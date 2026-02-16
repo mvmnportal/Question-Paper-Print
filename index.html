@@ -9,7 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap');
 
         body {
-            background-color: #525659; /* Dark grey background for preview */
+            background-color: #525659;
             font-family: 'Noto Serif Bengali', serif;
             margin: 0;
             padding: 20px;
@@ -27,7 +27,7 @@
             box-sizing: border-box;
         }
 
-        /* Header Styling */
+        /* Header Styling matching the image */
         .header {
             text-align: center;
             margin-bottom: 25px;
@@ -37,21 +37,21 @@
         .school-name {
             font-size: 22pt;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             letter-spacing: 0.5px;
         }
 
         .exam-name {
             font-size: 16pt;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .subject-class-row {
             font-size: 14pt;
             font-weight: 600;
             margin-bottom: 15px;
-            text-align: center; /* Centered as requested */
+            text-align: center;
         }
 
         .time-marks-row {
@@ -71,7 +71,8 @@
             font-size: 12pt;
             line-height: 1.5;
             color: #000;
-            page-break-inside: avoid; /* Prevents questions splitting across pages */
+            /* CRITICAL FIX: Changed from 'avoid' to 'auto' to allow Q1 to start on page 1 */
+            page-break-inside: auto; 
         }
 
         .q-header {
@@ -90,7 +91,8 @@
         .sub-questions li {
             margin-bottom: 15px;
             padding-left: 5px;
-            page-break-inside: avoid;
+            /* Keep individual sub-questions together, but allow list to split */
+            page-break-inside: avoid; 
         }
 
         /* Options Styling */
@@ -100,7 +102,7 @@
         }
         
         .option {
-            display: block; /* Options below question */
+            display: block;
             margin-bottom: 2px;
         }
 
@@ -164,27 +166,27 @@
             background-color: #0056b3;
         }
 
-        /* Print Media Query - FIX APPLIED HERE */
+        /* Print Media Query */
         @media print {
             @page {
-                margin: 0; /* Resets browser margins */
                 size: A4;
+                margin: 15mm 20mm; /* Standard margins */
             }
             body {
+                background-color: white;
                 margin: 0;
                 padding: 0;
-                background-color: white;
             }
             .btn-container {
-                display: none !important; /* Strictly hide button */
+                display: none !important;
             }
             .page {
                 width: 100%;
                 margin: 0;
-                padding: 15mm 20mm; /* Apply margins via padding on content */
+                padding: 0; /* Remove internal padding, let @page handle it */
                 box-shadow: none;
                 border: none;
-                min-height: auto; /* Remove fixed height constraint */
+                min-height: auto;
             }
         }
     </style>
@@ -201,7 +203,6 @@
             <div class="school-name">মহৰ্ষি বিদ্যা মন্দিৰ, নলবাৰী</div>
             <div class="exam-name">বছৰেকীয়া পৰীক্ষা, ২০২৬</div>
             
-            <!-- Centered Subject and Class -->
             <div class="subject-class-row">
                 বিষয় : অসমীয়া &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; শ্ৰেণী : সপ্তম
             </div>
@@ -219,7 +220,6 @@
                 <span>১ × ২০ = ২০</span>
             </div>
             <ul class="sub-questions">
-                <!-- 1. ক -->
                 <li>
                     <strong>ক)</strong> কবিয়ে কিহৰ ক্ষেত্ৰত 'অকণো সংশয় নাই' বুলি কৈছে?
                     <div class="options-container">
@@ -229,7 +229,6 @@
                     </div>
                 </li>
 
-                <!-- 1. খ -->
                 <li>
                     <strong>খ)</strong> 
                     <div class="assertion-box">
@@ -243,7 +242,6 @@
                     </div>
                 </li>
 
-                <!-- 1. গ -->
                 <li>
                     <strong>গ)</strong> 'সুতুলি' কিহেৰে নিৰ্মাণ কৰা হয়?
                     <div class="options-container">
@@ -253,7 +251,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ঘ -->
                 <li>
                     <strong>ঘ)</strong> বৰপেটা সত্ৰৰ কীৰ্তন ঘৰৰ ইতিহাসৰ তলৰ ঘটনাসমূহ সঠিক ক্ৰমত সজোৱা :
                     <div class="roman-list">
@@ -269,7 +266,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ঙ -->
                 <li>
                     <strong>ঙ)</strong> শ্ৰীশংকৰদেৱৰ ব্যক্তিত্ব আৰু অৱদানৰ বিষয়ে তলৰ বিবৃতিসমূহ বিবেচনা কৰা:
                     <div class="roman-list">
@@ -285,7 +281,6 @@
                     </div>
                 </li>
 
-                <!-- 1. চ -->
                 <li>
                     <strong>চ)</strong> 'টোকোৰা আৰু চিতল' কাহিনীটোত বৰ্ণিত চৰিত্ৰসমূহৰ মানসিকতাৰ বিষয়ে তলৰ শুদ্ধ বিবৃতিসমূহ বিচাৰি উলিওৱা।
                     <div class="roman-list">
@@ -301,7 +296,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ছ -->
                 <li>
                     <strong>ছ)</strong> সত্যনাথ বৰাৰ মতে জীৱনৰ আচল জোখ কি?
                     <div class="options-container">
@@ -311,7 +305,6 @@
                     </div>
                 </li>
 
-                <!-- 1. জ -->
                 <li>
                     <strong>জ)</strong>
                     <div class="assertion-box">
@@ -325,11 +318,10 @@
                     </div>
                 </li>
 
-                <!-- 1. ঝ -->
                 <li>
                     <strong>ঝ)</strong>
                     <div class="assertion-box">
-                        উক্তি (Assertion): কাঁহ আৰু ঘণ্টাৰ মাজত আকৃতিগত পাৰ্থক্য থাকিলেও দুয়োবিধ বাদ্যই একে শ্ৰেণীৰ অন্তৰ্গত।<br>
+                        উক্তি (Assertion): কাঁহ আৰু ঘণ্টাৰ মাজত আকৃতিগত পাৰ্থক্য থাকিলেও দুয়োবিধ বাদ্যই একে শ্ৰেণীৰ অন্তৰ্গত。<br>
                         যুক্তি (Reason): নামঘৰ বা মন্দিৰত দবাৰ লগত দুয়োবিধ বাদ্যই বজোৱা হয়।
                     </div>
                     <div class="options-container">
@@ -339,12 +331,11 @@
                     </div>
                 </li>
 
-                <!-- 1. ঞ -->
                 <li>
                     <strong>ঞ)</strong>
                     <div class="assertion-box">
-                        উক্তি (Assertion): দীর্ঘসূত্ৰী মানুহে কামৰ সঁজুলিবোৰ গোটাই থোৱা অৱস্থাতে সেইবোৰ 'আধানাৰ্জ্জী' হৈ নষ্ট হৈ যায়।<br>
-                        যুক্তি (Reason): মানুহে কোনো কাম কৰিবলৈ ইচ্ছা নকৰিলে নানাধৰণৰ আসোঁৱাহ বা অজুহাত দেখুৱায়।
+                        উক্তি (Assertion): দীর্ঘসূত্ৰী মানুহে কামৰ সঁজুলিবোৰ গোটাই থোৱা অৱস্থাতে সেইবোৰ 'আধানাৰ্জ্জী' হৈ নষ্ট হৈ যায়。<br>
+                        যুক্তি (Reason): মানুহে কোনো কাম কৰিবলৈ ইচ্ছা নকৰিলে নানাধৰণৰ আসোঁৱাহ বা অজুহাত দেখুৱায়。
                     </div>
                     <div class="options-container">
                         <span class="option">(ক) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ আৰু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা।</span>
@@ -353,12 +344,11 @@
                     </div>
                 </li>
 
-                <!-- 1. ট -->
                 <li>
                     <strong>ট)</strong>
                     <div class="assertion-box">
                         উক্তি (Assertion): এই বিশাল বিশ্বব্ৰহ্মাণ্ডৰ যান্ত্ৰিকতাত এজন মানুহৰ ব্যক্তিগত অস্তিত্বৰ কোনো গুৰুত্ব নাই。<br>
-                        যুক্তি (Reason): এজন মানুহ মৰিলেও জগতৰ দিন-ৰাতি হোৱা, জোন-বেলি ওলোৱা বা নক্ষত্ৰৰ গতিৰ দৰে প্ৰকৃতিৰ নিয়মবোৰৰ অলপো লৰচৰ নহয়।
+                        যুক্তি (Reason): এজন মানুহ মৰিলেও জগতৰ দিন-ৰাতি হোৱা, জোন-বেলি ওলোৱা বা নক্ষত্ৰৰ গতিৰ দৰে প্ৰকৃতিৰ নিয়মবোৰৰ অলপো লৰচৰ নহয়。
                     </div>
                     <div class="options-container">
                         <span class="option">(ক) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ আৰু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা।</span>
@@ -367,7 +357,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ঠ -->
                 <li>
                     <strong>ঠ)</strong> বাদ্যযন্ত্ৰ আৰু ইয়াৰ নিৰ্মাণ সামগ্ৰীৰ শুদ্ধ থূলটো বিচাৰি উলিওৱা:
                     <div class="roman-list">
@@ -383,7 +372,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ড -->
                 <li>
                     <strong>ড)</strong> 'বৃন্দাবলী বস্ত্ৰ'ৰ বিষয়ে তলৰ কোনকেইটা বিবৃতি শুদ্ধ?
                     <div class="roman-list">
@@ -399,7 +387,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ঢ -->
                 <li>
                     <strong>ঢ)</strong> 'লবেজান' শব্দটোৰ অৰ্থ কি?
                     <div class="options-container">
@@ -409,7 +396,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ণ -->
                 <li>
                     <strong>ণ)</strong> প্ৰকৃতিৰ কোনো শব্দ বা ধ্বনিক অনুকৰণ কৰি সৃষ্টি হোৱা শব্দক কি বোলে?
                     <div class="options-container">
@@ -419,7 +405,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ত -->
                 <li>
                     <strong>ত)</strong> "হাত-টান" জটুৱা ঠাঁচটোৱে কি অৰ্থ প্ৰকাশ কৰে?
                     <div class="options-container">
@@ -429,7 +414,6 @@
                     </div>
                 </li>
 
-                <!-- 1. থ -->
                 <li>
                     <strong>থ)</strong> তলৰ কোনটো যোৰা অৰ্থৰ ফালৰ পৰা সম্পূৰ্ণ শুদ্ধ?
                     <div class="options-container">
@@ -439,7 +423,6 @@
                     </div>
                 </li>
 
-                <!-- 1. দ -->
                 <li>
                     <strong>দ)</strong> যি সমাসত সমস্যমান পদবোৰৰ অৰ্থ নুবুজাই অন্য এটা অৰ্থহে বুজায়, তাক কি সমাস বোলে?
                     <div class="options-container">
@@ -449,7 +432,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ধ -->
                 <li>
                     <strong>ধ)</strong> "হে স্রষ্টা, অনিন্দ্য সুন্দৰ তোমাৰ সৃষ্টি"— এই বাক্যটোত 'অনিন্দ্য' শব্দটো কি?
                     <div class="options-container">
@@ -459,7 +441,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ন -->
                 <li>
                     <strong>ন)</strong> জটুৱা ঠাঁচ বা খণ্ডবাক্যৰ প্ৰধান বৈশিষ্ট্য কি?
                     <div class="options-container">
