@@ -90,6 +90,7 @@
         .sub-questions li {
             margin-bottom: 15px;
             padding-left: 5px;
+            page-break-inside: avoid;
         }
 
         /* Options Styling */
@@ -163,22 +164,27 @@
             background-color: #0056b3;
         }
 
-        /* Print Media Query - Critical for PDF generation */
+        /* Print Media Query - FIX APPLIED HERE */
         @media print {
+            @page {
+                margin: 0; /* Resets browser margins */
+                size: A4;
+            }
             body {
-                background: none;
                 margin: 0;
                 padding: 0;
+                background-color: white;
             }
             .btn-container {
-                display: none; /* Hides button in print */
+                display: none !important; /* Strictly hide button */
             }
             .page {
-                box-shadow: none;
-                margin: 0;
                 width: 100%;
-                padding: 15mm 20mm; /* Standard print margins */
+                margin: 0;
+                padding: 15mm 20mm; /* Apply margins via padding on content */
+                box-shadow: none;
                 border: none;
+                min-height: auto; /* Remove fixed height constraint */
             }
         }
     </style>
