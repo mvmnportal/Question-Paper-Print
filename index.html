@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assamese Question Paper 2026</title>
+    <title>Assamese Question Paper 2026 - Class 6</title>
     <style>
         /* General Setup */
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap');
 
         body {
-            background-color: #525659;
+            background-color: #525659; /* Dark grey background for preview */
             font-family: 'Noto Serif Bengali', serif;
             margin: 0;
             padding: 20px;
@@ -27,7 +27,7 @@
             box-sizing: border-box;
         }
 
-        /* Header Styling matching the image */
+        /* Header Styling */
         .header {
             text-align: center;
             margin-bottom: 25px;
@@ -37,14 +37,14 @@
         .school-name {
             font-size: 22pt;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             letter-spacing: 0.5px;
         }
 
         .exam-name {
             font-size: 16pt;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .subject-class-row {
@@ -69,10 +69,9 @@
         .question-block {
             margin-bottom: 15px;
             font-size: 12pt;
-            line-height: 1.5;
+            line-height: 1.6; /* Slightly increased for Assamese clarity */
             color: #000;
-            /* CRITICAL FIX: Changed from 'avoid' to 'auto' to allow Q1 to start on page 1 */
-            page-break-inside: auto; 
+            page-break-inside: avoid;
         }
 
         .q-header {
@@ -91,8 +90,6 @@
         .sub-questions li {
             margin-bottom: 15px;
             padding-left: 5px;
-            /* Keep individual sub-questions together, but allow list to split */
-            page-break-inside: avoid; 
         }
 
         /* Options Styling */
@@ -104,6 +101,12 @@
         .option {
             display: block;
             margin-bottom: 2px;
+        }
+        
+        /* Inline options for short items */
+        .options-container.inline .option {
+            display: inline-block;
+            margin-right: 20px;
         }
 
         /* Specific Component Styles */
@@ -118,7 +121,6 @@
 
         .roman-list {
             margin-left: 20px;
-            font-style: italic;
             margin-bottom: 5px;
         }
 
@@ -142,6 +144,16 @@
             text-align: center;
             font-weight: bold;
             margin: 10px 0;
+        }
+        
+        /* Match Table */
+        .match-table {
+            width: 80%;
+            margin-left: 20px;
+            border-collapse: collapse;
+        }
+        .match-table td {
+            padding: 5px 15px;
         }
 
         /* Print Button */
@@ -168,25 +180,20 @@
 
         /* Print Media Query */
         @media print {
-            @page {
-                size: A4;
-                margin: 15mm 20mm; /* Standard margins */
-            }
             body {
-                background-color: white;
+                background: none;
                 margin: 0;
                 padding: 0;
             }
             .btn-container {
-                display: none !important;
+                display: none;
             }
             .page {
-                width: 100%;
-                margin: 0;
-                padding: 0; /* Remove internal padding, let @page handle it */
                 box-shadow: none;
+                margin: 0;
+                width: 100%;
+                padding: 15mm 20mm;
                 border: none;
-                min-height: auto;
             }
         }
     </style>
@@ -203,8 +210,9 @@
             <div class="school-name">মহৰ্ষি বিদ্যা মন্দিৰ, নলবাৰী</div>
             <div class="exam-name">বছৰেকীয়া পৰীক্ষা, ২০২৬</div>
             
+            <!-- Centered Subject and Class -->
             <div class="subject-class-row">
-                বিষয় : অসমীয়া &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; শ্ৰেণী : সপ্তম
+                বিষয় : অসমীয়া &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; শ্ৰেণী : ষষ্ঠ
             </div>
 
             <div class="time-marks-row">
@@ -217,23 +225,15 @@
         <div class="question-block">
             <div class="q-header">
                 <span>১। তলৰ প্ৰশ্নসমূহৰ শুদ্ধ উত্তৰটো বিচাৰি লিখা।</span>
-                <span>১ × ২০ = ২০</span>
+                <span>১ × ১৫ = ১৫</span>
             </div>
             <ul class="sub-questions">
+                <!-- 1. ক -->
                 <li>
-                    <strong>ক)</strong> কবিয়ে কিহৰ ক্ষেত্ৰত 'অকণো সংশয় নাই' বুলি কৈছে?
-                    <div class="options-container">
-                        <span class="option">অ) মানুহ অমৰ হোৱাৰ ক্ষেত্ৰত</span>
-                        <span class="option">আ) নতুন আবিষ্কাৰ হোৱাৰ ক্ষেত্ৰত</span>
-                        <span class="option">ই) জগত আগৰ দৰেই চলি থকাৰ ক্ষেত্ৰত</span>
-                    </div>
-                </li>
-
-                <li>
-                    <strong>খ)</strong> 
+                    <strong>ক)</strong> 
                     <div class="assertion-box">
-                        উক্তি (Assertion) : মথুৰাদাস বুঢ়া আতা বৰপেটা সত্ৰৰ ইতিহাসত এজন উল্লেখযোগ্য ব্যক্তি।<br>
-                        যুক্তি (Reason) : তেওঁ কেৱল সত্ৰখনৰ প্ৰথম সত্ৰাধিকাৰেই নাছিল, বৰঞ্চ শংকৰদেৱৰ নিৰ্দেশত বৃন্দাবনী বস্ত্ৰ প্ৰস্তুত কৰাতো মুখ্য ভূমিকা লৈছিল।
+                        উক্তি(Assertion) : হাৰ্ডিয়ে ৰামানুজনক লণ্ডনলৈ মাতি পঠিয়াইছিল।<br>
+                        যুক্তি(Reason) : হাৰ্ডিয়ে ৰামানুজনৰ আৰ্থিক অৱস্থা উন্নত কৰিব বিচাৰিছিল।
                     </div>
                     <div class="options-container">
                         <span class="option">(অ) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ আৰু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা।</span>
@@ -242,211 +242,151 @@
                     </div>
                 </li>
 
+                <!-- 1. খ -->
                 <li>
-                    <strong>গ)</strong> 'সুতুলি' কিহেৰে নিৰ্মাণ কৰা হয়?
-                    <div class="options-container">
-                        <span class="option">(অ) বাঁহ</span>
-                        <span class="option">(আ) মাটি</span>
-                        <span class="option">(ই) পিতল</span>
+                    <strong>খ)</strong> শ্ৰীকৃষ্ণই কাৰ কু-মন্ত্ৰণাত কৌৰৱ কুল ধ্বংস হ’ল বুলি কৈছিল?
+                    <div class="options-container inline">
+                        <span class="option">(ক) ভীষ্ম আৰু দ্ৰোণ</span>
+                        <span class="option">(খ) শকুনি আৰু কৰ্ণ</span>
+                        <span class="option">(গ) অশ্বত্থামা</span>
                     </div>
                 </li>
 
+                <!-- 1. গ -->
                 <li>
-                    <strong>ঘ)</strong> বৰপেটা সত্ৰৰ কীৰ্তন ঘৰৰ ইতিহাসৰ তলৰ ঘটনাসমূহ সঠিক ক্ৰমত সজোৱা :
-                    <div class="roman-list">
-                        ১। ​ঊনবিংশ শতিকাত মানসকলৰ অগ্নি সংযোগ।<br>
-                        ২। ​১৫৮৫ চনত মাধৱদেৱৰ দ্বাৰা প্ৰথম নিৰ্মাণ।<br>
-                        ৩। ​১৫৯৫ চনত কীৰ্তন ঘৰটো জুইত জাহ যোৱা।<br>
-                        ৪। ​১৯৫২ চনত বৰ্তমানৰ কীৰ্তন ঘৰটো সজা হয়।
-                    </div>
-                    <div class="options-container">
-                        <span class="option">অ) ২- ১- ৩- ৪</span>
-                        <span class="option">আ) ২- ৪- ১- ৩</span>
-                        <span class="option">ই) ২- ৩- ১- ৪</span>
-                    </div>
-                </li>
-
-                <li>
-                    <strong>ঙ)</strong> শ্ৰীশংকৰদেৱৰ ব্যক্তিত্ব আৰু অৱদানৰ বিষয়ে তলৰ বিবৃতিসমূহ বিবেচনা কৰা:
-                    <div class="roman-list">
-                        I. তেওঁ একাধাৰে ধৰ্ম প্ৰচাৰক, সমাজ সংগঠক, কবি, নাট্যকাৰ আৰু শিল্পী আছিল।<br>
-                        II. শংকৰদেৱে কেৱল ধৰ্মীয় পুথিৰ চৰ্চা কৰিছিল আৰু সমাজৰ নীতি-নিয়মৰ পৰা আঁতৰি আছিল।<br>
-                        III. তেওঁৰ জন্ম বৰদোৱাৰ ওচৰৰ আলি-পুখুৰীত হৈছিল।<br>
-                        IV. তেওঁৰ আধ্যাত্মিক সাধনাই অসমক এক পবিত্ৰ তীৰ্থক্ষেত্ৰলৈ ৰূপান্তৰ কৰিছে।
-                    </div>
-                    <div class="options-container">
-                        <span class="option">(অ) কেৱল I আৰু II</span>
-                        <span class="option">(আ) কেৱল I, III আৰু IV</span>
-                        <span class="option">(ই) কেৱল III আৰু IV</span>
-                    </div>
-                </li>
-
-                <li>
-                    <strong>চ)</strong> 'টোকোৰা আৰু চিতল' কাহিনীটোত বৰ্ণিত চৰিত্ৰসমূহৰ মানসিকতাৰ বিষয়ে তলৰ শুদ্ধ বিবৃতিসমূহ বিচাৰি উলিওৱা।
-                    <div class="roman-list">
-                        I. টোকোৰা আৰু চিতল আছিল অতি স্বাৰ্থপৰ আৰু আনৰ উন্নতি দেখিব নোৱাৰা স্বভাৱৰ।<br>
-                        II. বিধাতাই তেওঁলোকক মাতি আনি বাহ সজাৰ বুদ্ধি দিছিল।<br>
-                        III. জীৱ-জন্তুবোৰে তেওঁলোকৰ মিছা কথা ধৰিব পাৰি একগোট হৈ শাস্তি বিহিছিল।<br>
-                        IV. বিধাতাই তেওঁলোকক খেদি পঠিওৱা বুলি কোৱা কথাটো আছিল সম্পূৰ্ণ মিছা।
-                    </div>
-                    <div class="options-container">
-                        <span class="option">(অ) কেৱল I, II আৰু III</span>
-                        <span class="option">(আ) কেৱল I, III আৰু IV</span>
-                        <span class="option">(ই) কেৱল II আৰু IV</span>
-                    </div>
-                </li>
-
-                <li>
-                    <strong>ছ)</strong> সত্যনাথ বৰাৰ মতে জীৱনৰ আচল জোখ কি?
-                    <div class="options-container">
-                        <span class="option">(অ) দিন আৰু বছৰ</span>
-                        <span class="option">(আ) ধন-সম্পত্তি</span>
-                        <span class="option">(ই) কাম</span>
-                    </div>
-                </li>
-
-                <li>
-                    <strong>জ)</strong>
+                    <strong>গ)</strong>
                     <div class="assertion-box">
-                        উক্তি (Assertion): প্ৰতিমা বৰুৱা পাণ্ডেক গোৱালপৰীয়া লোকগীতৰ 'প্ৰাণকাকলি' বুলি কোৱা হয়。<br>
-                        যুক্তি (Reason): তেওঁ গোৱালপৰীয়া লোকগীতক কেৱল এখন গাঁৱৰ পৰা বিশ্ব দৰবাৰলৈ নিয়া নাছিল, বৰঞ্চ ইয়াৰ জৰিয়তে সাধাৰণ মানুহৰ অন্তৰ্দ্বন্দ্বক প্ৰকাশ কৰিছিল।
+                        উক্তি(Assertion) : কবীৰ আজি সমগ্ৰ ভাৰতবৰ্ষতে অমৰ হৈ আছে।<br>
+                        যুক্তি(Reason) : কবীৰে তেওঁৰ দোহাবোৰৰ জৰিয়তে সমাজৰ পৰা উচ্চ-নীচ আৰু ধৰ্মীয় ভেদভাৱ আঁতৰোৱাৰ চেষ্টা কৰিছিল।
                     </div>
                     <div class="options-container">
-                        <span class="option">(ক) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ আৰু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা।</span>
-                        <span class="option">(খ) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ, কিন্তু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা নহয়।</span>
-                        <span class="option">(গ) উক্তিটো শুদ্ধ, কিন্তু যুক্তিটো অশুদ্ধ।</span>
+                        <span class="option">(অ) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ আৰু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা।</span>
+                        <span class="option">(আ) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ আৰু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা নহয়।</span>
+                        <span class="option">(ই) উক্তিটো শুদ্ধ, কিন্তু যুক্তিটো অশুদ্ধ।</span>
                     </div>
                 </li>
 
+                <!-- 1. ঘ -->
                 <li>
-                    <strong>ঝ)</strong>
-                    <div class="assertion-box">
-                        উক্তি (Assertion): কাঁহ আৰু ঘণ্টাৰ মাজত আকৃতিগত পাৰ্থক্য থাকিলেও দুয়োবিধ বাদ্যই একে শ্ৰেণীৰ অন্তৰ্গত。<br>
-                        যুক্তি (Reason): নামঘৰ বা মন্দিৰত দবাৰ লগত দুয়োবিধ বাদ্যই বজোৱা হয়।
-                    </div>
-                    <div class="options-container">
-                        <span class="option">(ক) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ আৰু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা।</span>
-                        <span class="option">(খ) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ, কিন্তু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা নহয়।</span>
-                        <span class="option">(গ) উক্তিটো শুদ্ধ, কিন্তু যুক্তিটো অশুদ্ধ।</span>
+                    <strong>ঘ)</strong> শ্ৰৱণ কুমাৰে কিহৰ বাবে পুখুৰীলৈ গৈছিল?
+                    <div class="options-container inline">
+                        <span class="option">(অ) গা ধুবলৈ</span>
+                        <span class="option">(আ) মাছ ধৰিবলৈ</span>
+                        <span class="option">(ই) পিতৃ-মাতৃৰ বাবে পানী আনিবলৈ</span>
                     </div>
                 </li>
 
+                <!-- 1. ঙ -->
                 <li>
-                    <strong>ঞ)</strong>
-                    <div class="assertion-box">
-                        উক্তি (Assertion): দীর্ঘসূত্ৰী মানুহে কামৰ সঁজুলিবোৰ গোটাই থোৱা অৱস্থাতে সেইবোৰ 'আধানাৰ্জ্জী' হৈ নষ্ট হৈ যায়。<br>
-                        যুক্তি (Reason): মানুহে কোনো কাম কৰিবলৈ ইচ্ছা নকৰিলে নানাধৰণৰ আসোঁৱাহ বা অজুহাত দেখুৱায়。
-                    </div>
-                    <div class="options-container">
-                        <span class="option">(ক) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ আৰু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা।</span>
-                        <span class="option">(খ) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ, কিন্তু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা নহয়।</span>
-                        <span class="option">(গ) উক্তিটো শুদ্ধ, কিন্তু যুক্তিটো অশুদ্ধ।</span>
+                    <strong>ঙ)</strong> মজিয়াত পিঠা-পনাৰ বাবে তিল-গুৰৰ দিহা কোনে কৰিছে?
+                    <div class="options-container inline">
+                        <span class="option">(অ) আইতাই</span>
+                        <span class="option">(আ)খুড়ীয়ে</span>
+                        <span class="option">(ই) বায়ে</span>
                     </div>
                 </li>
 
+                <!-- 1. চ -->
+                <li>
+                    <strong>চ)</strong> মানসিক উন্নতিৰ উপায় কি?
+                    <div class="options-container inline">
+                        <span class="option">(অ) পবিত্ৰতা</span>
+                        <span class="option">(আ) সততা</span>
+                        <span class="option">(ই) স্বাৰ্থত্যাগ</span>
+                    </div>
+                </li>
+
+                <!-- 1. ছ -->
+                <li>
+                    <strong>ছ)</strong> কৃশা গৌতমী কেনেকুৱা ধৰণৰ ছোৱালী আছিল?
+                    <div class="options-container inline">
+                        <span class="option">(অ) দৃষ্টিহীন</span>
+                        <span class="option">(আ) দেৱশক্তিসম্পন্না</span>
+                        <span class="option">(ই) স্বাৰ্থপৰ</span>
+                    </div>
+                </li>
+
+                <!-- 1. জ -->
+                <li>
+                    <strong>জ)</strong> যি বাক্যত দুটা বা ততোধিক বাক্য অব্যয়ৰ দ্বাৰা সংযুক্ত হৈ থাকে, তাকে কি বাক্য বোলে?
+                    <div class="options-container inline">
+                        <span class="option">(অ) সৰল বাক্য</span>
+                        <span class="option">(আ) জটিল বাক্য</span>
+                        <span class="option">(ই) যৌগিক বাক্য</span>
+                    </div>
+                </li>
+
+                <!-- 1. ঝ -->
+                <li>
+                    <strong>ঝ)</strong> "আমি পঢ়িছোঁ" - ইয়াত থকা 'আমি' পদটো হ'ল -
+                    <div class="options-container inline">
+                        <span class="option">(অ) কৰ্তা</span>
+                        <span class="option">(আ) কৰ্ম</span>
+                        <span class="option">(ই) ক্ৰিয়া</span>
+                    </div>
+                </li>
+
+                <!-- 1. ঞ -->
+                <li>
+                    <strong>ঞ)</strong> ' মাউৰী' শব্দটোৰ অৰ্থ হ'ল -
+                    <div class="options-container inline">
+                        <span class="option">(অ) অনাথ</span>
+                        <span class="option">(আ) দুখীয়া</span>
+                        <span class="option">(ই) মাছমৰীয়া</span>
+                    </div>
+                </li>
+
+                <!-- 1. ট -->
                 <li>
                     <strong>ট)</strong>
                     <div class="assertion-box">
-                        উক্তি (Assertion): এই বিশাল বিশ্বব্ৰহ্মাণ্ডৰ যান্ত্ৰিকতাত এজন মানুহৰ ব্যক্তিগত অস্তিত্বৰ কোনো গুৰুত্ব নাই。<br>
-                        যুক্তি (Reason): এজন মানুহ মৰিলেও জগতৰ দিন-ৰাতি হোৱা, জোন-বেলি ওলোৱা বা নক্ষত্ৰৰ গতিৰ দৰে প্ৰকৃতিৰ নিয়মবোৰৰ অলপো লৰচৰ নহয়。
+                        উক্তি(Assertion) : আধ্যাত্মিক উন্নতিৰ বাবে সেৱা ধৰ্মৰ প্ৰয়োজন নাই।<br>
+                        যুক্তি(Reason) : মহৎ সেৱাৰ সমান আন কোনো ধৰ্ম নাই।
                     </div>
                     <div class="options-container">
-                        <span class="option">(ক) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ আৰু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা।</span>
-                        <span class="option">(খ) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ, কিন্তু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা নহয়।</span>
-                        <span class="option">(গ) উক্তিটো শুদ্ধ, কিন্তু যুক্তিটো অশুদ্ধ।</span>
+                        <span class="option">(অ) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ আৰু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা।</span>
+                        <span class="option">(আ) উক্তি আৰু যুক্তি দুয়োটাই শুদ্ধ আৰু যুক্তিটো উক্তিৰ সঠিক ব্যাখ্যা নহয়।</span>
+                        <span class="option">(ই) উক্তিটো অশুদ্ধ, কিন্তু যুক্তিটো শুদ্ধ।</span>
                     </div>
                 </li>
 
+                <!-- 1. ঠ -->
                 <li>
-                    <strong>ঠ)</strong> বাদ্যযন্ত্ৰ আৰু ইয়াৰ নিৰ্মাণ সামগ্ৰীৰ শুদ্ধ থূলটো বিচাৰি উলিওৱা:
-                    <div class="roman-list">
-                        (ক) শিঙা — ম’হৰ শিং; সুতুলি — মাটি; গগনা — বাঁহ<br>
-                        (খ) পেঁপা — মাটি; বাঁহী — বাঁহ; শংখ — শামুক<br>
-                        (গ) টোকাৰী — লোহা; বীণ — বাঁহ; ডবা — তাম<br>
-                        (ঘ) সুতুলি — বাঁহ; গগনা — মাটি; পেঁপা — শিং
-                    </div>
-                    <div class="options-container">
-                        <span class="option">অ) ক</span>
-                        <span class="option">আ) খ</span>
-                        <span class="option">ই) গ আৰু ঘ</span>
+                    <strong>ঠ)</strong> চণ্ডালে পানীখিনি কিহৰ মোনাত লৈ আহিছিল?
+                    <div class="options-container inline">
+                        <span class="option">(অ) কাপোৰৰ</span>
+                        <span class="option">(আ) মাটিৰ</span>
+                        <span class="option">(ই) চামৰাৰ</span>
                     </div>
                 </li>
 
+                <!-- 1. ড -->
                 <li>
-                    <strong>ড)</strong> 'বৃন্দাবলী বস্ত্ৰ'ৰ বিষয়ে তলৰ কোনকেইটা বিবৃতি শুদ্ধ?
-                    <div class="roman-list">
-                        I. ইয়াক মহাৰাজ নৰনাৰায়ণৰ অনুৰোধত শংকৰদেৱে প্ৰস্তুত কৰিছিল。<br>
-                        II. এই বস্ত্ৰখন দীঘলে ১২০ হাত আৰু পথালিয়ে ৬০ হাত আছিল。<br>
-                        III. বৰ্তমান এই বস্ত্ৰখন লণ্ডনৰ ব্ৰিটিছ মিউজিয়ামত সুৰক্ষিত হৈ আছে。<br>
-                        IV. শিল্পী মথুৰাদাস বুঢ়া আতা আৰু অন্য শিপিনীসকলে ইয়াক প্ৰস্তুত কৰিছিল。
-                    </div>
-                    <div class="options-container">
-                        <span class="option">(অ) কেৱল I আৰু II</span>
-                        <span class="option">(আ) কেৱল I, II আৰু III</span>
-                        <span class="option">(ই) আটাইকেইটা বিবৃতি শুদ্ধ</span>
+                    <strong>ড)</strong> 'হতভম্ব' শব্দটোৰ এটা সমাৰ্থক শব্দ হৈছে -
+                    <div class="options-container inline">
+                        <span class="option">(অ) কিংকৰ্তব্যবিমূঢ়</span>
+                        <span class="option">(আ) নিথৰ</span>
+                        <span class="option">(ই) প্ৰখৰ</span>
                     </div>
                 </li>
 
+                <!-- 1. ঢ -->
                 <li>
-                    <strong>ঢ)</strong> 'লবেজান' শব্দটোৰ অৰ্থ কি?
-                    <div class="options-container">
-                        <span class="option">অ) মৰোঁ মৰোঁ হোৱা</span>
-                        <span class="option">আ) নিদ্ৰামগ্ন হোৱা</span>
-                        <span class="option">ই) কষ্ট পোৱা</span>
+                    <strong>ঢ)</strong> লক্ষ্মণ কাৰ গৰ্ভত জন্মলাভ কৰে?
+                    <div class="options-container inline">
+                        <span class="option">(অ) কৌশল্যা</span>
+                        <span class="option">(আ) কৈকেয়ী</span>
+                        <span class="option">(ই) সুমিত্ৰা</span>
                     </div>
                 </li>
 
+                <!-- 1. ণ -->
                 <li>
-                    <strong>ণ)</strong> প্ৰকৃতিৰ কোনো শব্দ বা ধ্বনিক অনুকৰণ কৰি সৃষ্টি হোৱা শব্দক কি বোলে?
-                    <div class="options-container">
-                        <span class="option">(অ) সমাসবদ্ধ শব্দ</span>
-                        <span class="option">(আ) অনুৰূপ শব্দ</span>
-                        <span class="option">(ই) অনুকাৰ শব্দ</span>
-                    </div>
-                </li>
-
-                <li>
-                    <strong>ত)</strong> "হাত-টান" জটুৱা ঠাঁচটোৱে কি অৰ্থ প্ৰকাশ কৰে?
-                    <div class="options-container">
-                        <span class="option">(অ) শক্তিশালী</span>
-                        <span class="option">(আ) অতি উচ্চ পদ পোৱা</span>
-                        <span class="option">(গ) কৃপণ</span>
-                    </div>
-                </li>
-
-                <li>
-                    <strong>থ)</strong> তলৰ কোনটো যোৰা অৰ্থৰ ফালৰ পৰা সম্পূৰ্ণ শুদ্ধ?
-                    <div class="options-container">
-                        <span class="option">(অ) অণু - ক্ষুদ্ৰতম অংশ; অনু - পাছত</span>
-                        <span class="option">(আ) অণু - পাছত; অনু - ক্ষুদ্ৰতম অংশ</span>
-                        <span class="option">(ই) অণু - স্থিৰ; অনু - গতিশীল</span>
-                    </div>
-                </li>
-
-                <li>
-                    <strong>দ)</strong> যি সমাসত সমস্যমান পদবোৰৰ অৰ্থ নুবুজাই অন্য এটা অৰ্থহে বুজায়, তাক কি সমাস বোলে?
-                    <div class="options-container">
-                        <span class="option">(অ) কৰ্মধাৰয় সমাস</span>
-                        <span class="option">(আ) বহুব্ৰীহি সমাস</span>
-                        <span class="option">(ই) দ্বিগু সমাস</span>
-                    </div>
-                </li>
-
-                <li>
-                    <strong>ধ)</strong> "হে স্রষ্টা, অনিন্দ্য সুন্দৰ তোমাৰ সৃষ্টি"— এই বাক্যটোত 'অনিন্দ্য' শব্দটো কি?
-                    <div class="options-container">
-                        <span class="option">(অ) সৰ্বনাম</span>
-                        <span class="option">(আ) ক্ৰিয়া বিশেষণ</span>
-                        <span class="option">(ই) বিশেষণীয় বিশেষণ</span>
-                    </div>
-                </li>
-
-                <li>
-                    <strong>ন)</strong> জটুৱা ঠাঁচ বা খণ্ডবাক্যৰ প্ৰধান বৈশিষ্ট্য কি?
-                    <div class="options-container">
-                        <span class="option">(অ) ইয়াৰ আক্ষৰিক অৰ্থহে গুৰুত্বপূৰ্ণ।</span>
-                        <span class="option">(আ) ইয়াক শব্দকোষৰ অৰ্থৰে বুজিব পাৰি।</span>
-                        <span class="option">(ই) ইয়াৰ অৰ্থ আক্ষৰিক নহৈ বিশেষ তাৎপৰ্যপূৰ্ণহে হয়।</span>
+                    <strong>ণ)</strong> কোনটো নদীৰ পাৰত বাল্মীকিয়ে তপস্যা কৰিছিল?
+                    <div class="options-container inline">
+                        <span class="option">(অ) যমুনা</span>
+                        <span class="option">(আ) গংগা</span>
+                        <span class="option">(ই) তমসা</span>
                     </div>
                 </li>
             </ul>
@@ -459,100 +399,98 @@
                 <span>২ × ৫ = ১০</span>
             </div>
             <ul class="sub-questions">
-                <li>ক) 'ধূলি-কণা মই' কবিতাটোৰ মতে জগতৰ কোনবোৰ কাম নিৰন্তৰে চলি থাকিব?</li>
-                <li>খ) বৰপেটা সত্ৰৰ কীৰ্তন ঘৰত থকা 'বাৰ গছি বন্তি'ৰ তাৎপৰ্য কি?</li>
-                <li>গ) শংকৰদেৱে অসমীয়া সমাজত থকা 'ক্ষুদ্ৰ স্বাৰ্থ' আৰু 'ভিন্নভাৱ' কেনেকৈ আঁতৰাইছিল?</li>
-                <li>ঘ) টোকোৰা আৰু চিতলে কেনেদৰে ক'ত বাহ সাজিছিল?</li>
-                <li>ঙ) ধৰি লোৱা তুমি এজন 'দীৰ্ঘসূত্ৰী' মানুহ। তোমাৰ হাতত থকা জৰুৰী কামবোৰ 'কালিলৈ কৰিম' বুলি পিছুৱাই থোৱাৰ ফলত তোমাৰ কি কি লোকচান হৈছে লিখা।</li>
-                <li>চ) অসমৰ পৰম্পৰাগত লোকবাদ্যসমূহৰ আকৃতি তথা প্ৰকৃতিলৈ লক্ষ্য কৰি কেইটা ভাগত ভাগ কৰা হৈছে? ভাগসমূহ কি কি লিখি এটাকৈ উদাহৰণ দিয়া।</li>
+                <li>ক) শ্রৱণ কুমাৰে অন্ধ পিতৃ-মাতৃৰ শুশ্রূষা কেনেদৰে কৰিছিল?</li>
+                <li>খ) মহাযজ্ঞত আৱির্ভাব হোৱা মহা দিব্যপুৰুষে পৰমান্নৰ পাত্ৰটো ৰজাৰ হাতত দি কি বুলি কৈছিল?</li>
+                <li>গ) আমি কেতিয়া এখন বহল ভাৰতীয় সমাজ গঢ়ি তুলিব পাৰিম?</li>
+                <li>ঘ) ধনকুবেৰৰ সোণ-ৰূপবোৰ ছাই হৈ যোৱাৰ কাৰণ কি বুলি বন্ধুজনে কৈছিল?</li>
+                <li>ঙ) মুনিবৰৰ প্ৰশ্নৰ উত্তৰত শ্রীকৃষ্ণই কি বুলি কৈছিল?</li>
+                <li>চ) সৰুৰে পৰা ৰামানুজন কেনেদৰে অংকত ব্ৰতী হৈছিল পাঠৰ আধাৰত লিখা।</li>
             </ul>
         </div>
 
         <!-- Question 3 -->
         <div class="question-block">
             <div class="q-header">
-                <span>৩। তলত দিয়া সংকেত বাক্যৰ দ্বাৰা এটা গল্প ৰচনা কৰা। (গল্পটোৰ শিৰোনাম আৰু নীতিশিক্ষা লিখিবা)</span>
-                <span>৫</span>
+                <span>৩। চমুটোকা লিখা। (যিকোনো এটা)</span>
+                <span>৩</span>
             </div>
-            <div class="story-box">
-                এদিনাখন এটা সিংহই গছৰ তলত ছাঁত জিৰণি লৈ আছিল............... নিগনি টোৱেও সিংহৰ পৰা মুক্ত হৈ সেই ঠাইৰ পৰা আঁতৰি গ'ল.......... অৱশেষত সিংহ টো সেই জালৰ পৰা মুক্ত হ'ল...... তেতিয়াৰ পৰা সিংহ আৰু নিগনি দুয়ো বন্ধু হ'ল ।
+            <div class="roman-list">
+                ক) শ্ৰৱণ কুমাৰ<br>
+                খ) কবীৰ
             </div>
         </div>
 
         <!-- Question 4 -->
         <div class="question-block">
             <div class="q-header">
-                <span>৪। তোমাৰ চৰিত্ৰৰ প্ৰমাণ-পত্ৰ বিচাৰি বিদ্যালয়ৰ প্ৰধান শিক্ষকলৈ এখন আবেদন পত্ৰ লিখা।</span>
-                <span>৫</span>
+                <span>৪। তলৰ যিকোনো এটা কবিতাৰ মূলভাৱ লিখা।</span>
+                <span>৪</span>
+            </div>
+            <div class="roman-list">
+                ক) বিহু আদৰণি<br>
+                খ) উন্নতি
             </div>
         </div>
 
         <!-- Question 5 -->
         <div class="question-block">
             <div class="q-header">
-                <span>৫। প্ৰসংগ সংগতি দৰ্শাই বাখ্যা কৰা। (যিকোনো এটা)</span>
-                <span>৫</span>
-            </div>
-            <div class="poem-box">
-                অনন্ত বিশ্বৰ অসংখ্য ধূলিৰ<br>
-                এটি মাত্র ধূলি-কণা মই;<br>
-                মোৰ অবিহনে এই বিপুল সৃষ্টিৰ,<br>
-                কেনিও অকণো হানি নাই।
-            </div>
-            <div class="center-or">অথবা</div>
-            <div class="poem-box">
-                কালিলৈ কৰিম এই কথা বহুত অনৰ্থৰ মূল।
+                <span>৫। বিষয় অনুসৰি চিঠিক সাধাৰণতে কেইটা ভাগত ভগাব পাৰি? ভাগ সমূহ কি কি?</span>
+                <span>৩</span>
             </div>
         </div>
 
         <!-- Question 6 -->
         <div class="question-block">
             <div class="q-header">
-                <span>৬। বাক্য ৰচনা কৰা।</span>
-                <span>১ × ৫ = ৫</span>
-            </div>
-            <div style="margin-left: 20px;">
-                লোকবাদ্য, প্ৰতিকূল, বিশাল, শুকাই - উবাই, যোগী
+                <span>৬। তোমাৰ আগন্তুক পৰীক্ষাৰ প্ৰস্তুতি সম্পর্কে জনাই তোমাৰ মাৰালৈ এখন চিঠি লিখা।</span>
+                <span>৫</span>
             </div>
         </div>
 
         <!-- Question 7 -->
         <div class="question-block">
             <div class="q-header">
-                <span>৭। ইংৰাজী অৰ্থ লিখা। (যিকোনো পাঁচটা)</span>
-                <span>১ × ৫ = ৫</span>
-            </div>
-            <div style="margin-left: 20px;">
-                গৰিমা, বন্তি, মিতিৰ, ওৰ, সংশয়, দুহিতা
+                <span>৭। সৰল আৰু যৌগিক বাক্য কাক বোলে সংজ্ঞা লিখি উদাহৰণ দিয়া।</span>
+                <span>৪</span>
             </div>
         </div>
 
         <!-- Question 8 -->
         <div class="question-block">
             <div class="q-header">
-                <span>৮। তলৰ শব্দবোৰৰ অৰ্থ লিখা।</span>
-                <span>১/২ × ১০ = ৫</span>
+                <span>৮। 'ক' অংশৰ লগত 'খ' অংশ মিলোৱা।</span>
+                <span>১ × ৫ = ৫</span>
             </div>
-            <div style="margin-left: 20px;">
-                খালি, খালী, কানি, কাণী, কাণ, কান, আটা, আতা, কঠা, কথা
-            </div>
+            <table class="match-table">
+                <tr><td><strong>ক</strong></td><td><strong>খ</strong></td></tr>
+                <tr><td>সমীৰ</td><td>ভেঁটি</td></tr>
+                <tr><td>আধাৰ</td><td>বতাহ</td></tr>
+                <tr><td>দৌৰাত্ম</td><td>উপদ্ৰৱ</td></tr>
+                <tr><td>চাতুৰী</td><td>সংহতি</td></tr>
+                <tr><td>মিলন</td><td>শঠতা</td></tr>
+            </table>
         </div>
 
         <!-- Question 9 -->
         <div class="question-block">
             <div class="q-header">
-                <span>৯। চমুটোকা লিখা।</span>
-                <span>৩</span>
+                <span>৯। খালী ঠাই পূৰণ কৰা।</span>
+                <span>১ × ৫ = ৫</span>
             </div>
-            <div style="margin-left: 20px;">
-                বায়ুবাদ্য, যতীন্দ্ৰনাথ দুৱৰা
-            </div>
+            <ul class="sub-questions">
+                <li>ক) মাক পিতাকে সদায় সন্তানৰ _______হে কামনা কৰে।</li>
+                <li>খ) দশৰথ নিপুণ _______আছিল।</li>
+                <li>গ) মহাৰাজ, এই ______ ভোজন কৰিলে তোমাৰ ৰাণীকেইগৰাকীয়ে পুত্র লাভ কৰিব।</li>
+                <li>ঘ) এনে এঘৰৰ পৰা সৰিয়হ আনিবা যাৰ ঘৰত কোনো _______ বিয়োগ ঘটা নাই।</li>
+                <li>ঙ) বৈদিক যুগত সিন্ধু নদীৰ পাৰত _______ বিকাশ ঘটিছিল।</li>
+            </ul>
         </div>
 
         <!-- Question 10 -->
         <div class="question-block">
             <div class="q-header">
-                <span>১০। বিশেষণ পদ বুলিলে কি বুজা? ই কেইবিধ আৰু কি কি? প্ৰতিটো ভাগৰে সংজ্ঞা লিখি উদাহৰণ দিয়া।</span>
+                <span>১০। "সাঁচি থোৱা ধন ছাইৰ নিচিনা"- এই কথাষাৰিত সোমাই থকা অর্থটো কি বুজাই লিখা।</span>
                 <span>৪</span>
             </div>
         </div>
@@ -560,44 +498,58 @@
         <!-- Question 11 -->
         <div class="question-block">
             <div class="q-header">
-                <span>১১। সমাস কাক বোলে? ই কেইবিধ আৰু কি কি নামসমূহ উল্লেখ কৰা।</span>
-                <span>৩</span>
+                <span>১১। ইংৰাজী অৰ্থ লিখা।</span>
+                <span>১ × ৫ = ৫</span>
+            </div>
+            <div style="margin-left: 20px;">
+                তাঁতী, বন্দনা, অন্তৰ্ধান, নিথৰ, গাণনিক
             </div>
         </div>
 
         <!-- Question 12 -->
         <div class="question-block">
             <div class="q-header">
-                <span>১২। সমাৰ্থক শব্দ লিখা।</span>
-                <span>১ × ৩ = ৩</span>
+                <span>১২। বাক্য ৰচনা কৰা। (যিকোনো পাঁচটা)</span>
+                <span>১ × ৫ = ৫</span>
             </div>
             <div style="margin-left: 20px;">
-                কাপোৰ, জগত, চকু
+                ত্যাগ, মহৎ, ৰাজত্ব, সন্ধান, আয়োজন, তপস্যা
             </div>
         </div>
 
         <!-- Question 13 -->
         <div class="question-block">
             <div class="q-header">
-                <span>১৩। বিপৰীত শব্দ লিখা।</span>
-                <span>১ × ৩ = ৩</span>
+                <span>১৩। সমার্থক শব্দ লিখা।</span>
+                <span>১ × ৪ = ৪</span>
             </div>
             <div style="margin-left: 20px;">
-                শান্তি, বেছি, জনম
+                শৰীৰ, নৃপতি, আকাশ, পত্ৰ
             </div>
         </div>
 
         <!-- Question 14 -->
         <div class="question-block">
             <div class="q-header">
-                <span>১৪। এটা শব্দত প্ৰকাশ কৰা।</span>
+                <span>১৪। বিপৰীত শব্দ লিখা।</span>
+                <span>১ × ৪ = ৪</span>
+            </div>
+            <div style="margin-left: 20px;">
+                গুণ, গুৰু, ধৰ্ম, হিত
+            </div>
+        </div>
+
+        <!-- Question 15 -->
+        <div class="question-block">
+            <div class="q-header">
+                <span>১৫। এটা শব্দত প্রকাশ কৰা।</span>
                 <span>১ × ৪ = ৪</span>
             </div>
             <div class="options-container">
-                <span class="option">ক) যাৰ সীমা নাই-</span>
-                <span class="option">খ) মুখেৰে ফু দি বজোৱা বাদ্য -</span>
-                <span class="option">গ) যিজনে ভৱিষ্যৎ চিন্তা কৰিব পাৰে -</span>
-                <span class="option">ঘ) যিয়ে ৰাজনীতি কৰে -</span>
+                <span class="option">ক) ব'হাগ বিহুৰ সময়ত বলা ধুমুহা -</span>
+                <span class="option">খ) আনৰ ভাল দেখিব নোৱাৰা লোক -</span>
+                <span class="option">গ) কৃপণ ধনী মানুহ -</span>
+                <span class="option">ঘ) বিহুৰ আগদিনা -</span>
             </div>
         </div>
 
