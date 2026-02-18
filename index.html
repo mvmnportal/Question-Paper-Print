@@ -146,31 +146,32 @@
             text-align: center;
             margin-bottom: 20px;
             position: relative;
-            z-index: 1000; /* Ensure it's on top */
+            z-index: 9999;
         }
 
         .print-btn {
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 12px 30px;
-            font-size: 18px;
-            border-radius: 5px;
+            padding: 15px 35px;
+            font-size: 20px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: background 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
         }
 
         .print-btn:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
         }
 
         /* === PRINT FIXES === */
         @media print {
             @page {
                 size: A4;
-                margin: 10mm; /* Small margin for printer */
+                margin: 0;
             }
 
             body {
@@ -187,9 +188,8 @@
 
             .page {
                 width: 100%;
-                min-height: auto; 
                 margin: 0;
-                padding: 0; /* Remove padding as @page handles margins */
+                padding: 15mm 20mm; /* Standard print padding */
                 box-shadow: none;
                 border: none;
             }
@@ -203,19 +203,19 @@
             .question-block {
                 page-break-inside: avoid;
             }
-            
-            /* Hide URL headers/footers in some browsers */
-            html {
-                margin: 0;
-            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Print Button Area -->
     <div class="btn-container">
-        <button id="printBtn" class="print-btn">🖨️ Print / Download PDF</button>
-        <p style="color: #fff; font-size: 12px; margin-top: 5px;">(If button doesn't work, press Ctrl+P)</p>
+        <button onclick="window.print(); return false;" class="print-btn">
+            🖨️ Print Question Paper
+        </button>
+        <div style="color: white; margin-top: 10px; font-size: 14px;">
+            (যদি বুটামটোৱে কাম নকৰে, কীবৰ্ডত <strong>Ctrl + P</strong> টিপক)
+        </div>
     </div>
 
     <div class="page">
@@ -572,11 +572,6 @@
         </div>
     </div>
 
-    <script>
-        document.getElementById('printBtn').addEventListener('click', function() {
-            window.print();
-        });
-    </script>
 </body>
 </html>
 
