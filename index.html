@@ -15,18 +15,21 @@
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
         }
 
-        /* A4 Paper Container */
+        /* Paper Container - Auto height ensures all questions are visible */
         .page {
-            width: 210mm;
-            min-height: 297mm;
+            width: 210mm; 
+            min-height: 297mm; /* Minimum A4 height */
+            height: auto;      /* Allows growing if content overflows */
             padding: 20mm;
             margin: 0 auto;
             background: white;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             position: relative;
             box-sizing: border-box;
+            overflow: visible; /* Ensures content isn't clipped */
         }
 
         /* Header Styling */
@@ -34,8 +37,6 @@
             text-align: center;
             margin-bottom: 25px;
             color: #000;
-            page-break-inside: avoid;
-            break-inside: avoid;
         }
 
         .school-name {
@@ -69,14 +70,13 @@
             margin-top: 10px;
         }
 
-        /* General Question Block */
+        /* Question Blocks */
         .question-block {
             margin-bottom: 15px;
             font-size: 12pt;
             line-height: 1.6;
             color: #000;
             page-break-inside: avoid;
-            break-inside: avoid;
         }
 
         .q-header {
@@ -97,7 +97,7 @@
             padding-left: 5px;
         }
 
-        /* Options */
+        /* Options & Components */
         .options-container {
             margin-top: 5px;
             margin-left: 20px;
@@ -108,13 +108,11 @@
             margin-bottom: 2px;
         }
         
-        /* Inline options */
         .options-container.inline .option {
             display: inline-block;
             margin-right: 20px;
         }
 
-        /* Components */
         .assertion-box {
             background-color: #fcfcfc;
             padding: 8px;
@@ -138,7 +136,7 @@
             padding: 5px 15px;
         }
 
-        /* === PRINT BUTTON AREA === */
+        /* Print Button Controls */
         .mobile-controls {
             background-color: #333;
             color: white;
@@ -153,7 +151,7 @@
         }
 
         .print-btn {
-            background-color: #ff9800; /* Orange for visibility */
+            background-color: #ff9800;
             color: #000;
             border: none;
             padding: 12px 25px;
@@ -167,81 +165,52 @@
             max-width: 300px;
         }
 
-        .instruction-text {
-            font-size: 14px;
-            line-height: 1.4;
-            margin-top: 5px;
-            color: #eee;
-        }
-
-        /* === PRINT MEDIA QUERY === */
+        /* Print Media Query */
         @media print {
             @page {
                 size: A4;
                 margin: 0;
             }
-
             body {
                 background: white;
                 margin: 0;
                 padding: 0;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
             }
-
             .mobile-controls {
                 display: none !important;
             }
-
             .page {
                 width: 100%;
                 margin: 0;
                 padding: 15mm 20mm;
                 box-shadow: none;
                 border: none;
-            }
-
-            .header {
-                margin-top: 0;
-                page-break-before: avoid;
-            }
-            
-            /* Hide URL headers/footers */
-            html {
-                margin: 0;
+                /* Ensure multi-page printing works */
+                height: auto;
+                overflow: visible;
             }
         }
     </style>
-    <script>
-        function printPage() {
-            // Attempt standard print
-            window.print();
-        }
-    </script>
 </head>
 <body>
 
-    <!-- Mobile Friendly Control Panel -->
+    <!-- Control Panel -->
     <div class="mobile-controls">
-        <button onclick="printPage()" class="print-btn">
-            🖨️ PDF সেভ কৰক (Save PDF)
+        <button onclick="window.print()" class="print-btn">
+            🖨️ PDF বনাবলৈ ইয়াত ক্লিক কৰক
         </button>
-        <div class="instruction-text">
-            <strong>টোকা:</strong> যদি বুটামটোৱে কাম নকৰে:
-            <br>
-            ১. এই ফাইলটো <strong>Chrome</strong> বা <strong>Browser</strong>-ত খুলক।
-            <br>
-            ২. ব্ৰাউজাৰৰ মেনু (⋮) ত ক্লিক কৰি <strong>Share</strong> > <strong>Print</strong> বাছনি কৰক।
+        <div style="font-size: 14px; margin-top: 5px; color: #eee;">
+            টোকা: যদি কাম নকৰে, ফাইলটো <strong>Chrome Browser</strong> ত খুলক।
         </div>
     </div>
 
+    <!-- Paper Content -->
     <div class="page">
-        <!-- Header Section -->
+        <!-- Header -->
         <div class="header">
             <div class="school-name">মহৰ্ষি বিদ্যা মন্দিৰ, নলবাৰী</div>
             <div class="exam-name">বছৰেকীয়া পৰীক্ষা, ২০২৬</div>
             
-            <!-- Subject and Class -->
             <div class="subject-class-row">
                 বিষয় : অসমীয়া &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; শ্ৰেণী : ষষ্ঠ
             </div>
@@ -252,14 +221,13 @@
             </div>
         </div>
 
-        <!-- Question 1 -->
+        <!-- Q1 -->
         <div class="question-block">
             <div class="q-header">
                 <span>১। তলৰ প্ৰশ্নসমূহৰ শুদ্ধ উত্তৰটো বিচাৰি লিখা।</span>
                 <span>১ × ১৫ = ১৫</span>
             </div>
             <ul class="sub-questions">
-                <!-- 1. ক -->
                 <li>
                     <strong>ক)</strong> 
                     <div class="assertion-box">
@@ -273,7 +241,6 @@
                     </div>
                 </li>
 
-                <!-- 1. খ -->
                 <li>
                     <strong>খ)</strong> শ্ৰীকৃষ্ণই কাৰ কু-মন্ত্ৰণাত কৌৰৱ কুল ধ্বংস হ’ল বুলি কৈছিল?
                     <div class="options-container inline">
@@ -283,7 +250,6 @@
                     </div>
                 </li>
 
-                <!-- 1. গ -->
                 <li>
                     <strong>গ)</strong>
                     <div class="assertion-box">
@@ -297,7 +263,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ঘ -->
                 <li>
                     <strong>ঘ)</strong> শ্ৰৱণ কুমাৰে কিহৰ বাবে পুখুৰীলৈ গৈছিল?
                     <div class="options-container inline">
@@ -307,7 +272,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ঙ -->
                 <li>
                     <strong>ঙ)</strong> মজিয়াত পিঠা-পনাৰ বাবে তিল-গুৰৰ দিহা কোনে কৰিছে?
                     <div class="options-container inline">
@@ -317,7 +281,6 @@
                     </div>
                 </li>
 
-                <!-- 1. চ -->
                 <li>
                     <strong>চ)</strong> মানসিক উন্নতিৰ উপায় কি?
                     <div class="options-container inline">
@@ -327,7 +290,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ছ -->
                 <li>
                     <strong>ছ)</strong> কৃশা গৌতমী কেনেকুৱা ধৰণৰ ছোৱালী আছিল?
                     <div class="options-container inline">
@@ -337,7 +299,6 @@
                     </div>
                 </li>
 
-                <!-- 1. জ -->
                 <li>
                     <strong>জ)</strong> যি বাক্যত দুটা বা ততোধিক বাক্য অব্যয়ৰ দ্বাৰা সংযুক্ত হৈ থাকে, তাকে কি বাক্য বোলে?
                     <div class="options-container inline">
@@ -347,7 +308,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ঝ -->
                 <li>
                     <strong>ঝ)</strong> "আমি পঢ়িছোঁ" - ইয়াত থকা 'আমি' পদটো হ'ল -
                     <div class="options-container inline">
@@ -357,7 +317,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ঞ -->
                 <li>
                     <strong>ঞ)</strong> ' মাউৰী' শব্দটোৰ অৰ্থ হ'ল -
                     <div class="options-container inline">
@@ -367,7 +326,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ট -->
                 <li>
                     <strong>ট)</strong>
                     <div class="assertion-box">
@@ -381,7 +339,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ঠ -->
                 <li>
                     <strong>ঠ)</strong> চণ্ডালে পানীখিনি কিহৰ মোনাত লৈ আহিছিল?
                     <div class="options-container inline">
@@ -391,7 +348,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ড -->
                 <li>
                     <strong>ড)</strong> 'হতভম্ব' শব্দটোৰ এটা সমাৰ্থক শব্দ হৈছে -
                     <div class="options-container inline">
@@ -401,7 +357,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ঢ -->
                 <li>
                     <strong>ঢ)</strong> লক্ষ্মণ কাৰ গৰ্ভত জন্মলাভ কৰে?
                     <div class="options-container inline">
@@ -411,7 +366,6 @@
                     </div>
                 </li>
 
-                <!-- 1. ণ -->
                 <li>
                     <strong>ণ)</strong> কোনটো নদীৰ পাৰত বাল্মীকিয়ে তপস্যা কৰিছিল?
                     <div class="options-container inline">
@@ -423,7 +377,7 @@
             </ul>
         </div>
 
-        <!-- Question 2 -->
+        <!-- Q2 -->
         <div class="question-block">
             <div class="q-header">
                 <span>২। চমু উত্তৰ লিখা। (যিকোনো পাঁচটা)</span>
@@ -439,7 +393,7 @@
             </ul>
         </div>
 
-        <!-- Question 3 -->
+        <!-- Q3 -->
         <div class="question-block">
             <div class="q-header">
                 <span>৩। চমুটোকা লিখা। (যিকোনো এটা)</span>
@@ -451,7 +405,7 @@
             </div>
         </div>
 
-        <!-- Question 4 -->
+        <!-- Q4 -->
         <div class="question-block">
             <div class="q-header">
                 <span>৪। তলৰ যিকোনো এটা কবিতাৰ মূলভাৱ লিখা।</span>
@@ -463,7 +417,7 @@
             </div>
         </div>
 
-        <!-- Question 5 -->
+        <!-- Q5 -->
         <div class="question-block">
             <div class="q-header">
                 <span>৫। বিষয় অনুসৰি চিঠিক সাধাৰণতে কেইটা ভাগত ভগাব পাৰি? ভাগ সমূহ কি কি?</span>
@@ -471,7 +425,7 @@
             </div>
         </div>
 
-        <!-- Question 6 -->
+        <!-- Q6 -->
         <div class="question-block">
             <div class="q-header">
                 <span>৬। তোমাৰ আগন্তুক পৰীক্ষাৰ প্ৰস্তুতি সম্পর্কে জনাই তোমাৰ মাৰালৈ এখন চিঠি লিখা।</span>
@@ -479,7 +433,7 @@
             </div>
         </div>
 
-        <!-- Question 7 -->
+        <!-- Q7 -->
         <div class="question-block">
             <div class="q-header">
                 <span>৭। সৰল আৰু যৌগিক বাক্য কাক বোলে সংজ্ঞা লিখি উদাহৰণ দিয়া।</span>
@@ -487,7 +441,7 @@
             </div>
         </div>
 
-        <!-- Question 8 -->
+        <!-- Q8 -->
         <div class="question-block">
             <div class="q-header">
                 <span>৮। 'ক' অংশৰ লগত 'খ' অংশ মিলোৱা।</span>
@@ -503,7 +457,7 @@
             </table>
         </div>
 
-        <!-- Question 9 -->
+        <!-- Q9 -->
         <div class="question-block">
             <div class="q-header">
                 <span>৯। খালী ঠাই পূৰণ কৰা।</span>
@@ -518,7 +472,7 @@
             </ul>
         </div>
 
-        <!-- Question 10 -->
+        <!-- Q10 -->
         <div class="question-block">
             <div class="q-header">
                 <span>১০। "সাঁচি থোৱা ধন ছাইৰ নিচিনা"- এই কথাষাৰিত সোমাই থকা অর্থটো কি বুজাই লিখা।</span>
@@ -526,7 +480,7 @@
             </div>
         </div>
 
-        <!-- Question 11 -->
+        <!-- Q11 -->
         <div class="question-block">
             <div class="q-header">
                 <span>১১। ইংৰাজী অৰ্থ লিখা।</span>
@@ -537,7 +491,7 @@
             </div>
         </div>
 
-        <!-- Question 12 -->
+        <!-- Q12 -->
         <div class="question-block">
             <div class="q-header">
                 <span>১২। বাক্য ৰচনা কৰা। (যিকোনো পাঁচটা)</span>
@@ -548,7 +502,7 @@
             </div>
         </div>
 
-        <!-- Question 13 -->
+        <!-- Q13 -->
         <div class="question-block">
             <div class="q-header">
                 <span>১৩। সমার্থক শব্দ লিখা।</span>
@@ -559,7 +513,7 @@
             </div>
         </div>
 
-        <!-- Question 14 -->
+        <!-- Q14 -->
         <div class="question-block">
             <div class="q-header">
                 <span>১৪। বিপৰীত শব্দ লিখা।</span>
@@ -570,7 +524,7 @@
             </div>
         </div>
 
-        <!-- Question 15 -->
+        <!-- Q15 - Last Question -->
         <div class="question-block">
             <div class="q-header">
                 <span>১৫। এটা শব্দত প্রকাশ কৰা।</span>
