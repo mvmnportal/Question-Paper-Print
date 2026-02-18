@@ -34,11 +34,8 @@
             text-align: center;
             margin-bottom: 25px;
             color: #000;
-            /* Prevent header from splitting or jumping */
             page-break-inside: avoid;
             break-inside: avoid;
-            page-break-after: avoid;
-            break-after: avoid;
         }
 
         .school-name {
@@ -78,7 +75,7 @@
             font-size: 12pt;
             line-height: 1.6;
             color: #000;
-            page-break-inside: avoid; /* Keeps question parts together */
+            page-break-inside: avoid;
             break-inside: avoid;
         }
 
@@ -141,33 +138,43 @@
             padding: 5px 15px;
         }
 
-        /* Print Button */
-        .btn-container {
-            text-align: center;
+        /* === PRINT BUTTON AREA === */
+        .mobile-controls {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
             margin-bottom: 20px;
-            position: relative;
-            z-index: 9999;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            max-width: 210mm;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .print-btn {
-            background-color: #007bff;
-            color: white;
+            background-color: #ff9800; /* Orange for visibility */
+            color: #000;
             border: none;
-            padding: 15px 35px;
-            font-size: 20px;
-            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 300px;
         }
 
-        .print-btn:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
+        .instruction-text {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-top: 5px;
+            color: #eee;
         }
 
-        /* === PRINT FIXES === */
+        /* === PRINT MEDIA QUERY === */
         @media print {
             @page {
                 size: A4;
@@ -182,39 +189,49 @@
                 print-color-adjust: exact;
             }
 
-            .btn-container {
+            .mobile-controls {
                 display: none !important;
             }
 
             .page {
                 width: 100%;
                 margin: 0;
-                padding: 15mm 20mm; /* Standard print padding */
+                padding: 15mm 20mm;
                 box-shadow: none;
                 border: none;
             }
 
-            /* Ensure header stays at the top of the first page */
             .header {
                 margin-top: 0;
                 page-break-before: avoid;
             }
-
-            .question-block {
-                page-break-inside: avoid;
+            
+            /* Hide URL headers/footers */
+            html {
+                margin: 0;
             }
         }
     </style>
+    <script>
+        function printPage() {
+            // Attempt standard print
+            window.print();
+        }
+    </script>
 </head>
 <body>
 
-    <!-- Print Button Area -->
-    <div class="btn-container">
-        <button onclick="window.print(); return false;" class="print-btn">
-            🖨️ Print Question Paper
+    <!-- Mobile Friendly Control Panel -->
+    <div class="mobile-controls">
+        <button onclick="printPage()" class="print-btn">
+            🖨️ PDF সেভ কৰক (Save PDF)
         </button>
-        <div style="color: white; margin-top: 10px; font-size: 14px;">
-            (যদি বুটামটোৱে কাম নকৰে, কীবৰ্ডত <strong>Ctrl + P</strong> টিপক)
+        <div class="instruction-text">
+            <strong>টোকা:</strong> যদি বুটামটোৱে কাম নকৰে:
+            <br>
+            ১. এই ফাইলটো <strong>Chrome</strong> বা <strong>Browser</strong>-ত খুলক।
+            <br>
+            ২. ব্ৰাউজাৰৰ মেনু (⋮) ত ক্লিক কৰি <strong>Share</strong> > <strong>Print</strong> বাছনি কৰক।
         </div>
     </div>
 
