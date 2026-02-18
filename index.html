@@ -36,7 +36,9 @@
             color: #000;
             /* Prevent header from splitting or jumping */
             page-break-inside: avoid;
+            break-inside: avoid;
             page-break-after: avoid;
+            break-after: avoid;
         }
 
         .school-name {
@@ -77,6 +79,7 @@
             line-height: 1.6;
             color: #000;
             page-break-inside: avoid; /* Keeps question parts together */
+            break-inside: avoid;
         }
 
         .q-header {
@@ -142,18 +145,21 @@
         .btn-container {
             text-align: center;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 1000; /* Ensure it's on top */
         }
 
         .print-btn {
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 25px;
-            font-size: 16px;
+            padding: 12px 30px;
+            font-size: 18px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: background 0.3s;
         }
 
         .print-btn:hover {
@@ -164,7 +170,7 @@
         @media print {
             @page {
                 size: A4;
-                margin: 0; /* Remove browser default margins */
+                margin: 10mm; /* Small margin for printer */
             }
 
             body {
@@ -172,19 +178,18 @@
                 margin: 0;
                 padding: 0;
                 -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
 
             .btn-container {
-                display: none;
+                display: none !important;
             }
 
             .page {
                 width: 100%;
-                /* Reset height to allow flow */
                 min-height: auto; 
                 margin: 0;
-                /* Use padding to create the visual margin on paper */
-                padding: 15mm 20mm; 
+                padding: 0; /* Remove padding as @page handles margins */
                 box-shadow: none;
                 border: none;
             }
@@ -198,13 +203,19 @@
             .question-block {
                 page-break-inside: avoid;
             }
+            
+            /* Hide URL headers/footers in some browsers */
+            html {
+                margin: 0;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="btn-container">
-        <button class="print-btn" onclick="window.print()">🖨️ Print / Download PDF</button>
+        <button id="printBtn" class="print-btn">🖨️ Print / Download PDF</button>
+        <p style="color: #fff; font-size: 12px; margin-top: 5px;">(If button doesn't work, press Ctrl+P)</p>
     </div>
 
     <div class="page">
@@ -561,6 +572,11 @@
         </div>
     </div>
 
+    <script>
+        document.getElementById('printBtn').addEventListener('click', function() {
+            window.print();
+        });
+    </script>
 </body>
 </html>
 
