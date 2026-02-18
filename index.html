@@ -25,16 +25,20 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             position: relative;
             box-sizing: border-box;
-            /* Allow height to grow automatically so content isn't cut off */
             height: auto; 
             overflow: visible;
         }
 
-        /* Header Styling */
+        /* Header Styling - Fixed for Print */
         .header {
             text-align: center;
             margin-bottom: 25px;
             color: #000;
+            /* These lines ensure header sticks to content */
+            page-break-inside: avoid;
+            break-inside: avoid;
+            page-break-after: avoid;
+            break-after: avoid;
         }
 
         .school-name {
@@ -75,6 +79,7 @@
             line-height: 1.5;
             color: #000;
             page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         .q-header {
@@ -106,7 +111,7 @@
             margin-bottom: 2px;
         }
 
-        /* Inline options for shorter items */
+        /* Inline options */
         .options-container.inline .option {
             display: inline-block;
             margin-right: 20px;
@@ -154,27 +159,35 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        .print-btn:hover {
-            background-color: #0056b3;
-        }
-
-        /* Print Media Query */
+        /* === CRITICAL PRINT FIXES === */
         @media print {
+            @page {
+                size: A4;
+                margin: 15mm; /* Set printer margins here */
+            }
+
             body {
-                background: none;
+                background: white;
                 margin: 0;
                 padding: 0;
             }
+
             .btn-container {
                 display: none;
             }
+
             .page {
-                box-shadow: none;
-                margin: 0;
                 width: 100%;
-                padding: 15mm 20mm;
+                margin: 0;
+                padding: 0; /* Remove internal padding, rely on @page margin */
+                box-shadow: none;
                 border: none;
-                height: auto; /* Ensures all content prints */
+                height: auto;
+            }
+
+            /* Force header to stay attached */
+            .header {
+                page-break-after: avoid;
             }
         }
     </style>
@@ -523,7 +536,7 @@
         <!-- Question 15 -->
         <div class="question-block">
             <div class="q-header">
-                <span>১৫। এটা শব্দত প্ৰকাশ কৰা।</span>
+                <span>১৫। এটা শব্দত প্রকাশ কৰা।</span>
                 <span>১ × ৪ = ৪</span>
             </div>
             <div class="options-container">
@@ -541,5 +554,4 @@
 
 </body>
 </html>
-
 
