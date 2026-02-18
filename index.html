@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assamese Question Paper 2026 - Class 6</title>
     <style>
-        /* General Setup */
+        /* Font Import */
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap');
 
+        /* Default Screen Styles */
         body {
-            background-color: #525659; /* Dark grey background for preview */
+            background-color: #525659;
             font-family: 'Noto Serif Bengali', serif;
             margin: 0;
             padding: 20px;
+            box-sizing: border-box;
         }
 
-        /* The A4 Paper */
+        /* A4 Paper Container */
         .page {
             width: 210mm;
             min-height: 297mm;
@@ -32,6 +34,9 @@
             text-align: center;
             margin-bottom: 25px;
             color: #000;
+            /* Prevent header from splitting or jumping */
+            page-break-inside: avoid;
+            page-break-after: avoid;
         }
 
         .school-name {
@@ -65,13 +70,13 @@
             margin-top: 10px;
         }
 
-        /* Question Styling */
+        /* General Question Block */
         .question-block {
             margin-bottom: 15px;
             font-size: 12pt;
-            line-height: 1.6; /* Slightly increased for Assamese clarity */
+            line-height: 1.6;
             color: #000;
-            page-break-inside: avoid;
+            page-break-inside: avoid; /* Keeps question parts together */
         }
 
         .q-header {
@@ -88,11 +93,11 @@
         }
 
         .sub-questions li {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             padding-left: 5px;
         }
 
-        /* Options Styling */
+        /* Options */
         .options-container {
             margin-top: 5px;
             margin-left: 20px;
@@ -103,13 +108,13 @@
             margin-bottom: 2px;
         }
         
-        /* Inline options for short items */
+        /* Inline options */
         .options-container.inline .option {
             display: inline-block;
             margin-right: 20px;
         }
 
-        /* Specific Component Styles */
+        /* Components */
         .assertion-box {
             background-color: #fcfcfc;
             padding: 8px;
@@ -124,29 +129,6 @@
             margin-bottom: 5px;
         }
 
-        .story-box {
-            border: 1px dashed #000;
-            padding: 12px;
-            margin: 10px 0;
-            background-color: #fff;
-            text-align: justify;
-        }
-
-        .poem-box {
-            margin-left: 40px;
-            border-left: 3px solid #ccc;
-            padding-left: 15px;
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-
-        .center-or {
-            text-align: center;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        
-        /* Match Table */
         .match-table {
             width: 80%;
             margin-left: 20px;
@@ -178,22 +160,43 @@
             background-color: #0056b3;
         }
 
-        /* Print Media Query */
+        /* === PRINT FIXES === */
         @media print {
+            @page {
+                size: A4;
+                margin: 0; /* Remove browser default margins */
+            }
+
             body {
-                background: none;
+                background: white;
                 margin: 0;
                 padding: 0;
+                -webkit-print-color-adjust: exact;
             }
+
             .btn-container {
                 display: none;
             }
+
             .page {
-                box-shadow: none;
-                margin: 0;
                 width: 100%;
-                padding: 15mm 20mm;
+                /* Reset height to allow flow */
+                min-height: auto; 
+                margin: 0;
+                /* Use padding to create the visual margin on paper */
+                padding: 15mm 20mm; 
+                box-shadow: none;
                 border: none;
+            }
+
+            /* Ensure header stays at the top of the first page */
+            .header {
+                margin-top: 0;
+                page-break-before: avoid;
+            }
+
+            .question-block {
+                page-break-inside: avoid;
             }
         }
     </style>
@@ -210,7 +213,7 @@
             <div class="school-name">মহৰ্ষি বিদ্যা মন্দিৰ, নলবাৰী</div>
             <div class="exam-name">বছৰেকীয়া পৰীক্ষা, ২০২৬</div>
             
-            <!-- Centered Subject and Class -->
+            <!-- Subject and Class -->
             <div class="subject-class-row">
                 বিষয় : অসমীয়া &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; শ্ৰেণী : ষষ্ঠ
             </div>
