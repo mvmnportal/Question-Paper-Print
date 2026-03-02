@@ -203,7 +203,6 @@
 
         .question {
             margin-bottom: 15px;
-            page-break-inside: avoid; /* Prevents questions from cutting in half */
         }
 
         .options {
@@ -216,7 +215,7 @@
             font-family: 'Times New Roman', serif;
         }
 
-        /* Strict A4 Print Media Query */
+        /* Strict A4 Print Media Query - Fixed Blank Spaces Issue */
         @media print {
             @page {
                 size: A4 portrait;
@@ -228,21 +227,24 @@
                 padding: 0;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
+                display: block; /* Overrides flex to prevent page breaking bugs */
             }
             .btn-container {
-                display: none !important; /* Hide button when printing */
+                display: none !important; 
             }
             .page {
+                display: block !important; /* Crucial to fix blank gaps caused by flexbox in print */
                 box-shadow: none;
                 margin: 0;
                 width: 100%;
-                min-height: auto; /* Allow natural flow */
-                padding: 0; /* Handled by @page margin */
+                min-height: auto; 
+                padding: 0; 
                 border: none; 
                 outline: none;
             }
-            .question {
-                page-break-inside: avoid;
+            .question, .content, .instructions, .note-section {
+                page-break-inside: auto !important; /* Allows long text to split naturally across pages without forcing huge empty gaps */
+                break-inside: auto !important;
             }
         }
     </style>
