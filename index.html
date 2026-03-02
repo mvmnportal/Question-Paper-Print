@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #e0e0e0;
+            background-color: #525659;
             font-family: 'Tiro Bangla', 'Times New Roman', serif;
             margin: 0;
             padding: 20px;
@@ -17,24 +17,26 @@
             text-rendering: optimizeLegibility;
         }
 
-        .no-print {
+        /* Print Button Styles from Class 6 Logic */
+        .btn-container {
+            text-align: center;
             margin-bottom: 20px;
         }
 
         .print-btn {
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            background-color: #d32f2f;
+            background-color: #007bff;
             color: white;
             border: none;
+            padding: 10px 25px;
+            font-size: 16px;
             border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .print-btn:hover {
-            background-color: #b71c1c;
+            background-color: #0056b3;
         }
 
         /* Screen Page Layout */
@@ -49,7 +51,7 @@
             outline-offset: -12px;
             position: relative;
             margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
         }
@@ -228,33 +230,28 @@
             font-family: 'Times New Roman', serif;
         }
 
-        /* Direct Print Settings for exact A4 configuration */
+        /* Print Media Query using Class 6 Logic */
         @media print {
-            @page {
-                size: A4 portrait;
-                margin: 5mm; /* Very small margin so the border renders properly inside the unprintable area */
-            }
             body {
-                background-color: white;
-                padding: 0;
+                background: none;
                 margin: 0;
+                padding: 0;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
-            .no-print {
+            .btn-container {
                 display: none;
             }
             .page {
                 box-shadow: none;
-                margin: 0 auto;
-                width: 198mm; /* Reduced slightly to account for the @page margin */
-                height: 286mm; /* Constrains height strictly to 1 A4 page */
-                page-break-after: always; /* Forces 7 independent pages */
-                border: 8px double #000; /* Maintains the border */
+                margin: 0;
+                width: 100%;
+                /* Kept the border to match your exact format requirement */
+                border: 8px double #000;
                 outline: 2px solid #000;
                 outline-offset: -12px;
+                page-break-after: always;
             }
-            /* Prevents a blank 8th page */
             .page:last-child {
                 page-break-after: auto;
             }
@@ -263,8 +260,8 @@
 </head>
 <body>
 
-    <div class="no-print">
-        <button class="print-btn" onclick="window.print()">Print Question Paper</button>
+    <div class="btn-container">
+        <button class="print-btn" onclick="window.print()">🖨️ Print / Download PDF</button>
     </div>
 
     <div id="question-paper">
@@ -375,7 +372,7 @@
                     লোক বা জন বা গঞালোক আৰু সমাজৰ বিশেষ কিছুমান বৈশিষ্ট্য আছে। যেনে-- লোক বা জন বা গঞালোকসকল সাধাৰণতে গাঁৱে-ভূঞে বাস কৰে। তেওঁলোক সাধাৰণতে চাকৰিজীৱী বা শিল্পজীৱী নহয়, কৃষিজীৱীহে। এই ফালৰ পৰা তেওঁলোক খেতিয়ক। খেতিয়কসকল প্রায়ে নিৰক্ষৰ, অৰ্থাৎ পঢ়া-শুনা কৰিব নাজানে। তেওঁলোকে প্রায়ে হাতেৰে নানা বিধৰ সা-সঁজুলি সাজে। এনে সা-সঁজুলি প্রায়ে মাটি, বাঁহ, কাঠ, বেত আদিৰ পৰা প্ৰস্তুত কৰে। যন্ত্রশিল্প অর্থাৎ যন্ত্রত প্রস্তুত কৰা সঁজুলি গঞা ৰাইজে ব্যৱহাৰ কৰিব নোখোজে। তেওঁলোকৰ মাজত লিখা-পঢ়াৰ গুৰুত্ব তুলনামূলকভাৱে কম। ছপা-সমল বা কিতাপ-আলোচনী আদিত তেওঁলোকে কম গুৰুত্ব দিয়ে।<br><br>
                     মুখে মুখে চলি অহা গীত-পদ, কথা-কাহিনী, যোজনা-পটন্তৰ আদিত তেওঁলোকে তুলনামূলকভাবে অধিক গুৰুত্ব দিয়ে। পিতাক-আতাক-ককাক, আবু-আইতাকৰ দিনৰে পৰা মুখে মুখে চলিঅহা সাধুকথা বা ৰামায়ণ-মহাভাৰত বা কোৰান, বাইবেল, জাতক আদিৰ কথা শুনি তেওঁলোকে সীমাহীন আনন্দ লাভ কৰে। নতুন কথা, নতুন উপদেশ আদিতকৈ তেওঁলোকে পীৰিয়ে পীৰিয়ে চলি অহা কথাবোৰতহে অধিক গুৰুত্ব দিয়ে।<br><br>
                     লোকসমাজত পুৰণি দিনৰ কথাৰহে অধিক সমাদৰ। চহৰীয়া বা নগৰীয়া মানুহৰ তুলনাত গঞালোক কিছু পৰিমাণে পিছ পৰা। লোকজীৱনত যুক্তিতকৈ বিশ্বাসত অধিক গুৰুত্ব দিয়া হয়। গভীৰ বিশ্বাসে পুৰণি ধৰণ-কৰণ, ৰীতি-নীতি, ভূত-প্রেত, ধর্মীয়কৃত্য, ঔষধ-চিকিৎসা আদিৰ প্ৰতি তেওঁলোকৰ মন-প্রাণ সদা-সর্বদাই আকৃষ্ট কৰি থাকে। অতীতৰ প্ৰতি থকা বিশ্বাস আৰু আস্থাই তেওঁলোকক যাদু-পৰায়ণ কৰি তোলে। সেই কাৰণে তেওঁলোকে সর্বত্রতে অশৰীৰী ভূত-প্রেত, বাক-দ'ত, দেৱ-দেৱতাৰ লীলা-খেলা দেখিবলৈ পায়। বেমাৰ-আজাৰ, ৰোগ-ব্যাধি, প্রাকৃতিক ঘটনা-দুর্ঘটনা আদিতো তেওঁলোকে এই কাৰণে অদৃশ্য শক্তিৰ লীলা-খেলা দেখিবলৈ পায়।<br><br>
-                    লোকসমাজک কোনো কোনো লোকতত্ত্ববিদে সমাজৰ নিম্নস্তৰৰ বুলি ক'ব খোজে যদিও এনে ধাৰণা গ্রহণ কৰিব নোৱাৰি। বিজ্ঞানসন্মত দৃষ্টিভংগী হ'লেই যে কোনো এখন সমাজ উচ্চতৰ হ'ব আৰু তাৰ বিপৰীতে লোক বা গণসমাজ নিম্নতৰ হ'ব লাগিব তেনে কোনো কথা নাই। লোকসমাজৰ অংগীভূত মানুহে প্রায়ে গাঁৱে-ভূঞে বাস কৰে আৰু অভিজাত শ্ৰেণীৰ লোকসকল নগৰ-চহৰ আদিত বাস কৰে। হ'লেও এই ধাৰণা সদা-সর্বদাই গ্রহণযোগ্য হ'ব নোৱাৰে। কাৰণ, গাঁৱতো শিক্ষিত মানুহে বাস কৰে। তাৰ বিপৰীতে চহৰ বা নগৰতো গঞালোকৰ বসতি দেখা যায়। নগৰ-চহৰৰ বিভিন্ন কাম-কাজৰ বাবে গঞালোকৰ প্রয়োজন হয়। তেতিয়া গঞালোকে চহৰ-নগৰত থাকি মজদুৰ বা কামিলাৰ ভূমিকা পালন কৰে আৰু এইদৰে তেওঁলোকে চহৰ বা নগৰবাসী হয়।
+                    লোকসমাজক কোনো কোনো লোকতত্ত্ববিদে সমাজৰ নিম্নস্তৰৰ বুলি ক'ব খোজে যদিও এনে ধাৰণা গ্রহণ কৰিব নোৱাৰি। বিজ্ঞানসন্মত দৃষ্টিভংগী হ'লেই যে কোনো এখন সমাজ উচ্চতৰ হ'ব আৰু তাৰ বিপৰীতে লোক বা গণসমাজ নিম্নতৰ হ'ব লাগিব তেনে কোনো কথা নাই। লোকসমাজৰ অংগীভূত মানুহে প্রায়ে গাঁৱে-ভূঞে বাস কৰে আৰু অভিজাত শ্ৰেণীৰ লোকসকল নগৰ-চহৰ আদিত বাস কৰে। হ'লেও এই ধাৰণা সদা-সর্বদাই গ্রহণযোগ্য হ'ব নোৱাৰে। কাৰণ, গাঁৱতো শিক্ষিত মানুহে বাস কৰে। তাৰ বিপৰীতে চহৰ বা নগৰতো গঞালোকৰ বসতি দেখা যায়। নগৰ-চহৰৰ বিভিন্ন কাম-কাজৰ বাবে গঞালোকৰ প্রয়োজন হয়। তেতিয়া গঞালোকে চহৰ-নগৰত থাকি মজদুৰ বা কামিলাৰ ভূমিকা পালন কৰে আৰু এইদৰে তেওঁলোকে চহৰ বা নগৰবাসী হয়।
                 </div>
             </div>
             <div class="footer-pagination">
@@ -625,7 +622,7 @@
                 </div>
 
                 <div class="question">
-                    <b>১০।</b> তলৰ শব্দ কেইটাৰ লিঙ্গ নিৰ্ণয় কৰা。 <span class="marks">১/২ × ۴ = ২</span><br>
+                    <b>১০।</b> তলৰ শব্দ কেইটাৰ লিঙ্গ নিৰ্ণয় কৰা。 <span class="marks">১/২ × 8 = ২</span><br>
                     ৰান্ধনি, ৰান্ধনী, শিপিনী, শিপিনি
                 </div>
             </div>
