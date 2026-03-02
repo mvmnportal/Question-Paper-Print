@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question Paper</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap" rel="stylesheet">
     <style>
         body {
@@ -22,7 +21,7 @@
             margin-bottom: 20px;
         }
 
-        .download-btn {
+        .print-btn {
             padding: 12px 24px;
             font-size: 16px;
             font-weight: bold;
@@ -34,11 +33,11 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
 
-        .download-btn:hover {
+        .print-btn:hover {
             background-color: #b71c1c;
         }
 
-        /* Page Layout */
+        /* Screen Page Layout */
         .page {
             width: 210mm; /* A4 width */
             min-height: 297mm; /* A4 height */
@@ -167,13 +166,6 @@
             height: 70px;
         }
 
-        .qr-text {
-            font-size: 11px;
-            font-weight: bold;
-            margin-top: 2px;
-            letter-spacing: 1px;
-        }
-
         /* Time and Marks */
         .time-marks {
             display: flex;
@@ -236,19 +228,35 @@
             font-family: 'Times New Roman', serif;
         }
 
-        /* Print Settings */
+        /* Direct Print Settings for exact A4 configuration */
         @media print {
+            @page {
+                size: A4 portrait;
+                margin: 5mm; /* Very small margin so the border renders properly inside the unprintable area */
+            }
             body {
                 background-color: white;
                 padding: 0;
+                margin: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
             .no-print {
                 display: none;
             }
             .page {
                 box-shadow: none;
-                margin: 0;
-                page-break-after: always;
+                margin: 0 auto;
+                width: 198mm; /* Reduced slightly to account for the @page margin */
+                height: 286mm; /* Constrains height strictly to 1 A4 page */
+                page-break-after: always; /* Forces 7 independent pages */
+                border: 8px double #000; /* Maintains the border */
+                outline: 2px solid #000;
+                outline-offset: -12px;
+            }
+            /* Prevents a blank 8th page */
+            .page:last-child {
+                page-break-after: auto;
             }
         }
     </style>
@@ -256,7 +264,7 @@
 <body>
 
     <div class="no-print">
-        <button class="download-btn" onclick="generatePDF()">Download Question Paper as PDF</button>
+        <button class="print-btn" onclick="window.print()">Print Question Paper</button>
     </div>
 
     <div id="question-paper">
@@ -266,7 +274,7 @@
                 <div class="top-header">
                     <div class="series-box">Series : MVMNFE1</div>
                     <div>
-                        <img src="https://bwipjs-api.metafloor.com/?bcid=code128&text=CLASS-%20IX&scale=3&height=12&includetext" alt="Barcode" height="50" crossorigin="anonymous">
+                        <img src="https://bwipjs-api.metafloor.com/?bcid=code128&text=CLASS-%20IX&scale=3&height=12" alt="Barcode" height="50" crossorigin="anonymous">
                     </div>
                     <div class="set-box">
                         <div class="set-border">SET ~ 1</div>
@@ -299,13 +307,12 @@
                 </div>
 
                 <div class="subject-area">
-                    <img src="https://bwipjs-api.metafloor.com/?bcid=code128&text=ASSAMESE&scale=3&height=12&includetext" alt="Center Barcode" class="barcode-center" crossorigin="anonymous"><br>
+                    <img src="https://bwipjs-api.metafloor.com/?bcid=code128&text=ASSAMESE&scale=3&height=12" alt="Center Barcode" class="barcode-center" crossorigin="anonymous"><br>
                     <h1 class="subject-title">অসমীয়া</h1>
                     <h2 class="subject-title" style="font-size: 22px; font-family: 'Times New Roman', serif;">ASSAMESE</h2>
                     
                     <div class="qr-code-container">
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=2025-2026" alt="QR Code" class="qr-code" crossorigin="anonymous">
-                        <div class="qr-text">2025-2026</div>
                     </div>
                 </div>
 
@@ -368,7 +375,7 @@
                     লোক বা জন বা গঞালোক আৰু সমাজৰ বিশেষ কিছুমান বৈশিষ্ট্য আছে। যেনে-- লোক বা জন বা গঞালোকসকল সাধাৰণতে গাঁৱে-ভূঞে বাস কৰে। তেওঁলোক সাধাৰণতে চাকৰিজীৱী বা শিল্পজীৱী নহয়, কৃষিজীৱীহে। এই ফালৰ পৰা তেওঁলোক খেতিয়ক। খেতিয়কসকল প্রায়ে নিৰক্ষৰ, অৰ্থাৎ পঢ়া-শুনা কৰিব নাজানে। তেওঁলোকে প্রায়ে হাতেৰে নানা বিধৰ সা-সঁজুলি সাজে। এনে সা-সঁজুলি প্রায়ে মাটি, বাঁহ, কাঠ, বেত আদিৰ পৰা প্ৰস্তুত কৰে। যন্ত্রশিল্প অর্থাৎ যন্ত্রত প্রস্তুত কৰা সঁজুলি গঞা ৰাইজে ব্যৱহাৰ কৰিব নোখোজে। তেওঁলোকৰ মাজত লিখা-পঢ়াৰ গুৰুত্ব তুলনামূলকভাৱে কম। ছপা-সমল বা কিতাপ-আলোচনী আদিত তেওঁলোকে কম গুৰুত্ব দিয়ে।<br><br>
                     মুখে মুখে চলি অহা গীত-পদ, কথা-কাহিনী, যোজনা-পটন্তৰ আদিত তেওঁলোকে তুলনামূলকভাবে অধিক গুৰুত্ব দিয়ে। পিতাক-আতাক-ককাক, আবু-আইতাকৰ দিনৰে পৰা মুখে মুখে চলিঅহা সাধুকথা বা ৰামায়ণ-মহাভাৰত বা কোৰান, বাইবেল, জাতক আদিৰ কথা শুনি তেওঁলোকে সীমাহীন আনন্দ লাভ কৰে। নতুন কথা, নতুন উপদেশ আদিতকৈ তেওঁলোকে পীৰিয়ে পীৰিয়ে চলি অহা কথাবোৰতহে অধিক গুৰুত্ব দিয়ে।<br><br>
                     লোকসমাজত পুৰণি দিনৰ কথাৰহে অধিক সমাদৰ। চহৰীয়া বা নগৰীয়া মানুহৰ তুলনাত গঞালোক কিছু পৰিমাণে পিছ পৰা। লোকজীৱনত যুক্তিতকৈ বিশ্বাসত অধিক গুৰুত্ব দিয়া হয়। গভীৰ বিশ্বাসে পুৰণি ধৰণ-কৰণ, ৰীতি-নীতি, ভূত-প্রেত, ধর্মীয়কৃত্য, ঔষধ-চিকিৎসা আদিৰ প্ৰতি তেওঁলোকৰ মন-প্রাণ সদা-সর্বদাই আকৃষ্ট কৰি থাকে। অতীতৰ প্ৰতি থকা বিশ্বাস আৰু আস্থাই তেওঁলোকক যাদু-পৰায়ণ কৰি তোলে। সেই কাৰণে তেওঁলোকে সর্বত্রতে অশৰীৰী ভূত-প্রেত, বাক-দ'ত, দেৱ-দেৱতাৰ লীলা-খেলা দেখিবলৈ পায়। বেমাৰ-আজাৰ, ৰোগ-ব্যাধি, প্রাকৃতিক ঘটনা-দুর্ঘটনা আদিতো তেওঁলোকে এই কাৰণে অদৃশ্য শক্তিৰ লীলা-খেলা দেখিবলৈ পায়।<br><br>
-                    লোকসমাজক কোনো কোনো লোকতত্ত্ববিদে সমাজৰ নিম্নস্তৰৰ বুলি ক'ব খোজে যদিও এনে ধাৰণা গ্রহণ কৰিব নোৱাৰি। বিজ্ঞানসন্মত দৃষ্টিভংগী হ'লেই যে কোনো এখন সমাজ উচ্চতৰ হ'ব আৰু তাৰ বিপৰীতে লোক বা গণসমাজ নিম্নতৰ হ'ব লাগিব তেনে কোনো কথা নাই। লোকসমাজৰ অংগীভূত মানুহে প্রায়ে গাঁৱে-ভূঞে বাস কৰে আৰু অভিজাত শ্ৰেণীৰ লোকসকল নগৰ-চহৰ আদিত বাস কৰে। হ'লেও এই ধাৰণা সদা-সর্বদাই গ্রহণযোগ্য হ'ব নোৱাৰে। কাৰণ, গাঁৱতো শিক্ষিত মানুহে বাস কৰে। তাৰ বিপৰীতে চহৰ বা নগৰতো গঞালোকৰ বসতি দেখা যায়। নগৰ-চহৰৰ বিভিন্ন কাম-কাজৰ বাবে গঞালোকৰ প্রয়োজন হয়। তেতিয়া গঞালোকে চহৰ-নগৰত থাকি মজদুৰ বা কামিলাৰ ভূমিকা পালন কৰে আৰু এইদৰে তেওঁলোকে চহৰ বা নগৰবাসী হয়।
+                    লোকসমাজک কোনো কোনো লোকতত্ত্ববিদে সমাজৰ নিম্নস্তৰৰ বুলি ক'ব খোজে যদিও এনে ধাৰণা গ্রহণ কৰিব নোৱাৰি। বিজ্ঞানসন্মত দৃষ্টিভংগী হ'লেই যে কোনো এখন সমাজ উচ্চতৰ হ'ব আৰু তাৰ বিপৰীতে লোক বা গণসমাজ নিম্নতৰ হ'ব লাগিব তেনে কোনো কথা নাই। লোকসমাজৰ অংগীভূত মানুহে প্রায়ে গাঁৱে-ভূঞে বাস কৰে আৰু অভিজাত শ্ৰেণীৰ লোকসকল নগৰ-চহৰ আদিত বাস কৰে। হ'লেও এই ধাৰণা সদা-সর্বদাই গ্রহণযোগ্য হ'ব নোৱাৰে। কাৰণ, গাঁৱতো শিক্ষিত মানুহে বাস কৰে। তাৰ বিপৰীতে চহৰ বা নগৰতো গঞালোকৰ বসতি দেখা যায়। নগৰ-চহৰৰ বিভিন্ন কাম-কাজৰ বাবে গঞালোকৰ প্রয়োজন হয়। তেতিয়া গঞালোকে চহৰ-নগৰত থাকি মজদুৰ বা কামিলাৰ ভূমিকা পালন কৰে আৰু এইদৰে তেওঁলোকে চহৰ বা নগৰবাসী হয়।
                 </div>
             </div>
             <div class="footer-pagination">
@@ -618,7 +625,7 @@
                 </div>
 
                 <div class="question">
-                    <b>১০।</b> তলৰ শব্দ কেইটাৰ লিঙ্গ নিৰ্ণয় কৰা。 <span class="marks">১/২ × ৪ = ২</span><br>
+                    <b>১০।</b> তলৰ শব্দ কেইটাৰ লিঙ্গ নিৰ্ণয় কৰা。 <span class="marks">১/২ × ۴ = ২</span><br>
                     ৰান্ধনি, ৰান্ধনী, শিপিনী, শিপিনি
                 </div>
             </div>
@@ -695,24 +702,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function generatePDF() {
-            const element = document.getElementById('question-paper');
-            const opt = {
-                margin:       [10, 10, 10, 10], // Margin around the PDF pages
-                filename:     'Question_Paper.pdf',
-                image:        { type: 'jpeg', quality: 1.0 }, // Maximum image quality
-                html2canvas:  { 
-                    scale: 3, // Increased scale for very high clarity
-                    useCORS: true, 
-                    letterRendering: true 
-                }, 
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-            
-            html2pdf().set(opt).from(element).save();
-        }
-    </script>
 </body>
 </html>
