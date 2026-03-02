@@ -17,7 +17,7 @@
             text-rendering: optimizeLegibility;
         }
 
-        /* Print Button Styles from Class 6 Logic */
+        /* Print Button Styles */
         .btn-container {
             text-align: center;
             margin-bottom: 20px;
@@ -230,10 +230,14 @@
             font-family: 'Times New Roman', serif;
         }
 
-        /* Print Media Query using Class 6 Logic */
+        /* Strict Print Layout for A4 without middle breaking */
         @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0; /* Forces exact fit without browser default margins */
+            }
             body {
-                background: none;
+                background: white;
                 margin: 0;
                 padding: 0;
                 -webkit-print-color-adjust: exact;
@@ -245,15 +249,18 @@
             .page {
                 box-shadow: none;
                 margin: 0;
-                width: 100%;
-                /* Kept the border to match your exact format requirement */
+                width: 210mm;
+                height: 297mm; /* Strict height prevents breaking onto next page */
+                padding: 15mm;
+                box-sizing: border-box;
                 border: 8px double #000;
                 outline: 2px solid #000;
                 outline-offset: -12px;
                 page-break-after: always;
+                page-break-inside: avoid;
             }
             .page:last-child {
-                page-break-after: auto;
+                page-break-after: avoid; /* Prevents an extra blank page at the end */
             }
         }
     </style>
