@@ -17,7 +17,7 @@
             text-rendering: optimizeLegibility;
         }
 
-        /* Print Button Styles from Class 6 Logic */
+        /* Print Button Styles */
         .btn-container {
             text-align: center;
             margin-bottom: 20px;
@@ -216,22 +216,29 @@
             font-family: 'Times New Roman', serif;
         }
 
-        /* Print Media Query explicitly using the Class 6 Logic */
+        /* Strict A4 Print Media Query */
         @media print {
+            @page {
+                size: A4 portrait;
+                margin: 15mm; /* Standard A4 printing margin */
+            }
             body {
                 background: none;
                 margin: 0;
                 padding: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
             .btn-container {
-                display: none;
+                display: none !important; /* Hide button when printing */
             }
             .page {
                 box-shadow: none;
                 margin: 0;
                 width: 100%;
-                padding: 10mm 15mm;
-                border: none; /* Removed heavy border on print to prevent multi-page clipping issues, just like Class 6 */
+                min-height: auto; /* Allow natural flow */
+                padding: 0; /* Handled by @page margin */
+                border: none; 
                 outline: none;
             }
             .question {
@@ -243,7 +250,7 @@
 <body>
 
     <div class="btn-container">
-        <button class="print-btn" onclick="window.print()">🖨️ Print / Download PDF</button>
+        <button id="printBtn" class="print-btn">🖨️ Print / Download PDF</button>
     </div>
 
     <div id="question-paper" class="page">
@@ -622,5 +629,11 @@
             
         </div>
     </div>
+
+    <script>
+        document.getElementById('printBtn').addEventListener('click', function() {
+            window.print();
+        });
+    </script>
 </body>
 </html>
