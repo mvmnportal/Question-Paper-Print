@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question Paper</title>
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body {
             background-color: #525659;
@@ -33,10 +34,19 @@
             cursor: pointer;
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin: 0 5px;
         }
 
         .print-btn:hover {
             background-color: #0056b3;
+        }
+
+        .download-btn {
+            background-color: #28a745;
+        }
+
+        .download-btn:hover {
+            background-color: #218838;
         }
 
         /* Screen Page Layout (Single Continuous Page for dynamic printing) */
@@ -189,7 +199,7 @@
         .content {
             font-size: 16px;
             line-height: 1.8; 
-            text-align: justify; /* Justified alignment for comprehension paragraph and text */
+            text-align: justify; /* Set to justify for proper alignment */
         }
 
         .section-title {
@@ -252,7 +262,8 @@
 <body>
 
     <div class="btn-container">
-        <button id="printBtn" class="print-btn" onclick="window.print();">🖨️ Print / Download PDF</button>
+        <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+        <button class="print-btn download-btn" onclick="downloadPDF()">📥 Download PDF</button>
     </div>
 
     <div id="question-paper" class="page">
@@ -359,7 +370,7 @@
 
             <div class="question">
                 <b>I)</b> <span class="marks">১</span><br>
-                উক্তি (Assertion - A): লোকসংস্কৃতিৰ পণ্ডিত ড° প্ৰফুল্ল দত্ত গোস্বামীয়ে 'বিশেষভাৱে লিখা-পঢ়া নথকা' লোককেই লোক বা জন বুলিছে। <br>
+                উক্তি (Assertion - A): লোকসংস্কৃতিৰ পণ্ডিত ড° প্ৰফুল্ল দত্ত গোস্বামীয়ে 'বিশেষভাৱে লিখা-পঢ়া নথকা' লোককেই লোক বা জন বুলিছে。 <br>
                 যুক্তি (Reason - R): লোকসমাজত পুৰণি দিনৰ ধৰ্মীয় পুথি যেনে ৰামায়ণ, মহাভাৰত আদিৰ কথা শুনি মানুহে অপাৰ আনন্দ লাভ কৰে।
                 <div class="options">
                     (ক) (A) আৰু (R) দুয়োটাই শুদ্ধ আৰু (R) হৈছে (A) ৰ সঠিক ব্যাখ্যা।<br>
@@ -404,9 +415,9 @@
             </div>
 
             <div class="question">
-                <b>V)</b> লোকসমাজত তলৰ কোনটো মাধ্যমৰ গুৰুত্ব আপেক্ষিকভাৱে কম? <span class="marks">১</span>
+                <b>V)</b> লোকসমাজত তলৰ কোনটো মাধ্যমৰ ಗುৰুত্ব আপেক্ষিকভাৱে কম? <span class="marks">১</span>
                 <div class="options">
-                    (ক) মুখে মুখে চলি অহা গীত-পদ।<br>
+                    (ক) মুখে মুখে চলি margin অহা গীত-পদ।<br>
                     (খ) কথা-কাহিনী আৰু যোজনা-পটন্তৰ।<br>
                     (গ) ছপা সমল বা কিতাপ-আলোচনী।<br>
                     (ঘ) পুৰণি দিনৰ পৰম্পৰাগত কথা।
@@ -444,7 +455,7 @@
             </div>
 
             <div class="question">
-                <b>IX)</b> লোকজীৱনত কিহৰ গুৰুত্ব অধিক বুলি পাঠত কোৱা হৈছে? <span class="marks">১</span>
+                <b>IX)</b> লোকজীৱনত কিহৰ ಗುৰুত্ব অধিক বুলি পাঠত কোৱা হৈছে? <span class="marks">১</span>
                 <div class="options">
                     ক) বিশ্বাস<br>
                     খ) আধুনিক শিক্ষা<br>
@@ -478,7 +489,7 @@
                 <br><br>
                 <center>নাইবা</center>
                 <br>
-                <b>খ)</b> তলত দিয়া যিকোনো এখন ৰচনা লিখা। <br>
+                <b>খ)</b> তলত দিয়া যিকোনো এখন ৰচনা লিখা。 <br>
                 অ) ছাত্ৰৰ কৰ্তব্য<br>
                 আ) অধ্যয়নশীলতা
             </div>
@@ -494,12 +505,12 @@
             </div>
 
             <div class="question">
-                <b>৫।</b> ভাব-সম্প্ৰসাৰণ কৰা。 <span class="marks">৫</span><br>
+                <b>৫.</b> ভাব-সম্প্ৰসাৰণ কৰা。 <span class="marks">৫</span><br>
                 ভাৰতবৰ্ষক বাৰেবৰণীয়া ফুলৰ এখনি মনোৰম ফুলনি বুলিব পাৰি।
             </div>
 
             <div class="question">
-                <b>৬।</b> তলত দিয়া জতুৱা খণ্ডবাক্যকেইটাৰ অৰ্থ লিখি একোটাকৈ বাক্য ৰচনা কৰা।(যিকোনো পাঁচটা) <span class="marks">১ × ৫ = ৫</span><br>
+                <b>৬.</b> তলত দিয়া জতুৱা খণ্ডবাক্যকেইটাৰ অৰ্থ লিখি একোটাকৈ বাক্য ৰচনা কৰা।(যিকোনো পাঁচটা) <span class="marks">১ × ৫ = ৫</span><br>
                 আঁঠু ল, গাত ল, গাই বাই চা, কঁকাল বান্ধ, কঁকাল ভাগ, গা টেঙা
             </div>
 
@@ -510,7 +521,7 @@
             </div>
 
             <div class="question">
-                <b>৭।</b> তলৰ শব্দকেইটাৰ শুদ্ধ সন্ধি বাছি উলিয়াই লিখা। <span class="marks">১ × ৩ = ৩</span><br><br>
+                <b>৭.</b> তলৰ শব্দকেইটাৰ শুদ্ধ সন্ধি বাছি উলিয়াই লিখা। <span class="marks">১ × ৩ = ৩</span><br><br>
                 ক) নিশ্চয় =<br>
                 অ) নি: + চয় &nbsp;&nbsp; আ) নিৰ + চয় &nbsp;&nbsp; ই) নি + চয় &nbsp;&nbsp; ঈ) নিশ+ চয়<br><br>
                 খ) কিন্তু =<br>
@@ -520,7 +531,7 @@
             </div>
 
             <div class="question">
-                <b>৮।</b> শুদ্ধ উত্তৰটো বিচাৰি লিখা। <span class="marks">১ × ১৩ = ১৩</span><br><br>
+                <b>৮.</b> শুদ্ধ উত্তৰটো বিচাৰি লিখা। <span class="marks">১ × ১৩ = ১৩</span><br><br>
                 ক) ক্ৰিয়াৰ মূলক কি বোলে?<br>
                 অ) প্ৰাতিপদিক &nbsp;&nbsp; আ) ধাতু &nbsp;&nbsp; ই) নি + চয় &nbsp;&nbsp; ঈ) নিশ+ চয়<br><br>
 
@@ -564,11 +575,11 @@
             </div>
 
             <div class="question">
-                <b>৯।</b> ভাষা এটাত সন্ধিৰ প্ৰয়োজন কিয়? <span class="marks">২</span>
+                <b>৯.</b> ভাষা এটাত সন্ধিৰ প্ৰয়োজন কিয়? <span class="marks">২</span>
             </div>
 
             <div class="question">
-                <b>১০।</b> তলৰ শব্দ কেইটাৰ লিঙ্গ নিৰ্ণয় কৰা। <span class="marks">১/২ × 8 = ২</span><br>
+                <b>১০.</b> তলৰ শব্দ কেইটাৰ লিঙ্গ নিৰ্ণয় কৰা。 <span class="marks">১/২ × 8 = ২</span><br>
                 ৰান্ধনি, ৰান্ধনী, শিপিনী, শিপিনি
             </div>
 
@@ -579,19 +590,19 @@
             </div>
 
             <div class="question">
-                <b>১১।</b> তলত দিয়া যিকোনো এটা প্ৰশ্নৰ উত্তৰ লিখা。 <span class="marks">৪</span><br>
+                <b>১১.</b> তলত দিয়া যিকোনো এটা প্ৰশ্নৰ উত্তৰ লিখা。 <span class="marks">৪</span><br>
                 ক) কি কি বিষয়ত ভাৰতবৰ্ষৰ বিচিত্ৰতা লক্ষ্য কৰিব পাৰি পাঠৰ আলমত লিখা।<br>
                 খ) তোমাৰ গাঁৱত এজন ব্যক্তিক 'ডাইনী' বুলি সন্দেহ কৰি গাঁৱৰ মানুহে অত্যাচাৰ কৰিবলৈ ওলাইছে। এজন সচেতন ছাত্ৰ হিচাপে সেই পৰিস্থিতিটো চম্ভালিবলৈ তুমি ল’বলগীয়া ৪ টা পদক্ষেপৰ বিষয়ে লিখা。
             </div>
 
             <div class="question">
-                <b>১২।</b> তলত দিয়া যিকোনো এটা প্ৰশ্নৰ চমু উত্তৰ লিখা。 <span class="marks">২</span><br>
+                <b>১২.</b> তলত দিয়া যিকোনো এটা প্ৰশ্নৰ চমু উত্তৰ লিখা。 <span class="marks">২</span><br>
                 ক) ব্যৱহাৰ প্ৰণালীক সামান্য কথা বুলি কিয় উলাই কৰিব নোৱাৰি?<br>
                 খ) ভাৰতৰ বৈচিত্ৰতাৰ দিশসমূহে কেনেদৰে ঐক্য স্থাপনত সহায় কৰিছে?
             </div>
 
             <div class="question">
-                <b>১৩।</b> উত্তৰ লিখা。 <span class="marks">১ × ৪ = ৪</span><br>
+                <b>১৩.</b> উত্তৰ লিখা。 <span class="marks">১ × ৪ = ৪</span><br>
                 ক) সুকুমাৰ কলা কি?<br>
                 খ) উৰাবাতৰি মানে কি?<br>
                 গ) 'অন্যৰ প্ৰতি ব্যৱহাৰ' পাঠটিৰ মূল গ্ৰন্থ কি?<br>
@@ -603,7 +614,7 @@
             </div>
 
             <div class="question">
-                <b>১৪।</b> তলত দিয়া যিকোনো এটা প্ৰশ্নৰ উত্তৰ লিখা。 <span class="marks">৪</span><br>
+                <b>১৪.</b> তলত দিয়া যিকোনো এটা প্ৰশ্নৰ উত্তৰ লিখা。 <span class="marks">৪</span><br>
                 ক) 'মোৰ দেশ' কবিতাটোত কবিৰ দেশপ্ৰেমৰ স্বৰূপ কেনেদৰে প্ৰকাশ পাইছে, বুজাই লিখা。 <br>
                 খ) 'এই যে পৃথিৱী স্বৰ্গতো অধিক<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;মানুহৰ নিজাপী ঘৰ。 '-<br>
@@ -616,13 +627,13 @@
             </div>
 
             <div class="question">
-                <b>১৫।</b> তলত দিয়া যিকোনো এটা প্ৰশ্নৰ চমু উত্তৰ লিখা。 <span class="marks">২</span><br>
+                <b>১৫.</b> তলত দিয়া যিকোনো এটা প্ৰশ্নৰ চমু উত্তৰ লিখা。 <span class="marks">২</span><br>
                 ক) "যিমানে বিলাই দিবা, সিমানে মহান হ’বা"— এই কবিতাশাৰীৰ তাৎপৰ্য কি?<br>
                 খ) মানুহক 'ময়াপী জীৱ' বোলাৰ অৰ্থ কি?
             </div>
 
             <div class="question">
-                <b>১৬।</b> উত্তৰ লিখা。 <span class="marks">১ × ৪ = ৪</span><br>
+                <b>১৬.</b> উত্তৰ লিখা。 <span class="marks">১ × ৪ = ৪</span><br>
                 ক) 'মানুহ বিনে নাই কেৱ'— ইয়াত 'কেৱ' শব্দটোৱে কি সূচাইছে?<br>
                 খ) কবিয়ে দেশৰ বাবে কি কৰিবলৈ 'মৰণ পণ' কৰিছে?<br>
                 গ) 'এনে বহু যাত্ৰাৰ শেষ মোৰ দেশ'— ইয়াৰ দ্বাৰা কবিৰ কি মানসিকতা প্ৰকাশ পাইছে?<br>
@@ -632,5 +643,18 @@
         </div>
     </div>
 
+    <script>
+        function downloadPDF() {
+            const element = document.getElementById('question-paper');
+            const opt = {
+                margin:       15,
+                filename:     'Question_Paper.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
 </body>
 </html>
