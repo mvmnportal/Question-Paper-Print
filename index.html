@@ -17,28 +17,6 @@
             text-rendering: optimizeLegibility;
         }
 
-        /* Print Button Styles */
-        .btn-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .print-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .print-btn:hover {
-            background-color: #0056b3;
-        }
-
         /* Screen Page Layout (Single Continuous Page for dynamic printing) */
         .page {
             width: 210mm;
@@ -229,9 +207,6 @@
                 print-color-adjust: exact;
                 display: block; /* Overrides flex to prevent page breaking bugs */
             }
-            .btn-container {
-                display: none !important; 
-            }
             .page {
                 display: block !important; /* Crucial to fix blank gaps caused by flexbox in print */
                 box-shadow: none;
@@ -250,10 +225,6 @@
     </style>
 </head>
 <body>
-
-    <div class="btn-container">
-        <button id="printBtn" class="print-btn" onclick="window.print();">🖨️ Print</button>
-    </div>
 
     <div id="question-paper" class="page">
         
@@ -394,7 +365,7 @@
              <div class="question">
                 <b>IV)</b> <span class="marks">১</span><br>
                 উক্তি (Assertion - A): লোকসংস্কৃতিৰ পণ্ডিত ড° প্ৰফুল্ল দত্ত গোস্বামীয়ে 'বিশেষভাৱে লিখা-পঢ়া নথকা' লোককেই লোক বা জন বুলিছে。 <br>
-                যুক্তি (Reason - R): লোকসমাজত পুৰণি দিনৰ ধৰ্মীয় পুথি যেনে ৰামায়ণ, মহাভাৰত আদিৰ কথা শুনি মানুহে অপাৰ আনন্দ লাভ কৰে।
+                যুক্তি (Reason - R): লোকসমাজত পুৰণি দিনৰ ধৰ্মীয় পুথি যেনে ৰামায়ণ, মহাভাৰত আদিৰ কথা শুনি মানুহে অপাৰ আনন্দ লাভ কৰে。
                 <div class="options">
                     (ক) (A) আৰু (R) দুয়োটাই শুদ্ধ আৰু (R) হৈছে (A) ৰ সঠিক ব্যাখ্যা。 <br>
                     (খ) (A) আৰু (R) দুয়োটাই শুদ্ধ কিন্তু (R), (A) ৰ সঠিক ব্যাখ্যা নহয়。 <br>
@@ -495,11 +466,11 @@
 
             <div class="question">
                 <b>৫.</b> ভাব-সম্প্ৰসাৰণ কৰা。 <span class="marks">৫</span><br>
-                ভাৰতবৰ্ষক বাৰেবৰণীয়া ফুলৰ এখনি মনোৰম ফুলনি বুলিব পাৰি।
+                ভাৰতবৰ্ষক বাৰেবৰণীয়া ফুলৰ এখনি মনোৰম ফুলনি বুলিব পাৰি。
             </div>
 
             <div class="question">
-                <b>৬.</b> তলত দিয়া জতুৱা খণ্ডবাক্যকেইটাৰ অৰ্থ লিখি একোটাকৈ বাক্য ৰচনা কৰা।(যিকোনো পাঁচটা) <span class="marks">১ × ৫ = ৫</span><br>
+                <b>৬.</b> তলত দিয়া জতুৱা খণ্ডবাক্যকেইটাৰ অৰ্থ লিখি একোটাকৈ বাক্য ৰচনা কৰা。 (যিকোনো পাঁচটা) <span class="marks">১ × ৫ = ৫</span><br>
                 আঁঠু ল, গাত ল, গাই বাই চা, কঁকাল বান্ধ, কঁকাল ভাগ, গা টেঙা
             </div>
 
