@@ -49,7 +49,7 @@
             background-color: #218838;
         }
 
-        /* Screen Page Layout (Single Continuous Page for dynamic printing) */
+        /* Screen Page Layout */
         .page {
             width: 210mm;
             min-height: 297mm;
@@ -63,8 +63,7 @@
             margin: 0 auto;
             margin-bottom: 30px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
+            display: block; /* Changed to block to prevent PDF generation glitches */
         }
 
         /* Top Header Area */
@@ -137,6 +136,8 @@
             font-size: 14px;
             line-height: 1.5;
             font-family: 'Times New Roman', serif;
+            page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         .note-section ol {
@@ -193,6 +194,8 @@
             line-height: 1.5;
             margin-bottom: 25px;
             font-family: 'Times New Roman', serif;
+            page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         /* Content / Questions */
@@ -209,10 +212,14 @@
             margin: 20px 0 10px 0;
             text-decoration: underline;
             font-family: 'Times New Roman', serif;
+            page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         .question {
             margin-bottom: 15px;
+            page-break-inside: avoid; /* Prevents splitting naturally across screen and PDF */
+            break-inside: avoid;
         }
 
         .options {
@@ -225,11 +232,11 @@
             font-family: 'Times New Roman', serif;
         }
 
-        /* Strict A4 Print Media Query - Fixed Blank Spaces Issue */
+        /* Strict A4 Print Media Query */
         @media print {
             @page {
                 size: A4 portrait;
-                margin: 15mm; /* Standard A4 printing margin */
+                margin: 15mm; 
             }
             body {
                 background: none;
@@ -237,13 +244,12 @@
                 padding: 0;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
-                display: block; /* Overrides flex to prevent page breaking bugs */
             }
             .btn-container {
                 display: none !important; 
             }
             .page {
-                display: block !important; /* Crucial to fix blank gaps caused by flexbox in print */
+                display: block !important;
                 box-shadow: none;
                 margin: 0;
                 width: 100%;
@@ -252,18 +258,14 @@
                 border: none; 
                 outline: none;
             }
-            .question, .content, .instructions, .note-section {
-                page-break-inside: auto !important; /* Allows long text to split naturally across pages without forcing huge empty gaps */
-                break-inside: auto !important;
-            }
         }
     </style>
 </head>
 <body>
 
     <div class="btn-container">
-        <button class="print-btn" onclick="window.print()">🖨️ Print</button>
-        <button class="print-btn download-btn" onclick="downloadPDF()">📥 Download PDF</button>
+        <button class="print-btn" onclick="window.print(); return false;">🖨️ Print</button>
+        <button class="print-btn download-btn" onclick="downloadPDF(); return false;">📥 Download PDF</button>
     </div>
 
     <div id="question-paper" class="page">
@@ -415,9 +417,9 @@
             </div>
 
             <div class="question">
-                <b>V)</b> লোকসমাজত তলৰ কোনটো মাধ্যমৰ ಗುৰুত্ব আপেক্ষিকভাৱে কম? <span class="marks">১</span>
+                <b>V)</b> লোকসমাজত তলৰ কোনটো মাধ্যমৰ গুৰুত্ব আপেক্ষিকভাৱে কম? <span class="marks">১</span>
                 <div class="options">
-                    (ক) মুখে মুখে চলি margin অহা গীত-পদ।<br>
+                    (ক) মুখে মুখে চলি অহা গীত-পদ।<br>
                     (খ) কথা-কাহিনী আৰু যোজনা-পটন্তৰ।<br>
                     (গ) ছপা সমল বা কিতাপ-আলোচনী।<br>
                     (ঘ) পুৰণি দিনৰ পৰম্পৰাগত কথা।
@@ -455,7 +457,7 @@
             </div>
 
             <div class="question">
-                <b>IX)</b> লোকজীৱনত কিহৰ ಗುৰুত্ব অধিক বুলি পাঠত কোৱা হৈছে? <span class="marks">১</span>
+                <b>IX)</b> লোকজীৱনত কিহৰ গুৰুত্ব অধিক বুলি পাঠত কোৱা হৈছে? <span class="marks">১</span>
                 <div class="options">
                     ক) বিশ্বাস<br>
                     খ) আধুনিক শিক্ষা<br>
@@ -646,13 +648,17 @@
     <script>
         function downloadPDF() {
             const element = document.getElementById('question-paper');
+            
             const opt = {
                 margin:       15,
                 filename:     'Question_Paper.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
+                image:        { type: 'jpeg', quality: 1.0 },
                 html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                // This specific setting forcefully prevents the div elements (.question, .section-title, etc) from being cut in half during the PDF generation.
+                pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
             };
+            
             html2pdf().set(opt).from(element).save();
         }
     </script>
