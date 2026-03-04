@@ -1,606 +1,318 @@
 <!DOCTYPE html>
-<html lang="as">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question Paper</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap" rel="stylesheet">
+    <title>Question Paper Cover Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    
     <style>
+        /* A4 Page Setup */
         body {
-            background-color: #525659;
-            font-family: 'Tiro Bangla', 'Times New Roman', serif;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
             margin: 0;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-rendering: optimizeLegibility;
+            font-family: "Times New Roman", Times, serif;
         }
 
-        /* Screen Page Layout (Single Continuous Page for dynamic printing) */
-        .page {
+        .a4-page {
             width: 210mm;
             min-height: 297mm;
             background-color: white;
-            padding: 15mm 20mm;
             box-sizing: border-box;
-            border: 8px double #000;
-            outline: 2px solid #000;
-            outline-offset: -12px;
-            position: relative;
-            margin: 0 auto;
-            margin-bottom: 30px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            padding: 10mm;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
         }
 
-        /* Top Header Area */
-        .top-header {
+        /* Decorative Border */
+        .page-border {
+            border: 5px double #111;
+            outline: 1px solid #111;
+            outline-offset: -8px;
+            flex-grow: 1;
+            padding: 15mm 10mm 10mm 10mm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Main Content Wrapper for Spacing Distribution */
+        .content-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Section */
+        .header-row {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            font-size: 18px;
+            align-items: center;
+            margin-bottom: 35px;
+            font-size: 20px;
+        }
+
+        .dashed-box {
+            border: 2px dashed #000;
+            padding: 10px 18px;
+            letter-spacing: 1px;
             font-weight: bold;
-            font-family: 'Times New Roman', serif;
         }
 
-        .series-box {
-            border: 2px dashed #000;
-            padding: 5px 15px;
-            font-size: 22px;
+        /* Functional Code Constraints */
+        #barcodeTop {
+            height: 40px;
+            max-width: 160px;
         }
 
-        .set-box {
-            text-align: right;
+        #barcodeSide {
+            height: 40px;
+            max-width: 140px;
         }
 
-        .set-border {
-            border: 2px dashed #000;
-            padding: 5px 15px;
-            font-size: 22px;
-            margin-bottom: 5px;
-            display: inline-block;
-        }
-
-        /* Roll Number / Student ID Area */
-        .roll-area {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 15px;
-            font-family: 'Times New Roman', serif;
-        }
-
-        .roll-number-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .roll-boxes {
-            display: flex;
-            margin-top: 5px;
-        }
-
-        .roll-box {
-            width: 22px; 
-            height: 30px;
-            border: 1px dashed #000;
-            margin-right: 4px;
-        }
-
-        .qp-code-instructions {
-            border: 2px dashed #000;
-            padding: 8px;
-            width: 320px;
-            font-size: 13px;
-        }
-
-        /* Note Section */
-        .note-section {
+        #qrCode {
+            width: 60px;
+            height: 60px;
             border: 2px solid #000;
-            padding: 12px;
-            margin-bottom: 25px;
-            font-size: 14px;
-            line-height: 1.5;
-            font-family: 'Times New Roman', serif;
+            padding: 2px;
+            box-sizing: border-box;
         }
 
-        .note-section ol {
-            margin: 0;
-            padding-left: 25px;
+        /* QP Code Section */
+        .qp-code-row {
+            text-align: right;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 35px;
         }
 
-        /* Subject Area */
-        .subject-area {
-            text-align: center;
-            margin-bottom: 25px;
+        .qp-code-row span {
+            font-size: 34px;
+            margin-left: 15px;
+        }
+
+        /* Student ID & Instructions */
+        .student-id-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 45px;
+            align-items: flex-start;
+        }
+
+        .student-id-container {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .boxes {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .box {
+            width: 22px;
+            height: 28px;
+            border: 1px dashed #000;
+            margin-right: 6px;
+        }
+
+        .answer-book-inst {
+            border: 1.5px dashed #000;
+            padding: 15px;
+            width: 40%;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        /* NOTE Box Section */
+        .note-box {
+            border: 2px solid #000;
+            padding: 15px 20px 10px 20px;
+            margin-bottom: 55px;
             position: relative;
         }
 
-        .subject-area img.barcode-center {
-            height: 45px;
-            margin-bottom: 5px;
-        }
-
-        .subject-title {
-            font-size: 28px;
+        .note-title {
             font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .note-list {
+            list-style: none;
+            padding-left: 0;
             margin: 0;
+            font-size: 16px;
+            text-align: justify;
         }
 
-        .qr-code-container {
-            position: absolute;
-            right: 0;
-            top: 0;
+        .note-list li {
+            display: flex;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .note-list .num {
+            width: 40px;
+            flex-shrink: 0;
+        }
+
+        .hash-mark {
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 8px;
+        }
+
+        /* Subject Section */
+        .subject-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .subject-center {
             text-align: center;
-            font-family: 'Times New Roman', serif;
+            flex-grow: 1;
         }
 
-        .qr-code {
-            width: 70px;
-            height: 70px;
+        .subject-center h1 {
+            margin: 0;
+            font-size: 34px;
+            font-weight: bold;
+            letter-spacing: 2px;
         }
 
         /* Time and Marks */
-        .time-marks {
+        .time-marks-row {
             display: flex;
             justify-content: space-between;
-            font-style: italic;
+            font-size: 20px;
             font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 16px;
-            font-family: 'Times New Roman', serif;
+            margin-bottom: 30px;
         }
 
-        /* General Instructions */
-        .instructions {
-            font-style: italic;
-            font-size: 15px;
-            line-height: 1.5;
-            margin-bottom: 25px;
-            font-family: 'Times New Roman', serif;
-        }
-
-        /* Content / Questions */
-        .content {
-            font-size: 16px;
-            line-height: 1.8; 
-            text-align: justify; 
-        }
-
-        .section-title {
-            text-align: center;
+        /* Footer */
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
             font-weight: bold;
             font-size: 18px;
-            margin: 20px 0 10px 0;
-            text-decoration: underline;
-            font-family: 'Times New Roman', serif;
+            margin-top: auto;
+            border-top: 2px solid #000;
+            padding-top: 10px;
         }
 
-        .question {
-            margin-bottom: 15px;
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
         }
-
-        .options {
-            margin-left: 20px;
-        }
-
-        .marks {
-            float: right;
-            font-weight: bold;
-            font-family: 'Times New Roman', serif;
-        }
-
-        /* Strict A4 Print Media Query - Fixed Blank Spaces Issue */
-        @media print {
-            @page {
-                size: A4 portrait;
-                margin: 15mm; /* Standard A4 printing margin */
-            }
-            body {
-                background: none;
-                margin: 0;
-                padding: 0;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                display: block; /* Overrides flex to prevent page breaking bugs */
-            }
-            .page {
-                display: block !important; /* Crucial to fix blank gaps caused by flexbox in print */
-                box-shadow: none;
-                margin: 0;
-                width: 100%;
-                min-height: auto; 
-                padding: 0; 
-                border: none; 
-                outline: none;
-            }
-            .question, .content, .instructions, .note-section {
-                page-break-inside: auto !important; /* Allows long text to split naturally across pages without forcing huge empty gaps */
-                break-inside: auto !important;
-            }
+        
+        .footer-center {
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
 
-    <div id="question-paper" class="page">
+<div class="a4-page">
+    <div class="page-border">
         
-        <div class="top-header">
-            <div class="series-box">Series : MVMNFE1</div>
-            <div>
-                <img src="https://bwipjs-api.metafloor.com/?bcid=code128&text=CLASS-%20IX&scale=3&height=12" alt="Barcode" height="50" crossorigin="anonymous">
+        <div class="content-wrapper">
+            <div class="header-row">
+                <div class="dashed-box">Series : MVMNFE1</div>
+                <svg id="barcodeTop"></svg>
+                <div class="dashed-box">SET ~ 1</div>
             </div>
-            <div class="set-box">
-                <div class="set-border">SET ~ 1</div>
-                <div>Q.P. Code &nbsp;&nbsp;&nbsp;&nbsp;<b>01</b></div>
+
+            <div class="qp-code-row">
+                Q.P. Code <span>01</span>
+            </div>
+
+            <div class="student-id-row">
+                <div class="student-id-container">
+                    STUDENT ID
+                    <div class="boxes">
+                        <div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div>
+                        <div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div>
+                        <div class="box"></div><div class="box"></div><div class="box"></div>
+                    </div>
+                </div>
+                <div class="answer-book-inst">
+                    Candidates must write the Q.P. Code on the title page of the answer-book.
+                </div>
+            </div>
+
+            <div class="note-box">
+                <div class="note-title">NOTE :</div>
+                <ul class="note-list">
+                    <li><span class="num">(I)</span> Please check that this question paper contains printed pages 9+1 Map.</li>
+                    <li><span class="num">(II)</span> Please check that this question paper contains 37 questions.</li>
+                    <li><span class="num">(III)</span> Please write down the Serial Number of the question in the answer script.</li>
+                    <li><span class="num">(IV)</span> 15 minutes time has been allotted to read this question paper. The question paper will be distributed at 9:15 am. From 9:15 a.m. to 9:30 a.m., the candidates will read the question paper only and will not write any answer on the answer-book during this period.</li>
+                </ul>
+                <div class="hash-mark">#</div>
+            </div>
+
+            <div class="subject-row">
+                <svg id="barcodeSide"></svg>
+                <div class="subject-center">
+                    <h1>SOCIAL SCIENCE</h1>
+                </div>
+                <canvas id="qrCode"></canvas>
+            </div>
+
+            <div class="time-marks-row">
+                <div>Time allowed : 3 hours</div>
+                <div style="text-align: right;">Maximum Marks : 80</div>
             </div>
         </div>
 
-        <div class="roll-area">
-            <div class="roll-number-container">
-                <b>STUDENT ID</b>
-                <div class="roll-boxes">
-                    <div class="roll-box"></div><div class="roll-box"></div><div class="roll-box"></div>
-                    <div class="roll-box"></div><div class="roll-box"></div><div class="roll-box"></div>
-                    <div class="roll-box"></div><div class="roll-box"></div><div class="roll-box"></div>
-                    <div class="roll-box"></div><div class="roll-box"></div>
-                </div>
+        <div class="footer-row">
+            <div class="footer-left">
+                <span>01</span>
+                <span>#</span>
             </div>
-            <div class="qp-code-instructions">
-                Candidates must write the Q.P. Code on the title page of the answer-book.
-            </div>
+            <div class="footer-center">1</div>
+            <div>P.T.O.</div>
         </div>
 
-        <div class="note-section">
-            <strong>NOTE :</strong>
-            <ol type="I">
-                <li>Please check that this question paper contains <b>8</b> printed pages.</li>
-                <li>Please check that this question paper contains <b>16</b> questions.</li>
-                <li>10 minute time has been allotted to read this question paper. The question paper will be distributed at 09.20 a.m. From 09.20 a.m to 09.30 a.m., the candidates will read the question paper only and will not write any answer on the answer-book during this period.</li>
-            </ol>
-        </div>
-
-        <div class="subject-area">
-            <img src="https://bwipjs-api.metafloor.com/?bcid=code128&text=ASSAMESE&scale=3&height=12" alt="Center Barcode" class="barcode-center" crossorigin="anonymous"><br>
-            <h1 class="subject-title">অসমীয়া</h1>
-            <h2 class="subject-title" style="font-size: 22px; font-family: 'Times New Roman', serif;">ASSAMESE</h2>
-            
-            <div class="qr-code-container">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=2025-2026" alt="QR Code" class="qr-code" crossorigin="anonymous">
-            </div>
-        </div>
-
-        <div class="time-marks">
-            <div>
-                সময়: 3 ঘণ্টা<br>
-                Time allowed: 3 hours
-            </div>
-            <div style="text-align: right;">
-                সৰ্বমুঠ নম্বৰ: 80<br>
-                Maximum Marks: 80
-            </div>
-        </div>
-
-        <div class="instructions">
-            <b>General Instructions:</b><br>
-            Question paper is divided into 4 sections.<br>
-            It has total 16 questions.<br>
-            Section A: 1 Question no. 1 to 1<br>
-            Section B: 5 Questions no. 2 to 6<br>
-            Section C: 4 Questions no. 7 to 10<br>
-            Section D: 5 Questions no. 11 to 16<br>
-            Attempt questions as per specific instructions.<br>
-            Write question no. in answer book before attempting it.<br><br>
-
-            <b style="font-family: 'Tiro Bangla', serif;">সাধাৰণ নিৰ্দেশনা:</b><br>
-            <span style="font-family: 'Tiro Bangla', serif;">
-            প্ৰশ্নকাকতৰ প্ৰশ্নসমূহ চাৰি (৪) ভাগত বিভক্ত।<br>
-            সৰ্ব্বমুঠ প্ৰশ্নৰ সংখ্যা: ১৬ <br>
-            শাখা 'ক': প্রশ্নৰ সংখ্যা ১, প্রশ্ন নং ১-১<br>
-            শাখা 'খ': প্ৰশ্নৰ সংখ্যা ৫, প্রশ্ন নং ২-৬<br>
-            শাখা 'গ': প্ৰশ্নৰ সংখ্যা ৪, প্রশ্ন নং ৭-১০<br>
-            শাখা 'ঘ': প্ৰশ্নৰ সংখ্যা ৫, প্রশ্ন নং ১১-১৬<br>
-            পৰীক্ষাৰ্থীসকলে নিৰ্দ্ধাৰিত নিৰ্দেশ অনুসৰি প্ৰশ্নসমূহৰ উত্তৰ কৰিব।<br>
-            উত্তৰ বহীত প্ৰশ্নসমূহৰ উত্তৰ কৰাৰ পুৰ্বে প্ৰশ্ন নং লিখাটো আৱশ্যক।
-            </span>
-        </div>
-
-        <div class="content">
-            
-            <div class="section-title">
-                Section - A<br>
-                বোধ পৰীক্ষণ<br>
-                (Comprehension)<br>
-                (15 Marks)
-            </div>
-
-            <div class="question">
-                <b>১। তলৰ গদ্যাংশটো পঢ়ি তলত দিয়া প্রশ্নসমূহৰ উত্তৰ কৰা।</b>
-                <br><br>
-                'লোকসংস্কৃতি' নো কাক বোলে -- এই বিষয়ে আলোচনা কৰাৰ আগতে 'লোক' আৰু 'সংস্কৃতি' পদ দুটাৰ বিষয়ে কিছু কথা কোৱা উচিত হ'ব।<br><br>
-                আমি পোনতে আলোচনা কৰোঁ 'লোক' পদটোৰ অৰ্থৰ বিষয়ে। লোক শব্দটোৰ সলনি জন, গঞা, গণ আদি শব্দ ব্যৱহাৰ কৰিব পাৰি। আমি ৰাইজ বুলিলে যি বুজোঁ-- তেনে অর্থকেই 'লোক' পদটোরে বুজায়। লোকসংস্কৃতিৰ পণ্ডিত ড°প্রফুল্ল দত্ত গোস্বামীয়ে 'বিশেষভাবে লিখা-পঢ়া নথকা গঞা লোককে'ই সাধাৰণতে লোক বা জন বুলি আখ্যা দিছিল। লোক বা জনৰ যি আচাৰ-অনুষ্ঠান, গীত-পদ, নৃত্য-নাচ, খোৱা-লোৱা, পিন্ধা-উৰা, পূজা-উপাসনা, ৰীতি-নীতি, উৎসৱ-অনুষ্ঠান, খেলা-ধূলা আদিৰ সমষ্টিকে লোককৃষ্টি বা লোকসংস্কৃতি বা গঞাসংস্কৃতি বুলিব পাৰি। চমুকৈ জনসাধাৰণৰ বা লোকসাধাৰণৰ আচৰণৰ সমষ্টিয়েই হ'ল লোকসংস্কৃতি বা গঞাসংস্কৃতি বা সৰ্বসাধাৰণৰ সংস্কৃতি।<br><br>
-                লোক বা জন বা গঞালোক আৰু সমাজৰ বিশেষ কিছুমান বৈশিষ্ট্য আছে। যেনে-- লোক বা জন বা গঞালোকসকল সাধাৰণতে গাঁৱে-ভূঞে বাস কৰে। তেওঁলোক সাধাৰণতে চাকৰিজীৱী বা শিল্পজীৱী নহয়, কৃষিজীৱীহে। এই ফালৰ পৰা তেওঁলোক খেতিয়ক। খেতিয়কসকল প্রায়ে নিৰক্ষৰ, অৰ্থাৎ পঢ়া-শুনা কৰিব নাজানে। তেওঁলোকে প্রায়ে হাতেৰে নানা বিধৰ সা-সঁজুলি সাজে। এনে সা-সঁজুলি প্রায়ে মাটি, বাঁহ, কাঠ, বেত আদিৰ পৰা প্ৰস্তুত কৰে। যন্ত্রশিল্প অর্থাৎ যন্ত্রত প্রস্তুত কৰা সঁজুলি গঞা ৰাইজে ব্যৱহাৰ কৰিব নোখোজে। তেওঁলোকৰ মাজত লিখা-পঢ়াৰ গুৰুত্ব তুলনামূলকভাৱে কম। ছপা-সমল বা কিতাপ-আলোচনী আদিত তেওঁলোকে কম গুৰুত্ব দিয়ে।<br><br>
-                মুখে মুখে চলি অহা গীত-পদ, কথা-কাহিনী, যোজনা-পটন্তৰ আদিত তেওঁলোকে তুলনামূলকভাবে অধিক গুৰুত্ব দিয়ে। পিতাক-আতাক-ককাক, আবু-আইতাকৰ দিনৰে পৰা মুখে মুখে চলিঅহা সাধুকথা বা ৰামায়ণ-মহাভাৰত বা কোৰান, বাইবেল, জাতক আদিৰ কথা শুনি তেওঁলোকে সীমাহীন আনন্দ লাভ কৰে। নতুন কথা, নতুন উপদেশ আদিতকৈ তেওঁলোকে পীৰিয়ে পীৰিয়ে চলি অহা কথাবোৰতহে অধিক গুৰুত্ব দিয়ে।<br><br>
-                লোকসমাজত পুৰণি দিনৰ কথাৰহে অধিক সমাদৰ। চহৰীয়া বা নগৰীয়া মানুহৰ তুলনাত গঞালোক কিছু পৰিমাণে পিছ পৰা। লোকজীৱনত যুক্তিতকৈ বিশ্বাসত অধিক গুৰুত্ব দিয়া হয়। গভীৰ বিশ্বাসে পুৰণি ধৰণ-কৰণ, ৰীতি-নীতি, ভূত-প্রেত, ধর্মীয়কৃত্য, ঔষধ-চিকিৎসা আদিৰ প্ৰতি তেওঁলোকৰ মন-প্রাণ সদা-সর্বদাই আকৃষ্ট কৰি থাকে। অতীতৰ প্ৰতি থকা বিশ্বাস আৰু আস্থাই তেওঁলোকক যাদু-পৰায়ণ কৰি তোলে। সেই কাৰণে তেওঁলোকে সর্বত্রতে অশৰীৰী ভূত-প্রেত, বাক-দ'ত, দেৱ-দেৱতাৰ লীলা-খেলা দেখিবলৈ পায়। বেমাৰ-আজাৰ, ৰোগ-ব্যাধি, প্রাকৃতিক ঘটনা-দুর্ঘটনা আদিতো তেওঁলোকে এই কাৰণে অদৃশ্য শক্তিৰ লীলা-খেলা দেখিবলৈ পায়।<br><br>
-                লোকসমাজক কোনো কোনো লোকতত্ত্ববিদে সমাজৰ নিম্নস্তৰৰ বুলি ক'ব খোজে যদিও এনে ধাৰণা গ্রহণ কৰিব নোৱাৰি। বিজ্ঞানসন্মত দৃষ্টিভংগী হ'লেই যে কোনো এখন সমাজ উচ্চতৰ হ'ব আৰু তাৰ বিপৰীতে লোক বা গণসমাজ নিম্নতৰ হ'ব লাগিব তেনে কোনো কথা নাই। লোকসমাজৰ অংগীভূত মানুহে প্রায়ে গাঁৱে-ভূঞে বাস কৰে আৰু অভিজাত শ্ৰেণীৰ লোকসকল নগৰ-চহৰ আদিত বাস কৰে। হ'লেও এই ধাৰণা সদা-সর্বদাই গ্রহণযোগ্য হ'ব নোৱাৰে। কাৰণ, গাঁৱতো শিক্ষিত মানুহে বাস কৰে। তাৰ বিপৰীতে চহৰ বা নগৰতো গঞালোকৰ বসতি দেখা যায়। নগৰ-চহৰৰ বিভিন্ন কাম-কাজৰ বাবে গঞালোকৰ প্রয়োজন হয়। তেতিয়া গঞালোকে চহৰ-নগৰত থাকি মজদুৰ বা কামিলাৰ ভূমিকা পালন কৰে আৰু এইদৰে তেওঁলোকে চহৰ বা নগৰবাসী হয়।
-            </div>
-
-            <div class="question">
-                <b>I)</b> <span class="marks">১</span><br>
-                উক্তি (Assertion - A): লোকসংস্কৃতিৰ পণ্ডিত ড° প্ৰফুল্ল দত্ত গোস্বামীয়ে 'বিশেষভাৱে লিখা-পঢ়া নথকা' লোককেই লোক বা জন বুলিছে。 <br>
-                যুক্তি (Reason - R): লোকসমাজত পুৰণি দিনৰ ধৰ্মীয় পুথি যেনে ৰামায়ণ, মহাভাৰত আদিৰ কথা শুনি মানুহে অপাৰ আনন্দ লাভ কৰে।
-                <div class="options">
-                    (ক) (A) আৰু (R) দুয়োটাই শুদ্ধ আৰু (R) হৈছে (A) ৰ সঠিক ব্যাখ্যা。 <br>
-                    (খ) (A) আৰু (R) দুয়োটাই শুদ্ধ কিন্তু (R), (A) ৰ সঠিক ব্যাখ্যা নহয়。 <br>
-                    (গ) (A) শুদ্ধ কিন্তু (R) অশুদ্ধ。 <br>
-                    (ঘ) (A) অশুদ্ধ কিন্তু (R) শুদ্ধ。 
-                </div>
-            </div>
-
-            <div class="question">
-                <b>II)</b> <span class="marks">১</span><br>
-                উক্তি (Assertion - A): লোকসমাজৰ মানুহে হাতেৰে তৈয়াৰী সা-সঁজুলি ব্যৱহাৰ কৰিবলৈ বেছি ভাল পায়।<br>
-                যুক্তি (Reason - R): লোকসংস্কৃতিৰ মানুহবোৰ চাকৰিজীৱী বা শিল্পজীৱী নহয়, তেওঁলোক ঘাইকৈ কৃষিজীৱী।
-                <div class="options">
-                    (ক) (A) আৰু (R) দুয়োটাই শুদ্ধ আৰু (R) হৈছে (A) ৰ সঠিক ব্যাখ্যা。 <br>
-                    (খ) (A) আৰু (R) দুয়োটাই শুদ্ধ কিন্তু (R), (A) ৰ সঠিক ব্যাখ্যা নহয়。 <br>
-                    (গ) (A) শুদ্ধ কিন্তু (R) অশুদ্ধ。 <br>
-                    (ঘ) (A) অশুদ্ধ কিন্তু (R) শুদ্ধ。 
-                </div>
-            </div>
-
-            <div class="question">
-                <b>III)</b> পাঠত থকা 'পিৰিয়ে পিৰিয়ে' দ্বিৰুক্ত শব্দটোৰ অৰ্থটো হ’ল— <span class="marks">১</span>
-                <div class="options">
-                    (ক) প্ৰতিটো খোজতে<br>
-                    (খ) পুৰুষাণুক্ৰমে বা বংশানুক্ৰমে<br>
-                    (গ) মাজে মাজে<br>
-                    (ঘ) সময় সাপেক্ষে
-                </div>
-            </div>
-
-             <div class="question">
-                <b>IV)</b> <span class="marks">১</span><br>
-                উক্তি (Assertion - A): লোকসংস্কৃতিৰ পণ্ডিত ড° প্ৰফুল্ল দত্ত গোস্বামীয়ে 'বিশেষভাৱে লিখা-পঢ়া নথকা' লোককেই লোক বা জন বুলিছে。 <br>
-                যুক্তি (Reason - R): লোকসমাজত পুৰণি দিনৰ ধৰ্মীয় পুথি যেনে ৰামায়ণ, মহাভাৰত আদিৰ কথা শুনি মানুহে অপাৰ আনন্দ লাভ কৰে。
-                <div class="options">
-                    (ক) (A) আৰু (R) দুয়োটাই শুদ্ধ আৰু (R) হৈছে (A) ৰ সঠিক ব্যাখ্যা。 <br>
-                    (খ) (A) আৰু (R) দুয়োটাই শুদ্ধ কিন্তু (R), (A) ৰ সঠিক ব্যাখ্যা নহয়。 <br>
-                    (গ) (A) শুদ্ধ কিন্তু (R) অশুদ্ধ。 <br>
-                    (ঘ) (A) অশুদ্ধ কিন্তু (R) শুদ্ধ。 
-                </div>
-            </div>
-
-            <div class="question">
-                <b>V)</b> লোকসমাজত তলৰ কোনটো মাধ্যমৰ গুৰুত্ব আপেক্ষিকভাৱে কম? <span class="marks">১</span>
-                <div class="options">
-                    (ক) মুখে মুখে চলি অহা গীত-পদ।<br>
-                    (খ) কথা-কাহিনী আৰু যোজনা-পটন্তৰ।<br>
-                    (গ) ছপা সমল বা কিতাপ-আলোচনী।<br>
-                    (ঘ) পুৰণি দিনৰ পৰম্পৰাগত কথা।
-                </div>
-            </div>
-
-            <div class="question">
-                <b>VI)</b> 'সংস্কৃতি' শব্দটোৰ শুদ্ধ সন্ধি বিচ্ছেদ কি হ’ব? <span class="marks">১</span>
-                <div class="options">
-                    (ক) সং + কৃতি<br>
-                    (খ) সম্ + কৃতি<br>
-                    (গ) স + কৃতি<br>
-                    (ঘ) সমান + কৃতি
-                </div>
-            </div>
-
-            <div class="question">
-                <b>VII)</b> "তেওঁলোক সাধাৰণতে চাকৰিজীৱী বা শিল্পজীৱী নহয়।"— এই বাক্যটোত 'তেওঁলোক' কি পদ? <span class="marks">১</span>
-                <div class="options">
-                    (ক) বিশেষ্য পদ<br>
-                    (খ) বিশেষণ পদ<br>
-                    (গ) সৰ্বনাম পদ<br>
-                    (ঘ) অব্যয় পদ
-                </div>
-            </div>
-
-            <div class="question">
-                <b>VIII)</b> তলৰ কোনটো শব্দত বহুবচনৰ প্ৰত্যয় যোগ কৰিলেও ইয়াৰ অৰ্থৰ কোনো পৰিবৰ্তন নঘটে? <span class="marks">১</span>
-                <div class="options">
-                    (ক) লোক<br>
-                    (খ) কিতাপ<br>
-                    (গ) খেতিয়ক<br>
-                    (ঘ) জনসাধাৰণ
-                </div>
-            </div>
-
-            <div class="question">
-                <b>IX)</b> লোকজীৱনত কিহৰ গুৰুত্ব অধিক বুলি পাঠত কোৱা হৈছে? <span class="marks">১</span>
-                <div class="options">
-                    ক) বিশ্বাস<br>
-                    খ) আধুনিক শিক্ষা<br>
-                    গ) যুক্তি<br>
-                    ঘ) টকা-পইচা
-                </div>
-            </div>
-
-            <div class="question">
-                <b>X)</b> লোকসমাজত 'যুক্তি'তকৈ 'বিশ্বাস'ৰ আধিপত্য থকাৰ এটা প্ৰধান পৰিণতি পাঠৰ আধাৰত লিখা। <span class="marks">২</span>
-            </div>
-
-            <div class="question">
-                <b>XI)</b> "নিৰক্ষৰ হ’লেও লোকসমাজ জ্ঞানহীন নহয়"— এই কথাটো পাঠত কেনেদৰে প্ৰতিপন্ন কৰা হৈছে? <span class="marks">২</span>
-            </div>
-
-            <div class="question">
-                <b>XII)</b> লোকসমাজৰ মানুহে আধুনিক যন্ত্ৰশিল্পক গ্ৰহণ নকৰাৰ মূল মানসিক কাৰণটো কি বুলি ধাৰণা কৰিব পাৰি? <span class="marks">২</span>
-            </div>
-
-            <div class="section-title">
-                Section - B<br>
-                লিখন কলা<br>
-                (Writing Skill)<br>
-                (25 Marks)
-            </div>
-
-            <div class="question">
-                <b>২. ক)</b> তলত দিয়া সংকেত বাক্যৰ সহায়ত গল্পটো সম্পূৰ্ণকৈ লিখা। (গল্পটোৰ শিৰোনাম আৰু নীতিশিক্ষা লিখিব লাগিব।) <span class="marks">৫</span><br><br>
-                এজন খেতিয়কে ছাগলী এটা কান্ধত তুলি ঘৰলৈ গৈ আছিল______বাটত তিনিটা ধূর্তই লগ পালে...... তিনিওটাৰ ছাগলীটোলৈ লোভ লাগিল_____তিনিওটাই বুদ্ধি কৰি দূৰে দূৰে ৰৈ থাকিল___________ প্রথম ধূৰ্তটোৱে ক'লে ককাই কুকুৰটো কিয় কান্ধত তুলি_______ দ্বিতীয় ধূৰ্তটোৱেও ক'লে ককাই কুকুৰটো কিয় নিছে? _______ খেতিয়কে ক'লে, সেইটো কুকুৰ নহয়, ছাগলী________ একেই উত্তৰ দিলে। তৃতীয় ধূৰ্তটোৱেও একেই প্রশ্ন কৰাত খেতিয়কৰ খং________ ছাগলীটো কান্ধৰ পৰা নমাই দিলে_______ লৰালৰিকৈ তাৰপৰা গুছি গ'ল।
-                <br><br>
-                <center>নাইবা</center>
-                <br>
-                <b>খ)</b> তলত দিয়া যিকোনো এখন ৰচনা লিখা。 <br>
-                অ) ছাত্ৰৰ কৰ্তব্য<br>
-                আ) অধ্যয়নশীলতা
-            </div>
-
-            <div class="question">
-                <b>৩.</b> তোমাৰ বিদ্যালয়ত অনুষ্ঠিত হৈ যোৱা' শিক্ষক দিৱস' ৰ বিষয়ে জনাই বাতৰিকাকতত প্ৰকাশৰ বাবে এখন প্রতিবেদন যুগুত কৰা。 <span class="marks">৫</span>
-            </div>
-
-            <div class="question">
-                <b>৪.</b> তলত দিয়া যিকোনো এটা ফকৰা-যোজনা বুজাই লিখা: <span class="marks">৫</span><br>
-                অ) আঁঠুৱা চাই ঠেং মেলা।<br>
-                আ) এনেই বুঢ়ী নাচনী, তাতে নাতিনীয়েকৰ বিয়া।
-            </div>
-
-            <div class="question">
-                <b>৫.</b> ভাব-সম্প্ৰসাৰণ কৰা。 <span class="marks">৫</span><br>
-                ভাৰতবৰ্ষক বাৰেবৰণীয়া ফুলৰ এখনি মনোৰম ফুলনি বুলিব পাৰি。
-            </div>
-
-            <div class="question">
-                <b>৬.</b> তলত দিয়া জতুৱা খণ্ডবাক্যকেইটাৰ অৰ্থ লিখি একোটাকৈ বাক্য ৰচনা কৰা。 (যিকোনো পাঁচটা) <span class="marks">১ × ৫ = ৫</span><br>
-                আঁঠু ল, গাত ল, গাই বাই চা, কঁকাল বান্ধ, কঁকাল ভাগ, গা টেঙা
-            </div>
-
-            <div class="section-title">
-                Section - C<br>
-                ব্যাকৰণ<br>
-                (20 Marks)
-            </div>
-
-            <div class="question">
-                <b>৭.</b> তলৰ শব্দকেইটাৰ শুদ্ধ সন্ধি বাছি উলিয়াই লিখা。 <span class="marks">১ × ৩ = ৩</span><br><br>
-                ক) নিশ্চয় =<br>
-                অ) নি: + চয় &nbsp;&nbsp; আ) নিৰ + চয় &nbsp;&nbsp; ই) নি + চয় &nbsp;&nbsp; ঈ) নিশ+ চয়<br><br>
-                খ) কিন্তু =<br>
-                অ) কি + ন্তু &nbsp;&nbsp; আ) কিম্ + তু &nbsp;&nbsp; ই) কিন + তু &nbsp;&nbsp; ঈ) কিন+ ন্তু<br><br>
-                গ) উন্নতি =<br>
-                অ) উৎ + নতি &nbsp;&nbsp; আ) উম + নতি &nbsp;&nbsp; ই) উন + নতি &nbsp;&nbsp; ঈ) উৎ + নতী
-            </div>
-
-            <div class="question">
-                <b>৮.</b> শুদ্ধ উত্তৰটো বিচাৰি লিখা。 <span class="marks">১ × ১৩ = ১৩</span><br><br>
-                ক) ক্ৰিয়াৰ মূলক কি বোলে?<br>
-                অ) প্ৰাতিপদিক &nbsp;&nbsp; আ) ধাতু &nbsp;&nbsp; ই) নি + চয় &nbsp;&nbsp; ঈ) নিশ+ চয়<br><br>
-
-                খ) 'খেলা চাবলৈ যাবা নেকি?' - বাক্যটোত থকা 'নেকি' পদটো হৈছে -<br>
-                অ) বিশেষ্য &nbsp;&nbsp; আ) সৰ্বনাম &nbsp;&nbsp; ই) ক্ৰিয়া &nbsp;&nbsp; ঈ) অব্যয়<br><br>
-
-                গ) 'শৰ' ৰ স্ত্ৰীলিঙ্গ ৰূপ হ'ল -<br>
-                অ) ভেলেঙ্গী &nbsp;&nbsp; আ) জলগুঁই &nbsp;&nbsp; ই) চেঁউৰী &nbsp;&nbsp; ঈ) মাখুন্দী<br><br>
-
-                ঘ) তলৰ কোনটো শব্দই 'একবচন' বুজাইছে?<br>
-                অ) ৰাইজ &nbsp;&nbsp; আ) কিতাপখন &nbsp;&nbsp; ই) সন্যসকল &nbsp;&nbsp; ঈ) মানুহবোৰ
-            </div>
-
-            <div class="question">
-                ঙ) 'সঁজুলি' শব্দটোৰ শুদ্ধ বহুবচন ৰূপটো কি হ’ব?<br>
-                (ক) সঁজুলিবোৰ &nbsp;&nbsp; (খ) সঁজুলিসকল &nbsp;&nbsp; (গ) সঁজুলিজন &nbsp;&nbsp; (ঘ) সঁজুলিজাক<br><br>
-
-                চ) "বিশাল সমুদ্ৰৰ ঢৌত জাহাজখন অদৃশ্য হৈ গ’ল"— এই বাক্যটোত 'বিশাল' শব্দটো কি পদ?<br>
-                (ক) ক্ৰিয়া বিশেষণ &nbsp;&nbsp; (খ) বিশেষণীয় বিশেষণ &nbsp;&nbsp; (গ) বিশেষ্যৰ বিশেষণ &nbsp;&nbsp; (ঘ) সৰ্বনাম<br><br>
-
-                ছ) তলৰ কোনটো 'স্থানবাচক সৰ্বনাম'ৰ উদাহৰণ?<br>
-                (ক) মই &nbsp;&nbsp; (খ) এতিয়া &nbsp;&nbsp; (গ) য’ত &nbsp;&nbsp; (ঘ) তেনেকুৱা<br><br>
-
-                জ) 'লাহে লাহে খোৱা'— ইয়াত 'লাহে লাহে' কি পদ?<br>
-                (ক) ক্ৰিয়া বিশেষণ &nbsp;&nbsp; (খ) বিশেষ্যৰ বিশেষণ &nbsp;&nbsp; (গ) বিশেষণীয় বিশেষণ &nbsp;&nbsp; (ঘ) কালবাচক সৰ্বনাম<br><br>
-
-                ঝ) তলৰ কোনটো শব্দ পুঞ্জ বা সমষ্টি বুজাবলৈ ব্যৱহাৰ কৰা হয়?<br>
-                (ক) তৰাৱলী &nbsp;&nbsp; (খ) দ্বীপপুঞ্জ &nbsp;&nbsp; (গ) পৰ্বতমালা &nbsp;&nbsp; (ঘ) ওপৰৰ আটাইকেইটা<br><br>
-
-                ঞ) "মই ভাত খাইছোঁ"— ইয়াত 'খাইছোঁ' পদটোৱে বাক্যটো সম্পূৰ্ণ কৰিছে। গতিকে ই কি ক্ৰিয়া?<br>
-                (ক) অসমাপিকা ক্ৰিয়া &nbsp;&nbsp; (খ) সমাপিকা ক্ৰিয়া &nbsp;&nbsp; (গ) সৰ্বনাম বিশেষণ &nbsp;&nbsp; (ঘ) বিশেষণীয় বিশেষণ<br><br>
-
-                ট) পৰ্বত' শব্দটোৰ বহুবচন বুজাবলৈ তলৰ কোনটো শব্দ সঠিক?<br>
-                (ক) পৰ্বতজাক &nbsp;&nbsp; (খ) পৰ্বতমালা &nbsp;&nbsp; (গ) পৰ্বতপুঞ্জ &nbsp;&nbsp; (ঘ) পৰ্বতবৃন্দ<br><br>
-
-                ঠ) সমষ্টি বুজাবলৈ ব্যৱহাৰ হোৱা 'থোপ' শব্দটো তলৰ কোনটোৰ লগত ব্যৱহাৰ হয়?<br>
-                (ক) গৰু &nbsp;&nbsp; (খ) আম &nbsp;&nbsp; (গ) ছাত্ৰ &nbsp;&nbsp; (ঘ) জাহাজ<br><br>
-
-                ড) 'ধোবা' শব্দটোৰ স্ত্ৰীলিংগ ৰূপ কি হ’ব?<br>
-                (ক) ধুবী &nbsp;&nbsp; (খ) ধুবুনী &nbsp;&nbsp; (গ) ধোবনী &nbsp;&nbsp; (ঘ) ধোবানী
-            </div>
-
-            <div class="question">
-                <b>৯.</b> ভাষা এটাত সন্ধিৰ প্ৰয়োজন কিয়? <span class="marks">২</span>
-            </div>
-
-            <div class="question">
-                <b>১০.</b> তলৰ শব্দ কেইটাৰ লিঙ্গ নিৰ্ণয় কৰা。 <span class="marks">১/২ × 8 = ২</span><br>
-                ৰান্ধনি, ৰান্ধনী, শিপিনী, শিপিনি
-            </div>
-
-            <div class="section-title">
-                Section - D<br>
-                (গদ্য ভাগ)<br>
-                (20 Marks)
-            </div>
-
-            <div class="question">
-                <b>১১.</b> তলত দিয়া যিকোনো এটা প্ৰশ্নৰ উত্তৰ লিখা。 <span class="marks">৪</span><br>
-                ক) কি কি বিষয়ত ভাৰতবৰ্ষৰ বিচিত্ৰতা লক্ষ্য কৰিব পাৰি পাঠৰ আলমত লিখা।<br>
-                খ) তোমাৰ গাঁৱত এজন ব্যক্তিক 'ডাইনী' বুলি সন্দেহ কৰি গাঁৱৰ মানুহে অত্যাচাৰ কৰিবলৈ ওলাইছে। এজন সচেতন ছাত্ৰ হিচাপে সেই পৰিস্থিতিটো চম্ভালিবলৈ তুমি ল’বলগীয়া ৪ টা পদক্ষেপৰ বিষয়ে লিখা。
-            </div>
-
-            <div class="question">
-                <b>১২.</b> তলত দিয়া যিকোনো এটা প্ৰশ্নৰ চমু উত্তৰ লিখা。 <span class="marks">২</span><br>
-                ক) ব্যৱহাৰ প্ৰণালীক সামান্য কথা বুলি কিয় উলাই কৰিব নোৱাৰি?<br>
-                খ) ভাৰতৰ বৈচিত্ৰতাৰ দিশসমূহে কেনেদৰে ঐক্য স্থাপনত সহায় কৰিছে?
-            </div>
-
-            <div class="question">
-                <b>১৩.</b> উত্তৰ লিখা。 <span class="marks">১ × ৪ = ৪</span><br>
-                ক) সুকুমাৰ কলা কি?<br>
-                খ) উৰাবাতৰি মানে কি?<br>
-                গ) 'অন্যৰ প্ৰতি ব্যৱহাৰ' পাঠটিৰ মূল গ্ৰন্থ কি?<br>
-                ঘ) নগা, বড়ো, মিছিং, কাৰ্বি, গাৰো আদি কোন গোষ্ঠীৰ লোক?
-            </div>
-
-            <div class="section-title">
-                পদ্য ভাগ
-            </div>
-
-            <div class="question">
-                <b>১৪.</b> তলত দিয়া যিকোনো এটা প্ৰশ্নৰ উত্তৰ লিখা。 <span class="marks">৪</span><br>
-                ক) 'মোৰ দেশ' কবিতাটোত কবিৰ দেশপ্ৰেমৰ স্বৰূপ কেনেদৰে প্ৰকাশ পাইছে, বুজাই লিখা。 <br>
-                খ) 'এই যে পৃথিৱী স্বৰ্গতো অধিক<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;মানুহৰ নিজাপী ঘৰ。 '-<br>
-                কথাষাৰৰ অৰ্থ বুজাই লিখা。 <br>
-                গ) বাখ্যা কৰা。 <br>
-                মুমূর্ষু মানৱক জীৱনৰ বিদ্যুৎ<br>
-                কিঞ্চিতো যদি দিব পাৰোঁ。 <br>
-                আকাশ, ধুমুহা আৰু বজ্রক<br>
-                তাৰ বাবে প্ৰণিপাত কৰোঁ。 
-            </div>
-
-            <div class="question">
-                <b>১৫.</b> তলত দিয়া যিকোনো এটা প্ৰশ্নৰ চমু উত্তৰ লিখা。 <span class="marks">২</span><br>
-                ক) "যিমানে বিলাই দিবা, সিমানে মহান হ’বা"— এই কবিতাশাৰীৰ তাৎপৰ্য কি?<br>
-                খ) মানুহক 'ময়াপী জীৱ' বোলাৰ অৰ্থ কি?
-            </div>
-
-            <div class="question">
-                <b>১৬.</b> উত্তৰ লিখা。 <span class="marks">১ × ৪ = ৪</span><br>
-                ক) 'মানুহ বিনে নাই কেৱ'— ইয়াত 'কেৱ' শব্দটোৱে কি সূচাইছে?<br>
-                খ) কবিয়ে দেশৰ বাবে কি কৰিবলৈ 'মৰণ পণ' কৰিছে?<br>
-                গ) 'এনে বহু যাত্ৰাৰ শেষ মোৰ দেশ'— ইয়াৰ দ্বাৰা কবিৰ কি মানসিকতা প্ৰকাশ পাইছে?<br>
-                ঘ) কবিক বিশাল দৃষ্টি কোনে দিলে?
-            </div>
-            
-        </div>
     </div>
+</div>
+
+<script>
+    // Generate Top Barcode (CLASS- IX)
+    JsBarcode("#barcodeTop", "CLASS- IX", {
+        format: "CODE128",
+        displayValue: false,
+        height: 35,
+        width: 1.8,
+        margin: 0
+    });
+
+    // Generate Side Barcode (SOCIAL SCIENCE)
+    JsBarcode("#barcodeSide", "SOCIAL SCIENCE", {
+        format: "CODE128",
+        displayValue: false,
+        height: 35,
+        width: 1.5,
+        margin: 0
+    });
+
+    // Generate QR Code (2025-2026)
+    new QRious({
+        element: document.getElementById('qrCode'),
+        value: '2025-2026',
+        size: 60,
+        level: 'H' // High error correction to ensure scannability at small sizes
+    });
+</script>
+
 </body>
 </html>
