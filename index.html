@@ -1,364 +1,569 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="as">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question Paper Cover Page</title>
-    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    
+    <title>Question Paper - Assamese</title>
     <style>
-        /* A4 Page Setup */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&display=swap');
+
         body {
-            background-color: #e0e0e0;
-            display: flex;
-            justify-content: center;
+            font-family: 'Noto Serif Bengali', 'Times New Roman', serif;
+            line-height: 1.5;
             margin: 0;
             padding: 20px;
-            font-family: "Times New Roman", Times, serif;
+            background-color: #e9ecef;
+            color: #000;
+        }
+        
+        .paper-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 50px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .a4-page {
-            width: 210mm;
-            min-height: 297mm;
-            background-color: white;
-            box-sizing: border-box;
-            padding: 10mm;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Decorative Border */
-        .page-border {
-            border: 5px double #111;
-            outline: 1px solid #111;
-            outline-offset: -8px;
-            flex-grow: 1;
-            padding: 15mm 10mm 10mm 10mm;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Main Content Wrapper for Spacing Distribution */
-        .content-wrapper {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Header Section - Adjusted margins to fit A4 */
-        .header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px; 
-            font-size: 20px;
-        }
-
-        .dashed-box {
-            border: 2px dashed #000;
-            padding: 10px 18px;
-            letter-spacing: 1px;
-            font-weight: bold;
-        }
-
-        /* Functional Code Constraints */
-        #barcodeTop {
-            height: 40px;
-            max-width: 160px;
-        }
-
-        #barcodeSide {
-            height: 40px;
-            max-width: 140px;
-        }
-
-        #qrCode {
-            width: 60px;
-            height: 60px;
-            border: 2px solid #000;
-            padding: 2px;
-            box-sizing: border-box;
-        }
-
-        /* QP Code Section */
-        .qp-code-row {
-            text-align: right;
-            font-weight: bold;
-            font-size: 20px;
+        .header-section {
+            text-align: center;
             margin-bottom: 20px;
         }
 
-        .qp-code-row span {
-            font-size: 34px;
-            margin-left: 15px;
-        }
-
-        /* Student ID & Instructions */
-        .student-id-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 25px;
-            align-items: flex-start;
-        }
-
-        .student-id-container {
+        .school-name {
+            font-size: 24px;
             font-weight: bold;
+            margin: 0 0 5px 0;
+        }
+
+        .exam-name {
             font-size: 18px;
+            margin: 0 0 5px 0;
         }
 
-        .boxes {
-            display: flex;
-            margin-top: 10px;
-        }
-
-        .box {
-            width: 22px;
-            height: 28px;
-            border: 1px dashed #000;
-            margin-right: 6px;
-        }
-
-        .answer-book-inst {
-            border: 1.5px dashed #000;
-            padding: 15px;
-            width: 40%;
+        .class-name {
             font-size: 16px;
-            line-height: 1.4;
-        }
-
-        /* Subject Section */
-        .subject-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .subject-center {
-            text-align: center;
-            flex-grow: 1;
-        }
-
-        .subject-center h1 {
-            margin: 0;
-            font-size: 34px;
             font-weight: bold;
-            letter-spacing: 2px;
+            margin: 0 0 20px 0;
         }
 
-        /* Time and Marks */
-        .time-marks-row {
-            display: flex;
-            justify-content: space-between;
+        .instruction-box {
+            border: 2px solid #000;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .instruction-box p {
+            margin: 5px 0;
+        }
+
+        .subject-title {
+            text-align: center;
             font-size: 20px;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin: 20px 0;
         }
 
-        /* NOTE Box Section */
-        .note-box {
-            border: 2px solid #000;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        .note-title {
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .note-list {
-            list-style: none;
-            padding-left: 0;
-            margin: 0;
-            font-size: 14px;
-            text-align: justify;
-        }
-
-        .note-list li {
-            display: flex;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .note-list .num {
-            width: 35px;
-            flex-shrink: 0;
-        }
-
-        .hash-mark {
-            font-weight: bold;
-            font-size: 16px;
-            margin-top: 5px;
-        }
-
-        /* General Instructions Box */
-        .general-inst-box {
-            border: 2px solid #000;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-        }
-
-        .general-inst-title {
-            font-weight: bold;
-            font-size: 16px;
-            text-align: center;
-            margin-bottom: 8px;
-            text-decoration: underline;
-        }
-
-        .general-inst-list {
-            margin: 0;
-            padding-left: 20px;
-            font-size: 14px;
-            line-height: 1.3;
-            text-align: justify;
-        }
-
-        .general-inst-list li {
+        .subject-title div {
             margin-bottom: 5px;
         }
 
-        /* Footer */
-        .footer-row {
+        .qr-code-center {
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .qr-code-center img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .flex-row {
             display: flex;
             justify-content: space-between;
             font-weight: bold;
-            font-size: 18px;
-            margin-top: auto;
-            border-top: 2px solid #000;
-            padding-top: 10px;
+            margin-bottom: 5px;
         }
 
-        .footer-left {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
+        hr {
+            border: 0;
+            border-top: 1px solid #000;
+            margin: 15px 0;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-weight: bold;
+            margin: 30px 0 15px 0;
         }
         
-        .footer-center {
-            font-size: 20px;
+        .section-heading div {
+            margin-bottom: 3px;
+        }
+
+        .passage {
+            text-align: justify;
+            margin-bottom: 20px;
+            text-indent: 40px;
+        }
+
+        .question {
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            margin-bottom: 5px;
+        }
+
+        .marks {
+            float: right;
+            font-weight: bold;
+        }
+
+        .options {
+            margin-left: 20px;
+        }
+
+        .options p {
+            margin: 3px 0;
+        }
+
+        .sub-question {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .sub-question p {
+            margin: 5px 0;
+        }
+
+        /* Clearfix for floats */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Print formatting */
+        @media print {
+            body {
+                background-color: transparent;
+                padding: 0;
+            }
+            .paper-container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="a4-page">
-    <div class="page-border">
-        
-        <div class="content-wrapper">
-            <div class="header-row">
-                <div class="dashed-box">Series : MVMNFE1</div>
-                <svg id="barcodeTop"></svg>
-                <div class="dashed-box">SET ~ A</div>
-            </div>
-
-            <div class="qp-code-row">
-                Q.P. Code <span>01</span>
-            </div>
-
-            <div class="student-id-row">
-                <div class="student-id-container">
-                    STUDENT ID
-                    <div class="boxes">
-                        <div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div>
-                        <div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div>
-                        <div class="box"></div><div class="box"></div><div class="box"></div>
-                    </div>
-                </div>
-                <div class="answer-book-inst">
-                    Candidates must write the Q.P. Code on the title page of the answer-book.
-                </div>
-            </div>
-
-            <div class="subject-row">
-                <svg id="barcodeSide"></svg>
-                <div class="subject-center">
-                    <h1>ENGLISH</h1>
-                </div>
-                <canvas id="qrCode"></canvas>
-            </div>
-
-            <div class="time-marks-row">
-                <div>Time allowed : 3 hours</div>
-                <div style="text-align: right;">Maximum Marks : 80</div>
-            </div>
-
-            <div class="note-box">
-                <div class="note-title">NOTE :</div>
-                <ul class="note-list">
-                    <li><span class="num">(I)</span> Please check that this question paper contains printed pages 6 </li>
-                    <li><span class="num">(II)</span> Please check that this question paper contains 9 questions.</li>
-                    <li><span class="num">(III)</span> Please write down the Serial Number of the question in the answer script.</li>
-                    <li><span class="num">(IV)</span> 15 minutes time has been allotted to read this question paper. The question paper will be distributed at 9:15 am. From 9:15 a.m. to 9:30 a.m., the candidates will read the question paper only and will not write any answer on the answer-book during this period.</li>
-                </ul>
-                <div class="hash-mark"></div>
-            </div>
-
-            <div class="general-inst-box">
-                <div class="general-inst-title">General Instructions</div>
-                <ul class="general-inst-list">
-                    <li>This question paper contains three sections – Section A (Reading Skills), Section B (Grammar and Creative Writing Skills), and Section C (Literature).</li>
-                    <li>Section A (Reading Skills) includes Questions 1–2.</li>
-                    <li>Section B (Grammar and Creative Writing Skills) includes Questions 3–5.</li>
-                    <li>Section C (Literature) includes Questions 6–11.</li>
-                    <li>The maximum marks are 80.</li>
-                    <li>All questions are compulsory.</li>
-                    <li>Read the instructions carefully before answering the questions.</li>
-                    <li>Attempt the questions section-wise in the given order.</li>
-                    <li>Internal choices are provided in some questions. Attempt only one of the alternatives.</li>
-                    <li>Follow the prescribed word limit wherever given.</li>
-                    <li>Marks are indicated against each question.</li>
-                    <li>Write your answers clearly and neatly.</li>
-                    <li>In the writing section, all the details given in the questions are imaginary and meant only for assessment purposes.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-row">
-            <div class="footer-left">
-                <span>A</span>
-                <span>#</span>
-            </div>
-            <div class="footer-center">A</div>
-            <div>P.T.O.</div>
-        </div>
-
+<div class="paper-container">
+    
+    <div class="header-section">
+        <h1 class="school-name">মহৰ্ষি বিদ্যা মন্দিৰ, নলবাৰী</h1>
+        <h2 class="exam-name">বছৰেকীয়া পৰীক্ষা, ২০২৬</h2>
+        <h3 class="class-name">শ্ৰেণী : অষ্টম</h3>
     </div>
+
+    <div class="instruction-box">
+        <p><strong>NOTE:</strong></p>
+        <p>(I) Please check that this question paper contains 12 printed pages.</p>
+        <p>(II) Please check that this question paper contains 15 questions.</p>
+        <p>(III) 10 minute time has been allotted to read this question paper. The question paper will be distributed at 09.20 a.m. From 09.20 a.m to 09.30 a.m., the candidates will read the question paper only and will not write any answer on the answer-book during this period.</p>
+    </div>
+
+    <div class="subject-title">
+        <div>অসমীয়া</div>
+        <div>ASSAMESE</div>
+    </div>
+
+    <div class="qr-code-center">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=MVMN/ASSAMESE/2025-2026" alt="QR Code">
+    </div>
+
+    <div class="flex-row">
+        <span>সময়: 3 ঘণ্টা</span>
+        <span>সৰ্বমুঠ নম্বৰ: 80</span>
+    </div>
+    <div class="flex-row">
+        <span>Time allowed: 3 hours</span>
+        <span>Maximum Marks: 80</span>
+    </div>
+
+    <hr>
+
+    <div class="instruction-box">
+        <p><strong>General Instructions:</strong></p>
+        <p>Question paper is divided into 4 sections.</p>
+        <p>It has total 20 questions.</p>
+        <p>Section A: 1 Question no. 1 to 1</p>
+        <p>Section B: 3 Questions no. 2 to 4</p>
+        <p>Section C: 9 Questions no. 5 to 13</p>
+        <p>Section D: 7 Questions no. 14 to 20</p>
+        <p>Attempt questions as per specific instructions.</p>
+        <p>Write question no. in answer book before attempting it.</p>
+        <br>
+        <p><strong>সাধাৰণ নিৰ্দেশনা:</strong></p>
+        <p>প্ৰশ্নকাকতৰ প্ৰশ্নসমূহ চাৰি (৪) ভাগত বিভক্ত।</p>
+        <p>সৰ্ব্বমুঠ প্ৰশ্নৰ সংখ্যা: ২০</p>
+        <p>শাখা 'ক': প্রশ্নৰ সংখ্যা ১, প্রশ্ন নং ১-১</p>
+        <p>শাখা 'খ': প্ৰশ্নৰ সংখ্যা ৩, প্রশ্ন নং ২-৪</p>
+        <p>শাখা 'গ': প্ৰশ্নৰ সংখ্যা ৯, প্রশ্ন নং ৫-১৩</p>
+        <p>শাখা 'ঘ': প্ৰশ্নৰ সংখ্যা ৭, প্রশ্ন নং ১৪-২০</p>
+        <p>পৰীক্ষাৰ্থীসকলে নিৰ্দ্ধাৰিত নিৰ্দেশ অনুসৰি প্ৰশ্নসমূহৰ উত্তৰ কৰিব।</p>
+        <p>উত্তৰ বহীত প্ৰশ্নসমূহৰ উত্তৰ কৰাৰ পুৰ্বে প্ৰশ্ন নং লিখাটো আৱশ্যক।</p>
+    </div>
+
+    <div class="section-heading">
+        <div>Section - A</div>
+        <div>বোধ পৰীক্ষণ</div>
+        <div>(Comprehension)</div>
+        <div>(10 Marks)</div>
+    </div>
+
+    <div class="question">
+        <p class="question-text">১। তলৰ গদ্যাংশটো পঢ়ি তলত দিয়া প্রশ্নসমূহৰ উত্তৰ কৰা।</p>
+        
+        <p class="passage">প্ৰায় ৬০০০ বছৰৰ আগতে আৱিষ্কৃত হোৱা লেখন-পদ্ধতিয়ে মানৱ-সভ্যতাত যি বিপ্লৱৰ সূচনা কৰিছিল সেই বিপ্লৱৰ দ্বিতীয়টো অধ্যায় আৰম্ভ হ’ল পোন্ধৰ শতিকাত মুদ্ৰণ-যন্ত্ৰ আৱিষ্কৃত হোৱা মুহূৰ্তৰ পৰা। মানৱসভ্যতাৰ ইতিহাসত মুদ্ৰণ-যন্ত্ৰৰ আৱিষ্কাৰ এটা বিৰাট যুগান্তকাৰী ঘটনা। কিতাপেই হ’ল জ্ঞানৰ আকৰ, অৰ্থাৎ চিন্তাশীলৰ চিন্তা আৰু জ্ঞান কিতাপৰ মাজতেই সংৰক্ষিত হৈ থাকে। কিন্তু আধুনিক মুদ্ৰণ-যন্ত্ৰ আবিষ্কৃত হোৱাৰ আগলৈকে প্ৰায় ৪০০০ বছৰ ধৰি সকলো কিতাপ লিখিব লগা হৈছিল হাতেৰে। হাতেৰে লেখা মূল কিতাপখন আকৌ আনে হাতেৰে লিখি প্রতিলিপি কৰি ল'ব লগা হৈছিল। কিন্তু কেৱল হাতেৰে লিখি আৰু কিমান প্ৰতিলিপি কৰা সম্ভৱ? প্রাচীন কালত জ্ঞানৰ চৰ্চা সীমাৱদ্ধ আছিল সমাজৰ মুষ্টিমেয় মানুহৰ মাজত। জ্ঞানৰ চৰ্চা সীমাবদ্ধ হৈ থকাৰ কাৰণে কিতাপৰ প্রতিলিপিও আছিল কম; আনহাতে কিতাপৰ সংখ্যা কম হোৱাৰ কাৰণে জ্ঞানৰ চৰ্চা আৰু প্রচাৰো সীমাবদ্ধ হ’বলৈ বাধ্য হৈছিল। সংখ্যাত অতি তাকৰীয়া হাতে লেখা কিতাপবোৰ ইমান দুষ্প্ৰাপ্য আৰু ব্যয়-বহুল আছিল যে কিতাপৰ গৰাকীসকলে আনক পৰাপক্ষত কেতিয়াও কিতাপ নিদিছিল। মধ্য যুগৰ খ্ৰীষ্টীয় মঠবোৰত কিতাপবোৰ লোৰ শিকলিৰে বান্ধি ৰখাৰ নিয়ম আছিল--- যাতে আনে সহজে সেইবোৰ চুৰ কৰিব নোৱাৰে। কিন্তু পোন্ধৰ শতিকাত আৱিষ্কৃত হোৱা মুদ্ৰণ যন্ত্ৰই কিতাপক এই বন্দী-দশাৰ পৰা মুক্তি দিলে আৰু লগতে মানুহৰ সভাতাত যুগান্তৰ আনিলে। ই এইচ মিনছ নামৰ ঐতিহাসিক এজনে একে আষাৰে কৈছে যে মুদ্ৰণ-যন্ত্ৰৰ আৱিষ্কাৰ হোৱাৰ মুহূৰ্তৰ পৰাহে পশ্চিমীয়া সভ্যতাৰ দ্ৰুত বিকাশ সম্ভৱ হ’ল। কেৱল পশ্চিমীয়া সভ্যতা নহয়, সমগ্ৰ মানৱ-সভ্যতাৰ ক্ষেত্ৰতেই এই কথা খাটে।</p>
+        
+        <p class="passage">সভ্যতাৰ বিকাশ ঘাইকৈ নির্ভৰ কৰে জ্ঞানৰ বহল প্ৰচাৰৰ ওপৰত। এজন মানুহৰ শাৰীৰিক শক্তিয়ে যিখিনি কাম কৰিব পাৰে, এশজন মানুহৰ শাৰীৰিক শক্তি লগ লাগিলে এশগুণ বেছি কাম কৰা সম্ভৱ হয়। মগজুৰ পৰিশ্ৰমৰ ক্ষেত্রতো সেই একে কথাই খাটে। সমাজত শিক্ষিতৰ সংখ্যা যিমানেই বাঢ়ে সিমানেই সমাজৰ উন্নতিৰ কাৰণে প্রয়োজনীয় ভাব-সম্পদো বাঢ়ি গৈ থাকে। মুদ্ৰণ-যন্ত্ৰ আৱিষ্কাৰ হোৱাৰ আগলৈকে সমাজত শিক্ষিতৰ সংখ্যা আছিল স্বাভাৱিকতেই অতি কম; কাৰণ, শিক্ষাৰ বিস্তাৰ আৰু বিকাশৰ ঘাই আহিলা কিতাপ আছিল মাত্র এমুঠিমান মানুহৰ এদনীয়া সম্পত্তি। কিন্তু মুদ্ৰণ-যন্ত্ৰৰ সহায়েৰে যি কোনো এখন কিতাপৰ লাখ লাখ বা কোটি কোটি কপি ছপা কৰি উলিওৱা সম্ভৱ হোৱাৰ ফলত আগতে যিখন কিতাপ পঢ়িবলৈ পাইছিল মাত্র এমুঠিমান ভাগ্যৱান মানুহে, এতিয়া সেই কিতাপ পঢ়িব পৰা হ’ল লাখ লাখ কোটি কোটি মানুহে ৷ তদুপৰি একেলগে বহুত কিতাপ ছপা কৰা সম্ভৱ হোৱাৰ ফলত কিতাপৰ দামো ইমান হাস পালে যে ধনী-দুখীয়া সকলোৱেই কিতাপ কিনিব পৰা হ’ল। ফলত অতীতত যি জ্ঞান-বিজ্ঞান আছিল মাত্র এমুঠিমান মানুহৰ এদনীয়া সম্পত্তি এতিয়া সি হৈ পৰিল সমাজৰ সকলো মানুহৰ উমৈহতীয়া সম্পত্তি।</p>
+        
+        <p class="passage">দ্বিতীয়তে, কিতাপ সুলভ হোৱাৰ লগে লগে শিক্ষা সাৰ্বজনীন কৰাও সম্ভৱ হ’ল। শিক্ষিতৰ সংখ্যা দ্ৰতত গতিৰে বাঢ়িবলৈ ধৰিলে। মানুহৰ মাজত কিতাপ পঢ়াৰ অভ্যাস গঢ়ি উঠিল। ইয়াৰ ফলত সাহিত্যই বাণিজ্যিক ৰূপ ল'বলৈ আৰম্ভ কৰিলে; অৰ্থাৎ কিতাপৰ লেখক, প্রকাশক, মুদ্ৰক আৰু বিক্ৰেতা আদি বিভিন্ন শ্রেণীৰ মানুহৰ কাৰণে কিতাপৰ ব্যৱসায়েই হ’ল প্রধান জীৱিকা।তৃতীয়তে, মুদ্ৰণ-যন্ত্ৰ হৈ উঠিল বিৰাট সামাজিক পৰিৱৰ্তনৰ এটা পৰম শক্তিশালী সঁজুলি আগতে কোনোবাই যদি প্রচলিত মত বা আদৰ্শৰ বিৰুদ্ধে বিদ্ৰোহ কৰিব খুজিছিল, তেওঁ সেইটো কৰিব লগা হৈছিল সীমিত সংখ্যক মানুহৰ আগত কথা কৈ বা বক্তৃতা দি। নতুন এটা মত প্রচাৰ কৰিব খুজিলেও তেওঁ ঠিক তাকেই কৰিব লগা হৈছিল। ইয়াৰ ফলত যি কোনো নতুন মত বা আদৰ্শ প্রচাৰ কৰিবলৈ স্বভাৱতেই দীঘলীয়৷ সময় লাগিছিল। তদুপৰি এনে মানুহৰ পদে পদে লাঞ্ছিত বা আক্ৰান্ত হোৱাৰ ভয় আছিল। মুদ্ৰণ-যন্তু আৱিষ্কাৰ হোৱাৰ ফলত এইবোৰ বিপদ আৰু অসুবিধা নোহোৱা হ’ল। কোনোবাই কিবা এটা নতুন কথা বা বৈপ্লৱিক মত প্ৰচাৰ কৰিব খুজিলে কিতাপ এখন লিখি ছপা কৰি দিলেই বা বাতৰি কাকতত প্ৰবন্ধ লিখিলেই হ’ল। ছপা হোৱা মাত্ৰে লাখ লাখ মানুহৰ মাজত তেওঁৰ বাণী বিয়পি পৰিব।</p>
+        
+        <p class="passage">এইবোৰ কাৰণতে মুদ্ৰণ-যন্ত্ৰ আৱিষ্কাৰ হোৱাৰ পাঁচ শ বছৰৰ ভিতৰতে মানুহে সকলে ক্ষেত্ৰতে যি প্ৰগতি লাভ কৰিছে তাৰ আগৰ পাঁচ হাজাৰ বছৰতো সিমানখিনি কৰিব পৰা নাছিল। মানুহৰ প্ৰগতি আৰু মুক্তিৰ ক্ষেত্ৰত যি কেইটা বস্তুৱে আটাইতকৈ বেছি অৰিহণা যোগাইছে সেইবোৰৰ ভিতৰত সৰ্ব-প্রথমে নাম ল'ব লাগিব মুদ্ৰণ-যন্ত্ৰৰ ।</p>
+
+        <div class="sub-question">
+            <p class="clearfix">i) মুদ্ৰণ-যন্ত্ৰ আৱিষ্কৃত হৈছিল— <span class="marks">১</span></p>
+            <div class="options">
+                <p>(ক) ১২ শতিকাত</p>
+                <p>(খ) ১৩ শতিকাত</p>
+                <p>(গ) ১৫ শতিকাত</p>
+                <p>(ঘ) ১৯ শতিকাত</p>
+            </div>
+        </div>
+
+        <div class="sub-question">
+            <p class="clearfix">ii) উক্তি (Assertion - A): মধ্য যুগত কিতাপবোৰ অতি দুষ্প্ৰাপ্য আছিল। <span class="marks">১</span></p>
+            <p>যুক্তি (Reason - R): সেই সময়ত কিতাপবোৰ লোৰ শিকলিৰে বান্ধি ৰখা হৈছিল।</p>
+            <div class="options">
+                <p>(ক) (A) আৰু (R) দুয়োটাই শুদ্ধ আৰু (R) হৈছে (A) ৰ সঠিক ব্যাখ্যা।</p>
+                <p>(খ) (A) আৰু (R) দুয়োটাই শুদ্ধ কিন্তু (R), (A) ৰ সঠিক ব্যাখ্যা নহয়।</p>
+                <p>(গ) (A) শুদ্ধ কিন্তু (R) অশুদ্ধ।</p>
+                <p>(ঘ) (A) অশুদ্ধ কিন্তু (R) শুদ্ধ।</p>
+            </div>
+        </div>
+
+        <div class="sub-question">
+            <p class="clearfix">iii) উক্তি (Assertion - A): মুদ্ৰণ-যন্ত্ৰই নতুন মত বা বৈপ্লৱিক আদৰ্শ প্ৰচাৰত সহায় কৰিলে। <span class="marks">১</span></p>
+            <p>যুক্তি (Reason - R): ছপা মাধ্যমৰ জৰিয়তে এজনৰ বাণী অতি কম সময়তে লাখ লাখ মানুহৰ ওচৰলৈ লৈ যোৱাটো সম্ভৱ হ’ল。</p>
+            <div class="options">
+                <p>(ক) (A) আৰু (R) দুয়োটাই শুদ্ধ আৰু (R) হৈছে (A) ৰ সঠিক ব্যাখ্যা।</p>
+                <p>(খ) (A) আৰু (R) দুয়োটাই শুদ্ধ কিন্তু (R), (A) ৰ সঠিক ব্যাখ্যা নহয়।</p>
+                <p>(গ) (A) শুদ্ধ কিন্তু (R) অশুদ্ধ।</p>
+                <p>(ঘ) (A) অশুদ্ধ কিন্তু (R) শুদ্ধ।</p>
+            </div>
+        </div>
+
+        <div class="sub-question">
+            <p class="clearfix">iv) তলৰ বিবৃতিসমূহ বিচাৰ কৰা: <span class="marks">১</span></p>
+            <p>১. মুদ্ৰণ-যন্ত্ৰৰ আৱিষ্কাৰে জ্ঞানক 'ব্যক্তিগত সম্পত্তি'ৰ পৰা 'সামাজিক সম্পত্তি'লৈ ৰূপান্তৰিত কৰিলে।<br>
+            ২. হাতে লিখা পুথিৰ যুগত জ্ঞানৰ চৰ্চা কেৱল মঠ-মন্দিৰৰ ধৰ্মীয় পৰিৱেশতহে আৱদ্ধ আছিল।<br>
+            ৩. ঐতিহাসিক ই এইচ মিনছৰ মতে, মুদ্ৰণ-যন্ত্ৰ অবিহনে পশ্চিমীয়া সভ্যতাৰ আধুনিক বিকাশ অসম্ভৱ আছিল।</p>
+            <div class="options">
+                <p>(ক) কেৱল ১ আৰু ২ শুদ্ধ</p>
+                <p>(খ) কেৱল ২ আৰু ৩ শুদ্ধ</p>
+                <p>(গ) কেৱল ১ আৰু ৩ শুদ্ধ</p>
+                <p>(ঘ) আটাইকেইটা বিবৃতি শুদ্ধ</p>
+            </div>
+        </div>
+
+        <div class="sub-question">
+            <p class="clearfix">v) 'আকৰ' শব্দটোৰ পাঠভিত্তিক সমাৰ্থক শব্দটো কি? <span class="marks">১</span></p>
+            <div class="options">
+                <p>(ক) আকৃতি</p>
+                <p>(খ) ভঁৰাল বা খনি</p>
+                <p>(গ) কঠিন বস্তু</p>
+                <p>(ঘ) আহৰণ কৰা</p>
+            </div>
+        </div>
+
+        <div class="sub-question">
+            <p class="clearfix">vi) 'মুষ্টিমেয়' শব্দটোৰ সমাৰ্থক শব্দ কি? <span class="marks">১</span></p>
+            <div class="options">
+                <p>(ক) এমুঠিমান বা অতি কম সংখ্যক</p>
+                <p>(খ) বহুত বেছি</p>
+                <p>(গ) মুঠি মাৰি ধৰা</p>
+                <p>(ঘ) শক্তিশালী</p>
+            </div>
+        </div>
+
+        <div class="sub-question">
+            <p class="clearfix">Vii) মুদ্ৰণ-যন্ত্ৰই সমাজত কেনেধৰণৰ 'গণতান্ত্ৰিক' পৰিৱেশৰ সূচনা কৰিছিল? <span class="marks">২</span></p>
+        </div>
+
+        <div class="sub-question">
+            <p class="clearfix">Viii) সাহিত্যই কেনেকৈ বাণিজ্যিক ৰূপ লাভ কৰিলে? <span class="marks">২</span></p>
+        </div>
+    </div>
+
+    <div class="section-heading">
+        <div>Section - B</div>
+        <div>লিখন কলা</div>
+        <div>(Writing Skill)</div>
+        <div>(15 Marks)</div>
+    </div>
+
+    <div class="question">
+        <p class="clearfix">২। ধৰি লোৱা তুমি লখিমপুৰ জিলাৰ বানাক্ৰান্ত 'শান্তিপুৰ' গাঁৱৰ এজন সচেতন যুৱক/যুৱতী। ধাৰাসাৰ বৰষুণ আৰু মথাউৰি ভাঙি যোৱাৰ ফলত তোমালোকৰ গাঁওখন সম্পূৰ্ণৰূপে পানীৰ তলত বুৰ গৈছে। খেতি-পথাৰ নষ্ট হোৱাৰ লগতে খোৱা পানী আৰু ঔষধৰ তীব্ৰ নাটনিয়ে দেখা দিছে। বৰ্তমানৰ এই দুৰ্বিষহ অৱস্থাৰ পৰা পৰিত্ৰাণ পাবলৈ আৰু জৰুৰীকালীন সাহায্য (খাদ্য, আশ্ৰয় আৰু চিকিৎসা) বিচাৰি জিলা উপায়ুক্তলৈ এখন আবেদন পত্ৰ লিখা। <span class="marks">৫</span></p>
+    </div>
+
+    <div class="question clearfix">
+        <p><span style="float: left;">৩। ভাৱ বহলাই লিখা।</span> <span class="marks">৫</span></p>
+        <div style="clear:both;"></div>
+        <p>অতি ভক্তি চোৰৰ লক্ষণ</p>
+    </div>
+
+    <div class="question clearfix">
+        <p><span style="float: left;">৪। বাক্য ৰচনা কৰা। (যিকোনো পাঁচটা)</span> <span class="marks">১ × ৫= ৫</span></p>
+        <div style="clear:both;"></div>
+        <p>অমৰ, প্ৰতীক, দোষ, পৰিধান, লাখুটি, গৃহস্থ</p>
+    </div>
+
+    <div class="section-heading">
+        <div>Section - C</div>
+        <div>ব্যাকৰণ</div>
+        <div>(25 Marks)</div>
+    </div>
+
+    <div class="question">
+        <p class="clearfix">৫। শুদ্ধ সন্ধি বিচ্ছেদটো বিচাৰি উলিওৱা। <span class="marks">১ × ২= ২</span></p>
+        <div class="sub-question">
+            <p>i) গণক =</p>
+            <div class="options">
+                <p>ক) গন+আক</p>
+                <p>খ) গণ+ অক</p>
+                <p>গ) গণা + অক</p>
+                <p>ঘ) গম + অক</p>
+            </div>
+        </div>
+        <div class="sub-question">
+            <p>ii) লিখক =</p>
+            <div class="options">
+                <p>ক) লিখ+অক</p>
+                <p>খ) লিখা + অক</p>
+                <p>গ) লিখন + অক</p>
+                <p>ঘ) লিখা + আক</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="question">
+        <p class="clearfix">৬। শুদ্ধ উত্তৰটো বিচাৰি লিখা। <span class="marks">১ × ৪= ৪</span></p>
+        <div class="sub-question">
+            <p>i) কথাত চহকী -</p>
+            <div class="options">
+                <p>ক) কথাচহকী</p>
+                <p>খ) কথা বতৰা</p>
+                <p>গ) কথা গৰকা</p>
+                <p>ঘ) ওপৰৰ এটাও নহয়</p>
+            </div>
+        </div>
+        <div class="sub-question">
+            <p>ii) তলৰ কোনটো শব্দত স্বাভাৱিকতে 'ষ' হৈছে?</p>
+            <div class="options">
+                <p>ক) কষ্ট</p>
+                <p>খ) বিশেষণ</p>
+                <p>গ) সুষম</p>
+                <p>ঘ) যুধিষ্ঠিৰ</p>
+            </div>
+        </div>
+        <div class="sub-question">
+            <p>iii) 'শৰীৰ' শব্দৰ সমাৰ্থক শব্দ নহয় -</p>
+            <div class="options">
+                <p>ক) তনু</p>
+                <p>খ) দেহ</p>
+                <p>গ) কায়া</p>
+                <p>ঘ) তন্তু</p>
+            </div>
+        </div>
+        <div class="sub-question">
+            <p>iv) 'নিশা' শব্দটোৰ বিপৰীত অৰ্থ বুজোৱা এটা শব্দ হ'ল -</p>
+            <div class="options">
+                <p>ক) দিন</p>
+                <p>খ) যামিনী</p>
+                <p>গ) দীন</p>
+                <p>ঘ) বিভাৱৰী</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="question">
+        <p class="clearfix">৭। ষত্ব বিধি কাক বোলে? 'ভূমিষ্ঠ' শব্দটোত 'ষ' হোৱাৰ কাৰণটো কি? <span class="marks">২</span></p>
+    </div>
+
+    <div class="question">
+        <p class="clearfix">৮। ণত্ব বিধি কাক বোলে? 'কণ্ঠ' শব্দটোত কিহৰ বাবে 'ণ' হৈছে লিখা। <span class="marks">২</span></p>
+    </div>
+
+    <div class="question clearfix">
+        <p><span style="float: left;">৯। লিংগ পৰিৱৰ্তন কৰা।</span> <span class="marks">১ × ৩= ৩</span></p>
+        <div style="clear:both;"></div>
+        <p>পতি, বালক, কিশোৰ</p>
+    </div>
+
+    <div class="question clearfix">
+        <p><span style="float: left;">১০। প্ৰত্যয় ভাঙা।</span> <span class="marks">১ × ৩= ৩</span></p>
+        <div style="clear:both;"></div>
+        <p>সেউজীয়া, লিখক, পৰ্বতীয়া</p>
+    </div>
+
+    <div class="question clearfix">
+        <p><span style="float: left;">১১। একাৰ্থক শব্দ লিখা।</span> <span class="marks">১ × ৩= ৩</span></p>
+        <div style="clear:both;"></div>
+        <p>ক) পোন্ধৰ দিনৰ সমাহাৰ -</p>
+        <p>খ) তিনি ফলৰ সমাহাৰ -</p>
+        <p>গ) পাঁচ অমৃতৰ সমাহাৰ -</p>
+    </div>
+
+    <div class="question clearfix">
+        <p><span style="float: left;">১২। এটা শব্দত প্রকাশ কৰা।</span> <span class="marks">১ × ৩= ৩</span></p>
+        <div style="clear:both;"></div>
+        <p>ক) যাৰ কোনো অৱয়ব নাই -</p>
+        <p>খ) আকাশ চুব পৰা -</p>
+        <p>গ) দুমাহৰ জোৰা -</p>
+    </div>
+
+    <div class="question clearfix">
+        <p><span style="float: left;">১৩। তলৰ ভুল বাক্যকেইটা শুদ্ধকৈ লিখা।</span> <span class="marks">১ × ৩= ৩</span></p>
+        <div style="clear:both;"></div>
+        <p>ক) তোমাৰ দেউতা কি কৰে?</p>
+        <p>খ) মই কালি নলবাৰী যাম।</p>
+        <p>গ) তুমি ক'ত যাবা?</p>
+    </div>
+
+    <div class="section-heading">
+        <div>Section - D</div>
+        <div>(30 Marks)</div>
+        <div>(গদ্য ভাগ)</div>
+    </div>
+
+    <div class="question">
+        <p class="clearfix">১৪। শুদ্ধ উত্তৰটো বিচাৰি লিখা। <span class="marks">১ × ৬= ৬</span></p>
+        <div class="sub-question">
+            <p>i) সংস্কৃত ব্যাকৰণৰ অমৰ গ্ৰন্থ 'অষ্টাধ্যায়ী'ৰ ৰচক কোন?</p>
+            <div class="options">
+                <p>(ক) পতঞ্জলি</p>
+                <p>(খ) পাণিনি</p>
+                <p>(গ) ভৰত মুনি</p>
+                <p>(ঘ) চাণক্য</p>
+            </div>
+        </div>
+        <div class="sub-question">
+            <p>ii) 'কানছ' হৈছে -</p>
+            <div class="options">
+                <p>(ক) চমাংকান উৎসৱৰ প্ৰথম দিন</p>
+                <p>(খ) চমাংকান উৎসৱৰ দ্বিতীয় দিন</p>
+                <p>(গ) চমাংকান উৎসৱৰ তৃতীয় দিন</p>
+                <p>(ঘ) চমাংকান উৎসৱৰ চতুৰ্থ দিন</p>
+            </div>
+        </div>
+        <div class="sub-question">
+            <p>iii) তলৰ কোনটো লিওনাৰ্ডো দা ভিঞ্চিয়ে পোনপ্ৰথমে পৰিকল্পনা বা স্কেচ্ছ্ কৰা নাছিল?</p>
+            <div class="options">
+                <p>(ক) পেৰাছুট</p>
+                <p>(খ) ছাবমেৰিন</p>
+                <p>(গ) উৰাজাহাজ</p>
+                <p>(ঘ) চিম্পছ’ন ইণ্ডেক্স</p>
+            </div>
+        </div>
+        <div class="sub-question">
+            <p>iv) 'ৰত্নোদধি ' কি?</p>
+            <div class="options">
+                <p>(ক) এখন প্ৰাচীন গ্ৰন্থ</p>
+                <p>(খ) এটা বৃহৎ পুথিভঁৰাল</p>
+                <p>(গ) এখন ধৰ্মীয় গ্ৰন্থ</p>
+                <p>(ঘ) এজন বৌদ্ধ পণ্ডিত</p>
+            </div>
+        </div>
+        <div class="sub-question">
+            <p>v) মহোহো উৎসৱ পালন কৰা হয় -</p>
+            <div class="options">
+                <p>(ক) ব'হাগ মাহৰ পূৰ্ণিমা ৰাতি</p>
+                <p>(খ) আঘোণ মাহৰ পূৰ্ণিমা ৰাতি</p>
+                <p>(গ) মাঘ মাহৰ পূৰ্ণিমা ৰাতি</p>
+                <p>(ঘ) ওপৰৰ এটাও নহয়</p>
+            </div>
+        </div>
+        <div class="sub-question">
+            <p>vi) _____ক্ষেত্ৰত অসম যথেষ্ট চহকী।</p>
+            <div class="options">
+                <p>(ক) ফাট বিহুৰ</p>
+                <p>(খ) লোক-সংস্কৃতিৰ</p>
+                <p>(গ) খেল-ধেমালিৰ</p>
+                <p>(ঘ) বিহুৰ</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="question clearfix">
+        <p><span style="float: left;">১৫। ইংৰাজী অৰ্থ লিখা। (যিকোনো পাঁচটা)</span> <span class="marks">১ × ৫= ৫</span></p>
+        <div style="clear:both;"></div>
+        <p>তিৰ্যক, টনকিয়াল, তত্ত্ব, অদৃষ্ট, নিয়তি, নিখুঁত</p>
+    </div>
+
+    <div class="question clearfix">
+        <p><span style="float: left;">১৬। চমু উত্তৰ লিখা।</span> <span class="marks">২ × ৪= ৮</span></p>
+        <div style="clear:both;"></div>
+        <p>ক) আজিকালি কিয় স্বাধীন চিন্তা কৰি নতুন তত্ত্ব বাহিৰ কৰিব পৰা ছাত্ৰৰ সংখ্যা কম?</p>
+        <p>খ) এনৰ লিখাৰ প্ৰতি কেনেদৰে আগ্ৰহ জন্মিল?</p>
+        <p>গ) লিওনাৰ্ডোৱে কেনেদৰে ডাক্তৰতকৈও বেছি মানুহৰ শৰীৰটোৰ বিষয়ে জানিব পাৰিছিল?</p>
+        <p>ঘ) চমাংকান উৎসৱৰ বাবে প্ৰয়োজনীয় বস্তু কি কি?</p>
+    </div>
+
+    <div class="section-heading">
+        <div>(পদ্য ভাগ)</div>
+    </div>
+
+    <div class="question">
+        <p class="clearfix">১৭। শুদ্ধ উত্তৰটো বিচাৰি লিখা। <span class="marks">১ × ২= ২</span></p>
+        <div class="sub-question">
+            <p>i) ম: ইব্ৰাহিম আলিয়ে সম্পাদনা কৰা এখন শিশু আলোচনী হ'ল -</p>
+            <div class="options">
+                <p>(ক) ৰাজদ্ৰোহী</p>
+                <p>(খ) কাঁচিজোন</p>
+                <p>(গ) মাটি আৰু সোণ</p>
+                <p>(ঘ) কুমাৰী জেবুন্নিছা</p>
+            </div>
+        </div>
+        <div class="sub-question">
+            <p>ii) নীল আকাশে কিহৰ শৰাই দিয়ে?</p>
+            <div class="options">
+                <p>(ক) তৰাফুলৰ থোপাৰ</p>
+                <p>(খ) মেঘৰ থোপাৰ</p>
+                <p>(গ) সেউজী ফুলৰ</p>
+                <p>(ঘ) পদুম ফুলৰ</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="question">
+        <p class="clearfix">১৮। কবিতাত বৰ্ণনা কৰা অনুসৰি ‘শাওণী মেঘে’ পথাৰখন কেনেদৰে ধুৱাই দিছে তাৰ এটা ৰঙীন ছবি মনলৈ আনা। তুমি যদি এই পথাৰখনত থিয় হৈ থাকা, তেন্তে তোমাৰ কেনে অনুভৱ হ’ব? <span class="marks">২</span></p>
+    </div>
+
+    <div class="question">
+        <p class="clearfix">১৯। কবিয়ে শাওণৰ মেঘক ‘সোণ পানীৰে’ পথাৰ ধুওৱা বুলি কিয় কৈছে? <span class="marks">২</span></p>
+    </div>
+
+    <div class="question clearfix">
+        <p><span style="float: left;">২০। প্ৰসংগ - সংগতি দৰ্শাই ব্যাখ্যা কৰা।</span> <span class="marks">৫</span></p>
+        <div style="clear:both;"></div>
+        <p>সেউজ বোলে.....ভৈয়াম খনি..... ইমান সেউজী কৰে।</p>
+        <p>মোৰো মনৰ.... সেউজী কথা....... সদায় মনত পৰে।</p>
+    </div>
+
 </div>
-
-<script>
-    // Generate Top Barcode (CLASS- IX)
-    JsBarcode("#barcodeTop", "CLASS- IX", {
-        format: "CODE128",
-        displayValue: false,
-        height: 35,
-        width: 1.8,
-        margin: 0
-    });
-
-    // Generate Side Barcode (SOCIAL SCIENCE)
-    JsBarcode("#barcodeSide", "ENGLISH", {
-        format: "CODE128",
-        displayValue: false,
-        height: 35,
-        width: 1.5,
-        margin: 0
-    });
-
-    // Generate QR Code (2025-2026)
-    new QRious({
-        element: document.getElementById('qrCode'),
-        value: '2025-2026',
-        size: 60,
-        level: 'H' // High error correction to ensure scannability at small sizes
-    });
-</script>
 
 </body>
 </html>
