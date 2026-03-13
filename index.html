@@ -4,332 +4,309 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question Paper Title Page</title>
-    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     <style>
-        /* A4 Page Setup */
-        @page {
-            size: A4 portrait;
-            margin: 10mm;
-        }
-        
         body {
-            font-family: "Times New Roman", Times, serif;
+            font-family: 'Times New Roman', Times, serif;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
         }
-        
-        .paper-container {
-            width: 100%;
-            max-width: 800px; /* Adjusted for A4 width */
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px 30px; /* Reduced padding to fit A4 height */
+        .page-container {
+            width: 800px;
+            max-width: 100%;
+            background: white;
+            padding: 20px;
             box-sizing: border-box;
-            color: #000;
         }
-
-        /* Screen Only - Add a shadow for preview */
-        @media screen {
-            .paper-container {
-                margin: 20px auto;
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            }
+        .top-bars {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
         }
-
+        .black-bar {
+            height: 10px;
+            background-color: black;
+            flex-grow: 1;
+        }
+        .barcode {
+            width: 150px;
+            height: 30px;
+            background: repeating-linear-gradient(
+                90deg,
+                #000,
+                #000 2px,
+                #fff 2px,
+                #fff 4px,
+                #000 4px,
+                #000 7px,
+                #fff 7px,
+                #fff 9px
+            );
+            margin: 0 15px;
+        }
         .header-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
+            align-items: flex-start;
+            margin-bottom: 20px;
         }
-        .box-border {
-            border: 2px solid #000;
-            padding: 5px 15px;
+        .series-text {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .set-text {
             font-size: 20px;
             font-weight: bold;
+            text-align: right;
         }
-        .qr-placeholder img {
-            width: 60px;
-            height: 60px;
+        .qp-code-box {
+            text-align: center;
+            margin-top: 5px;
         }
-        .student-info-row {
+        .qp-code-num {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .roll-no-section {
             display: flex;
             justify-content: space-between;
             margin-bottom: 15px;
         }
-        .student-id-section {
-            text-align: center;
-            flex: 1;
-        }
-        .student-id-text {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-        .id-boxes {
-            display: flex;
-            justify-content: center;
-            gap: 2px;
-            margin-bottom: 8px;
-        }
-        .id-circle {
-            width: 26px;
-            height: 26px;
-            border: 2px solid #000;
-            border-radius: 50%;
-        }
-        .barcode-section {
-            text-align: center;
-            margin-top: 5px;
-        }
-        /* Barcode specific sizing to keep it short */
-        #barcode {
-            max-width: 220px;
-            height: auto;
-        }
-        .barcode-dots {
-            font-size: 20px;
-            line-height: 8px;
-            margin-top: 2px;
-        }
-        .qp-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-        .qp-code-box {
-            border: 3px solid #000;
-            padding: 5px 15px;
-            text-align: center;
-            margin-bottom: 8px;
-            border-radius: 5px;
+        .roll-no-left {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        .qp-text {
-            text-align: right;
-            font-size: 15px;
-            font-weight: bold;
+        .roll-no-label {
+            font-size: 16px;
             line-height: 1.2;
         }
-        .qp-number {
-            font-size: 32px;
-            font-weight: bold;
+        .roll-no-boxes {
+            display: flex;
         }
-        .instruction-box {
-            border: 2px solid #000;
-            padding: 8px;
+        .roll-box {
+            width: 25px;
+            height: 30px;
+            border: 1px solid black;
+            border-right: none;
+        }
+        .roll-box:last-child {
+            border-right: 1px solid black;
+        }
+        .instruction-box-right {
+            border: 1px solid black;
+            padding: 5px 10px;
             width: 320px;
-            font-size: 13px;
-            border-radius: 8px;
+            font-size: 14px;
         }
-        .instruction-box p {
-            margin: 0;
-            margin-bottom: 3px;
-        }
-        .notes-section {
+        .notes-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 5px;
             margin-bottom: 10px;
-            font-size: 15px;
-            line-height: 1.3;
         }
-        .notes-section td {
+        .notes-table th, .notes-table td {
+            border: 1px solid black;
+            padding: 8px 10px;
             vertical-align: top;
-            padding: 4px;
+            width: 50%;
         }
-        .col-roman {
-            width: 4%;
-            font-weight: normal;
-        }
-        .col-hindi {
-            width: 46%;
-            padding-right: 15px;
-        }
-        .col-english {
-            width: 46%;
-        }
-        .separator {
+        .notes-table th {
             text-align: center;
-            margin: -5px 0 5px 0;
-            font-size: 18px;
+            font-size: 16px;
         }
-        .subject-container {
-            border: 2px solid #000;
-            border-radius: 12px;
-            padding: 15px;
-            position: relative;
-            text-align: center;
-        }
-        .subject-qr {
-            position: absolute;
-            left: 15px;
-            top: 15px;
-        }
-        .subject-qr img {
-            width: 60px;
-            height: 60px;
-        }
-        .subject-hindi {
-            font-size: 26px;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-        .subject-english {
-            font-size: 22px;
-            font-weight: bold;
-        }
-        .details-row {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
+        .notes-table td {
             font-size: 15px;
-            font-style: italic;
-            font-weight: bold;
+            line-height: 1.4;
+            text-align: justify;
         }
-        .footer-row {
+        .num-col {
+            width: 30px;
+            display: inline-block;
+        }
+        .subject-section {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid black;
+            margin-bottom: 15px;
+        }
+        .subject-title {
+            text-align: center;
+        }
+        .subject-title .hindi {
+            font-size: 22px;
             font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .subject-title .english {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .footer-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
             font-size: 15px;
-            border-top: 2px solid #000;
-            padding-top: 8px;
+            font-style: italic;
+        }
+        .footer-box {
+            border: 1px solid black;
+            padding: 5px 10px;
+            min-width: 220px;
+        }
+        .footer-box div {
+            margin: 3px 0;
+        }
+        .page-num-circle {
+            width: 30px;
+            height: 30px;
+            background-color: black;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin: 0 auto;
+            font-style: normal;
+        }
+        .bottom-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<div class="paper-container">
+<div class="page-container">
+    
+    <div class="top-bars">
+        <div class="black-bar"></div>
+        <div class="barcode"></div>
+        <div class="black-bar"></div>
+    </div>
+
     <div class="header-row">
-        <div class="box-border">Series : MVMNFE1</div>
-        <div class="qr-placeholder">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=2025-2026" alt="QR Code Top">
-        </div>
-        <div class="box-border">SET ~ A</div>
-    </div>
-
-    <div class="student-info-row">
-        <div class="student-id-section">
-            <div class="student-id-text">STUDENT ID</div>
-            <div class="id-boxes">
-                <div class="id-circle"></div>
-                <div class="id-circle"></div>
-                <div class="id-circle"></div>
-                <div class="id-circle"></div>
-                <div class="id-circle"></div>
-                <div class="id-circle"></div>
-                <div class="id-circle"></div>
-                <div class="id-circle"></div>
-                <div class="id-circle"></div>
-                <div class="id-circle"></div>
-                <div class="id-circle"></div>
-            </div>
-            <div class="barcode-section">
-                <svg id="barcode"></svg>
-                <div class="barcode-dots">• • •</div>
-            </div>
-        </div>
-
-        <div class="qp-section">
+        <div class="series-text">Series : MVMNFE1</div>
+        <div class="set-text">
+            SET~A
             <div class="qp-code-box">
-                <div class="qp-text">
-                    प्रश्न-पत्र कोड<br>
-                    Q.P. Code
-                </div>
-                <div class="qp-number">01</div>
-            </div>
-            <div class="instruction-box">
-                <p>परीक्षार्थी प्रश्न-पत्र कोड को उत्तर-पुस्तिका के मुख-पृष्ठ पर अवश्य लिखें।</p>
-                <p>Candidates must write the Q.P. Code on the title page of the answer-book.</p>
+                <table style="text-align:center; border:none; margin-left:auto;">
+                    <tr>
+                        <td style="font-size:14px; padding-right:15px; font-weight:normal;">प्रश्न-पत्र कोड<br>Q.P. Code</td>
+                        <td class="qp-code-num">01</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
 
-    <table class="notes-section">
+    <div class="roll-no-section">
+        <div class="roll-no-left">
+            <div class="roll-no-label">
+                रोल नं.<br>Roll No.
+            </div>
+            <div class="roll-no-boxes">
+                <div class="roll-box"></div>
+                <div class="roll-box"></div>
+                <div class="roll-box"></div>
+                <div class="roll-box"></div>
+                <div class="roll-box"></div>
+                <div class="roll-box"></div>
+                <div class="roll-box"></div>
+            </div>
+        </div>
+        <div class="instruction-box-right">
+            परीक्षार्थी प्रश्न-पत्र कोड को उत्तर-पुस्तिका के मुख-पृष्ठ पर अवश्य लिखें ।<br>
+            Candidates must write the Q.P. Code on the title page of the answer-book.
+        </div>
+    </div>
+
+    <table class="notes-table">
         <tr>
-            <td colspan="2" style="font-weight: bold; font-size: 17px;">नोट</td>
-            <td colspan="2" style="font-weight: bold; font-size: 17px;">NOTE</td>
+            <th>नोट</th>
+            <th>NOTE</th>
         </tr>
         <tr>
-            <td class="col-roman">(I)</td>
-            <td class="col-hindi">कृपया जाँच कर लें कि इस प्रश्न-पत्र में मुद्रित पृष्ठ <strong>19</strong> हैं।</td>
-            <td class="col-roman">(I)</td>
-            <td class="col-english">Please check that this question paper contains <strong>7</strong> printed pages.</td>
+            <td>
+                <span class="num-col">(I)</span> कृपया जाँच कर लें कि इस प्रश्न-पत्र में मुद्रित पृष्ठ <b>12</b> हैं ।
+            </td>
+            <td>
+                <span class="num-col">(I)</span> Please check that this question paper contains <b>12</b> printed pages.
+            </td>
         </tr>
         <tr>
-            <td class="col-roman">(II)</td>
-            <td class="col-hindi">प्रश्न-पत्र में दाहिने हाथ की ओर दिए गए प्रश्न-पत्र कोड को परीक्षार्थी उत्तर-पुस्तिका के मुख-पृष्ठ पर लिखें।</td>
-            <td class="col-roman">(II)</td>
-            <td class="col-english">Q.P. Code given on the right hand side of the question paper should be written on the title page of the answer-book by the candidate.</td>
+            <td>
+                <span class="num-col">(II)</span> प्रश्न-पत्र में दाहिने हाथ की ओर दिए गए प्रश्न-पत्र कोड को परीक्षार्थी उत्तर-पुस्तिका के मुख-पृष्ठ पर लिखें ।
+            </td>
+            <td>
+                <span class="num-col">(II)</span> Q.P. Code given on the right hand side of the question paper should be written on the title page of the answer-book by the candidate.
+            </td>
         </tr>
         <tr>
-            <td class="col-roman">(III)</td>
-            <td class="col-hindi">कृपया जाँच कर लें कि इस प्रश्न-पत्र में <strong>21</strong> प्रश्न हैं।</td>
-            <td class="col-roman">(III)</td>
-            <td class="col-english">Please check that this question paper contains <strong>21</strong> questions.</td>
+            <td>
+                <span class="num-col">(III)</span> कृपया जाँच कर लें कि इस प्रश्न-पत्र में <b>18</b> प्रश्न हैं ।
+            </td>
+            <td>
+                <span class="num-col">(III)</span> Please check that this question paper contains <b>18</b> questions.
+            </td>
         </tr>
         <tr>
-            <td class="col-roman">(IV)</td>
-            <td class="col-hindi">कृपया प्रश्न का उत्तर लिखना शुरू करने से पहले, उत्तर-पुस्तिका में यथा स्थान पर प्रश्न का क्रमांक अवश्य लिखें।</td>
-            <td class="col-roman">(IV)</td>
-            <td class="col-english"><strong>Please write down the Serial Number of the question in the answer-book at the given place before attempting it.</strong></td>
+            <td>
+                <span class="num-col">(IV)</span> कृपया प्रश्न का उत्तर लिखना शुरू करने से पहले, उत्तर-पुस्तिका में यथा स्थान पर प्रश्न का क्रमांक अवश्य लिखें ।
+            </td>
+            <td>
+                <span class="num-col">(IV)</span> <b>Please write down the Serial Number of the question in the answer-book at the given place before attempting it.</b>
+            </td>
         </tr>
         <tr>
-            <td class="col-roman">(V)</td>
-            <td class="col-hindi">इस प्रश्न-पत्र को पढ़ने के लिए 15 मिनट का समय दिया गया है। प्रश्न-पत्र का वितरण पूर्वाह्न में 09.15 बजे किया जाएगा। 09.15 बजे से 09.30 बजे तक परीक्षार्थी केवल प्रश्न-पत्र को पढ़ेंगे और इस अवधि के दौरान वे उत्तर-पुस्तिका पर कोई उत्तर नहीं लिखेंगे।</td>
-            <td class="col-roman">(V)</td>
-            <td class="col-english">15 minute time has been allotted to read this question paper. The question paper will be distributed at 09.15 a.m. From 09.15 a.m. to 09.30 a.m., the candidates will read the question paper only and will not write any answer on the answer-book during this period.</td>
+            <td>
+                <span class="num-col">(V)</span> इस प्रश्न-पत्र को पढ़ने के लिए 15 मिनट का समय दिया गया है । प्रश्न-पत्र का वितरण पूर्वाह्न में 10.15 बजे किया जाएगा । 10.15 बजे से 10.30 बजे तक परीक्षार्थी केवल प्रश्न-पत्र को पढ़ेंगे और इस अवधि के दौरान वे उत्तर-पुस्तिका पर कोई उत्तर नहीं लिखेंगे । <span style="float:right;">#</span>
+            </td>
+            <td>
+                <span class="num-col">(V)</span> 15 minute time has been allotted to read this question paper. The question paper will be distributed at 10.15 a.m. From 10.15 a.m. to 10.30 a.m., the candidates will read the question paper only and will not write any answer on the answer-book during this period.
+            </td>
         </tr>
     </table>
 
-    <div class="separator">#<br>• • •</div>
-
-    <div class="subject-container">
-        <div class="subject-qr">
-             <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=2025-2026" alt="QR Code Subject">
+    <div class="subject-section">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=Class+-+IX" alt="Class IX QR Code" style="width: 50px; height: 50px;">
+        <div class="subject-title">
+            <div class="hindi">संस्कृतम्</div>
+            <div class="english">SANSKRIT</div>
         </div>
-        <div class="subject-hindi">सूचना प्रौद्योगिकी</div>
-        <div class="subject-english">INFORMATION TECHNOLOGY</div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=Class+-+IX" alt="Class IX QR Code" style="width: 50px; height: 50px;">
+    </div>
+
+    <div class="footer-section">
+        <div class="footer-box">
+            <div>अवधि : होरात्रयम्</div>
+            <div>निर्धारित समय : 3 घण्टे</div>
+            <div>Time allowed : 3 hours</div>
+        </div>
         
-        <div class="details-row">
-            <div>
-                <span style="font-weight:normal; font-style:normal;">निर्धारित समय : </span>2 घण्टे<br>
-                <span style="font-weight:normal;">Time allowed : </span>2 hours
-            </div>
-            <div style="text-align: right;">
-                <span style="font-weight:normal; font-style:normal;">अधिकतम अंक : </span>50<br>
-                <span style="font-weight:normal;">Maximum Marks : </span>50
-            </div>
+        <div class="page-num-circle">1</div>
+
+        <div class="footer-box" style="text-align: right;">
+            <div>पूर्णाङ्काः : 80</div>
+            <div>अधिकतम अंक : 80</div>
+            <div>Maximum Marks : 80</div>
         </div>
     </div>
 
-    <div class="footer-row">
-        <div>01</div>
-        <div style="letter-spacing: 2px;">1 | P a g e</div>
-        <div>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=30x30&data=2025-2026" alt="Small QR" style="vertical-align: middle; margin-right: 20px;">
-            P.T.O.
-        </div>
+    <div class="bottom-row">
+        <div>*01*</div>
+        <div>[ P.T.O. ]</div>
     </div>
 
 </div>
-
-<script>
-    // Adjusted width to 1.1 to make the generated barcode much shorter in physical length
-    JsBarcode("#barcode", "CLASS - IX | INFORMATION TECHNOLOGY", {
-        format: "CODE128",
-        lineColor: "#000",
-        width: 1.1, 
-        height: 35, 
-        displayValue: false 
-    });
-</script>
 
 </body>
 </html>
