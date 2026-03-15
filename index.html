@@ -7,90 +7,106 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 40px auto;
-            max-width: 800px;
             line-height: 1.6;
-            padding: 20px;
-            color: #000;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 10mm auto;
+            background: white;
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         p {
+            margin: 0 0 10px 0;
+        }
+        .header-block {
+            margin-bottom: 30px;
+        }
+        .spacing {
+            margin-bottom: 30px;
+        }
+        .indented-para {
+            text-indent: 50px;
+            text-align: justify;
             margin-bottom: 15px;
         }
-        .text-indent {
-            text-indent: 50px;
+        .signature-block {
+            float: right;
+            width: 250px;
+            margin-top: 40px;
+        }
+        .signature-block p {
+            margin: 5px 0;
         }
         .clearfix::after {
             content: "";
             clear: both;
             display: table;
         }
-        .address-line {
-            margin: 0;
-            line-height: 1.8;
-        }
+
+        /* Print Specific Styles */
         @media print {
             body {
-                margin: 0;
-                padding: 15mm 20mm;
-                max-width: 100%;
+                background-color: white;
             }
-            @page {
+            .page {
                 margin: 0;
+                box-shadow: none;
+                padding: 15mm;
             }
         }
     </style>
 </head>
-<body>
+<body onload="window.print()">
 
-    <div style="margin-bottom: 30px;">
-        <p class="address-line">To</p>
-        <p class="address-line">The Headmaster</p>
-        <p class="address-line">Sewguri Maqtab LP School</p>
-        <p class="address-line">Kapili Block, Nagaon, Assam, 782425</p>
-    </div>
-
-    <p style="margin-top: 30px;">Date: 18/03/2026</p>
-
-    <p style="margin-top: 30px;">Sub: Joining Letter .</p>
-
-    <p style="margin-top: 30px;">Respected Sir/Madam,</p>
-
-    <p class="text-indent" style="text-align: justify;">
-        With due respect, I would like to state that I am appointed at Sewguri Maqtab LP School as Assistant Teacher vide Appointment Letter No. E-770675/2361 dated 12 March, 2026 issued by the Director of Elementary Education, Assam. Now I want to join in your school in accordance with the directions of the mentioned appointment letter enclosed herewith.
-    </p>
-
-    <p class="text-indent" style="text-align: justify;">
-        So, I request you to kindly allow me to join this school today, i.e., 18/03/2026, at 10:30 A.M. onwards.
-    </p>
-
-    <p style="margin-top: 50px;">
-        N.B:- Enclosed herewith my Appointment letter for your information & favorable action.
-    </p>
-
-    <p style="margin-top: 20px;">Thank you.</p>
-
-    <div class="clearfix" style="margin-top: 50px;">
-        <div style="float: right; width: 50%;">
-            <p class="address-line" style="margin-bottom: 70px;">Yours faithfully</p>
-            <p class="address-line">Name: <b>Pranamita Barman</b></p>
-            <p class="address-line">D/O: Dhirendra Nath Barman</p>
-            
-            <table style="border-collapse: collapse; margin: 0; padding: 0;">
-                <tr>
-                    <td style="vertical-align: top; padding: 0; padding-right: 5px; line-height: 1.8;">Address:</td>
-                    <td style="padding: 0; line-height: 1.8;">
-                        Vill: BALIKARIA<br>
-                        P.O: GOPAL BAZAR<br>
-                        PIN : 781353<br>
-                        P/S: NALBARI<br>
-                        Dist: NALBARI<br>
-                        State:ASSAM<br>
-                        Mobile No: 8876475640<br>
-                        E-Mail ID: pranamita98@gmail.com
-                    </td>
-                </tr>
-            </table>
+    <div class="page clearfix">
+        
+        <div class="header-block">
+            <p>To</p>
+            <p>The Block Elementary Education Officer</p>
+            <p><strong>Demo Block Name</strong> Block</p>
+            <p>District: <strong>Demo District Name</strong></p>
         </div>
+
+        <div class="spacing">
+            <p>Through the Headmaster of <strong>Demo Primary School, Assam</strong></p>
+        </div>
+
+        <p>Date: <strong>15/03/2026</strong></p>
+
+        <p>Sub: Joining Letter .</p>
+
+        <p class="spacing">Respected Sir/Madam,</p>
+
+        <p class="indented-para">
+            With due respect, I would like to state that I am appointed at <strong>Demo Primary</strong> School as Assistant Teacher vide Appointment Letter No. <strong>DEE/APP/12345</strong> dated <strong>10/03/2026</strong> issued by the Director of Elementary Education, Assam. Now I have already joined the school in accordance with the directions of the mentioned appointment letter enclosed herewith.
+        </p>
+
+        <p class="indented-para">
+            So, I request you to kindly accept my joining report in your Block on today i.e <strong>15/03/2026</strong> at <strong>10:00</strong> A.M onwards.
+        </p>
+
+        <div class="spacing" style="margin-top: 40px;">
+            <p>N.B:- Enclosed herewith my Appointment letter & School joining report for you information & favorable action.</p>
+        </div>
+
+        <p>Thank you.</p>
+
+        <div class="signature-block">
+            <p>Yours faithfully</p>
+            <p>Name: <strong>John Doe</strong></p>
+            <p>S/O: <strong>Richard Doe</strong></p>
+            <p>Address: Vill <strong>Demo Village</strong></p>
+            <p style="padding-left: 60px;">P.O <strong>Demo PO</strong></p>
+            <p style="padding-left: 60px;">P/S <strong>Demo PS</strong></p>
+            <p style="padding-left: 60px;">Dist <strong>Demo District</strong></p>
+        </div>
+
     </div>
 
 </body>
