@@ -3,93 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joining Letter</title>
+    <title>Undertaking - Manab Sharma</title>
     <style>
+        /* General body styling for a formal document */
         body {
-            font-family: Arial, sans-serif;
-            margin: 40px auto;
-            max-width: 800px;
-            line-height: 1.6;
-            padding: 20px;
-            color: #000;
-        }
-        p {
-            margin-bottom: 15px;
-        }
-        .text-indent {
-            text-indent: 50px;
-        }
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-        .address-line {
-            margin: 0;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 14pt;
             line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
         }
+
+        /* Simulating A4 page on screen */
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 25mm; /* Standard 1-inch margins */
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+
+        /* Print-specific rules to ensure it prints perfectly on one page */
         @media print {
             body {
-                margin: 0;
-                padding: 15mm 20mm;
-                max-width: 100%;
+                background: none;
             }
-            @page {
+            .a4-page {
                 margin: 0;
+                padding: 25mm;
+                box-shadow: none;
+                width: 100%;
+                height: 100%;
             }
+            /* Hides the print button when printing */
+            .no-print {
+                display: none;
+            }
+        }
+
+        /* Typography styling */
+        h2 {
+            text-align: center;
+            font-size: 18pt;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-bottom: 40px;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        /* Formatting the signature block */
+        .signature-block {
+            margin-top: 80px;
+            text-align: right;
+        }
+
+        .details-block {
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .line {
+            margin-bottom: 8px;
         }
     </style>
 </head>
 <body>
 
-    <div style="margin-bottom: 30px;">
-        <p class="address-line">To</p>
-        <p class="address-line">The Headmaster</p>
-        <p class="address-line">Sewguri Maqtab LP School</p>
-        <p class="address-line">Kapili Block, Nagaon, Assam, 782425</p>
+    <div style="text-align: center; margin-top: 20px;" class="no-print">
+        <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Print Document</button>
     </div>
 
-    <p style="margin-top: 30px;">Date: 17/03/2026</p>
+    <div class="a4-page">
+        <h2>UNDERTAKING</h2>
 
-    <p style="margin-top: 30px;">Sub: Joining Letter .</p>
+        <p>"I, <strong>MANAB SHARMA</strong>, appointed as <strong>Assistant Teacher (LPS)</strong> under the Department of School Education, Government of Assam, do hereby solemnly affirm and declare that I voluntarily and without duress agree to the terms and conditions mentioned in the appointment order.</p>
 
-    <p style="margin-top: 30px;">Respected Sir/Madam,</p>
+        <p>I also solemnly affirm and declare that I satisfy all the qualifying criteria of the post to which I am appointed. I further declare that I am currently unmarried and, as such, do not have more than one wife living, nor do I have any children.</p>
 
-    <p class="text-indent" style="text-align: justify;">
-        With due respect, I would like to state that I am appointed at Jit Gaon LP School as Assistant Teacher vide Appointment Letter No. E-770675/2361 dated 12 March, 2026 issued by the Director of Elementary Education, Assam. Now I want to join in your school in accordance with the directions of the mentioned appointment letter enclosed herewith.
-    </p>
+        <p>I further declare that I shall strictly adhere to the Small Family Norms and will not have more than two living children on or after 01-01-2021 from single or multiple partners. In case of any detection to the contrary in due course, I understand that I shall be summarily discharged from the Service."</p>
 
-    <p class="text-indent" style="text-align: justify;">
-        So, I request you to kindly allow me to join this school today, i.e., 17/03/2026, at 10:30 A.M. onwards.
-    </p>
+        <div class="signature-block">
+            <div class="line">Signature of the Appointee: ____________________</div>
+        </div>
 
-    <p style="margin-top: 50px;">
-        N.B:- Enclosed herewith my Appointment letter for your information & favorable action.
-    </p>
-
-    <p style="margin-top: 20px;">Thank you.</p>
-
-    <div class="clearfix" style="margin-top: 50px;">
-        <div style="float: right; width: 50%;">
-            <p class="address-line" style="margin-bottom: 70px;">Yours faithfully</p>
-            <p class="address-line">Name: <b>PRANAMITA BARMAN</b></p>
-            <p class="address-line">S/O: DHIRENDRA NATH BARMAN</p>
-            
-            <table style="border-collapse: collapse; margin: 0; padding: 0;">
-                <tr>
-                    <td style="vertical-align: top; padding: 0; padding-right: 5px; line-height: 1.8;">Address:</td>
-                    <td style="padding: 0; line-height: 1.8;">
-                        Vill: BALIKARIA<br>
-                        P.O: GOPAL BAZAR<br>
-                        PIN:781353 <br>
-                        P/S: NALBARI<br>
-                        Dist:NALBARI <br>
-                        State:ASSAM<br>
-                        Mobile No: 8876475640<br>
-                        E-Mail ID: pranamita98@gmail.com
-                    </td>
-                </tr>
-            </table>
+        <div class="details-block">
+            <div class="line">Full Name: <strong>MANAB SHARMA</strong></div>
+            <div class="line">Designation: <strong>Assistant Teacher (LPS)</strong></div>
+            <div class="line">Date:</div>
+            <div class="line">Place:</div>
         </div>
     </div>
 
