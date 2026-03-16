@@ -3,74 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRANAM Undertaking</title>
+    <title>Question Paper Title Page - General Science</title>
     <style>
         body {
-            font-family: 'Times New Roman', Times, serif; /* Using a formal font */
-            margin: 50px auto;
-            max-width: 800px;
+            font-family: 'Times New Roman', Times, serif; 
+            margin: 0;
             padding: 20px;
-            color: #000;
+            display: flex;
+            justify-content: center;
         }
-        .heading {
-            text-align: center;
+        .page-container {
+            width: 800px;
+            max-width: 100%;
+            background: white;
+            box-sizing: border-box;
+        }
+        
+        /* Decorative top border approximation */
+        .decorative-border-outer {
+            border: 1px solid #000;
+            padding: 3px;
+            margin-bottom: 20px;
+        }
+        .decorative-border-inner {
+            border: 2px dashed #000;
+            padding: 15px;
+        }
+
+        /* Header Row */
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .dashed-box {
+            border: 2px dashed black;
+            padding: 5px 15px;
             font-weight: bold;
-            text-decoration: underline;
-            margin-bottom: 40px;
-            font-size: 1.2em;
         }
-        .content {
-            line-height: 2;
-            text-align: justify;
-            margin-bottom: 60px;
-            font-size: 1.1em;
+        .series-text {
+            font-size: 22px;
+            letter-spacing: 1px;
         }
-        .signature-section {
+        .set-text {
+            font-size: 22px;
+            letter-spacing: 2px;
+        }
+        .barcode-top {
+            width: 180px;
+            height: 35px;
+            background: repeating-linear-gradient(
+                90deg,
+                #000,
+                #000 2px,
+                #fff 2px,
+                #fff 4px,
+                #000 4px,
+                #000 7px,
+                #fff 7px,
+                #fff 9px
+            );
+        }
+
+        /* QP Code */
+        .qp-code-row {
             text-align: right;
-            margin-bottom: 40px;
-            font-size: 1.1em;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-right: 15px;
         }
-        .signature-line {
-            text-decoration: underline;
+        .qp-code-num {
+            font-size: 26px;
+            font-weight: bold;
+            margin-left: 10px;
         }
-        .details-section {
-            line-height: 2;
-            font-size: 1.1em;
+
+        /* Roll No Row */
+        .roll-no-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
-        .details-row {
+        .roll-no-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .roll-no-label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .roll-no-boxes {
             display: flex;
         }
-        .details-label {
+        .roll-box {
+            width: 30px;
+            height: 35px;
+            border: 1px dashed black;
+            border-right: none;
+        }
+        .roll-box:last-child {
+            border-right: 1px dashed black;
+        }
+        .instruction-box-right {
+            border: 2px dashed black;
+            padding: 8px 15px;
+            width: 300px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Notes Section */
+        .notes-box {
+            border: 2px solid black;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 2px;
+        }
+        .notes-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .note-item {
+            display: flex;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+        .note-num {
+            width: 35px;
+            flex-shrink: 0;
+        }
+        .note-text {
+            flex-grow: 1;
+            text-align: justify;
+        }
+        .hash-mark {
+            margin-top: 5px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        /* Subject Section */
+        .subject-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 5px 0;
+        }
+        .barcode-bottom {
             width: 150px;
+            height: 35px;
+            background: repeating-linear-gradient(
+                90deg,
+                #000,
+                #000 2px,
+                #fff 2px,
+                #fff 5px,
+                #000 5px,
+                #000 6px,
+                #fff 6px,
+                #fff 9px
+            );
+        }
+        .subject-title {
+            text-align: center;
+        }
+        .subject-title .hindi {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .subject-title .english {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* Time & Marks */
+        .time-marks-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        /* General Instructions */
+        .general-instructions {
+            padding: 0 10px;
+            margin-bottom: 30px;
+        }
+        .gi-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .gi-subtitle {
+            font-size: 16px;
+            font-style: italic;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .gi-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .gi-item {
+            display: flex;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .gi-num {
+            width: 35px;
+            flex-shrink: 0;
+        }
+        .gi-text b {
+            font-weight: 900;
+        }
+
+        /* Footer */
+        .footer-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 16px;
+            border-top: 2px solid black;
+            padding-top: 10px;
+        }
+        .footer-left {
+            text-align: center;
+            line-height: 1.2;
         }
     </style>
 </head>
 <body>
 
-    <div class="heading">UNDERTAKING</div>
+<div class="page-container">
+    
+    <div class="decorative-border-outer">
+        <div class="decorative-border-inner">
 
-    <div class="content">
-        "I, <strong>Pranamita Barman</strong>, having permanent address Vill - Balikaria, PO - Gopal Bazar, P.S. - Nalbari, Dist. - Nalbari, PIN - 781353, appointed as an Assistant Teacher in Sewguri Maqtab LP School, Department of Education, Government of Assam, do hereby undertake that I shall take care of all dependents of my family as per the Rules of the "PRANAM ACT" framed by the Govt. of Assam in this regard."
+            <div class="header-row">
+                <div class="dashed-box series-text">Series : MVMNFE1</div>
+                <div class="barcode-top"></div>
+                <div class="dashed-box set-text">SET ~ A</div>
+            </div>
+
+            <div class="qp-code-row">
+                प्रश्न-पत्र कोड / Q.P. Code <span class="qp-code-num">01</span>
+            </div>
+
+            <div class="roll-no-section">
+                <div class="roll-no-left">
+                    <div class="roll-no-label">रोल नं.<br>Roll No.</div>
+                    <div class="roll-no-boxes">
+                        <div class="roll-box"></div><div class="roll-box"></div><div class="roll-box"></div><div class="roll-box"></div>
+                        <div class="roll-box"></div><div class="roll-box"></div><div class="roll-box"></div><div class="roll-box"></div>
+                    </div>
+                </div>
+                <div class="instruction-box-right">
+                    परीक्षार्थी प्रश्न-पत्र कोड को उत्तर-पुस्तिका के मुख-पृष्ठ पर अवश्य लिखें ।<br>
+                    Candidates must write the Q.P. Code on the title page of the answer-book.
+                </div>
+            </div>
+
+            <div class="notes-box">
+                <div class="notes-title">नोट / NOTE :</div>
+                <div class="note-item">
+                    <div class="note-num">(I)</div>
+                    <div class="note-text">कृपया जाँच कर लें कि इस प्रश्न-पत्र में मुद्रित पृष्ठ <b>7</b> हैं । / Please check that this question paper contains <b>7</b> printed pages.</div>
+                </div>
+                <div class="note-item">
+                    <div class="note-num">(II)</div>
+                    <div class="note-text">प्रश्न-पत्र में दाहिने हाथ की ओर दिए गए प्रश्न-पत्र कोड को परीक्षार्थी उत्तर-पुस्तिका के मुख-पृष्ठ पर लिखें । / Q.P. Code given on the right hand side of the question paper should be written on the title page of the answer-book by the candidate.</div>
+                </div>
+                <div class="note-item">
+                    <div class="note-num">(III)</div>
+                    <div class="note-text">कृपया जाँच कर लें कि इस प्रश्न-पत्र में <b>42</b> प्रश्न हैं । / Please check that this question paper contains <b>42</b> questions.</div>
+                </div>
+                <div class="note-item">
+                    <div class="note-num">(IV)</div>
+                    <div class="note-text">कृपया प्रश्न का उत्तर लिखना शुरू करने से पहले, उत्तर-पुस्तिका में यथा स्थान पर प्रश्न का क्रमांक अवश्य लिखें । / <b>Please write down the Serial Number of the question in the answer-book at the given place before attempting it.</b></div>
+                </div>
+                <div class="note-item">
+                    <div class="note-num">(V)</div>
+                    <div class="note-text">इस प्रश्न-पत्र को पढ़ने के लिए 15 मिनट का समय दिया गया है । प्रश्न-पत्र का वितरण पूर्वाह्न में 10.15 बजे किया जाएगा । 10.15 बजे से 10.30 बजे तक परीक्षार्थी केवल प्रश्न-पत्र को पढ़ेंगे और इस अवधि के दौरान वे उत्तर-पुस्तिका पर कोई उत्तर नहीं लिखेंगे । / 15 minute time has been allotted to read this question paper. The question paper will be distributed at 10.15 a.m. From 10.15 a.m. to 10.30 a.m., the candidates will read the question paper only and will not write any answer on the answer-book during this period.</div>
+                </div>
+                <div class="hash-mark">#</div>
+            </div>
+
+            <div class="subject-section">
+                <div class="barcode-bottom"></div>
+                <div class="subject-title">
+                    <div class="hindi">सामान्य विज्ञान</div>
+                    <div class="english">GENERAL SCIENCE</div>
+                </div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=Class+-+IX" alt="Class IX QR Code">
+            </div>
+
+            <div class="time-marks-row">
+                <div>निर्धारित समय : 3 घण्टे / Time allowed : 3 hours</div>
+                <div>अधिकतम अंक : 80 / Maximum Marks : 80</div>
+            </div>
+
+        </div>
     </div>
 
-    <div class="signature-section">
-        <span class="signature-line">Signature of the candidate</span>
+    <div class="general-instructions">
+        <div class="gi-title">General Instructions :</div>
+        <div class="gi-subtitle">Read the following instructions carefully and follow them strictly :</div>
+        
+        <ul class="gi-list">
+            <li class="gi-item">
+                <div class="gi-num">(i)</div>
+                <div class="gi-text">This question paper consists of <b>42</b> questions. <b>All questions are compulsory.</b></div>
+            </li>
+            <li class="gi-item">
+                <div class="gi-num">(ii)</div>
+                <div class="gi-text">This question paper has 5 sections – <b>A, B, C, D and E.</b></div>
+            </li>
+            <li class="gi-item">
+                <div class="gi-num">(iii)</div>
+                <div class="gi-text"><b>Section A:</b> Question numbers <b>1 to 20</b> are Multiple Choice Questions (MCQs).</div>
+            </li>
+            <li class="gi-item">
+                <div class="gi-num">(iv)</div>
+                <div class="gi-text"><b>Section B:</b> Question numbers <b>21 to 27</b> are Very Short Answer Type Questions.</div>
+            </li>
+            <li class="gi-item">
+                <div class="gi-num">(v)</div>
+                <div class="gi-text"><b>Section C:</b> Question numbers <b>28 to 35</b> are Short Answer Type Questions.</div>
+            </li>
+            <li class="gi-item">
+                <div class="gi-num">(vi)</div>
+                <div class="gi-text"><b>Section D:</b> Question numbers <b>36 to 39</b> are Long Answer Type Questions.</div>
+            </li>
+            <li class="gi-item">
+                <div class="gi-num">(vii)</div>
+                <div class="gi-text"><b>Section E:</b> Question numbers <b>40 to 42</b> are Case Based Questions.</div>
+            </li>
+        </ul>
     </div>
 
-    <div class="details-section">
-        <div class="details-row">
-            <span class="details-label">Name in full</span> : <strong>Pranamita Barman</strong>
+    <div class="footer-section">
+        <div class="footer-left">
+            01<br>#
         </div>
-        <div class="details-row">
-            <span class="details-label">Designation</span> : Assistant Teacher
-        </div>
-        <div class="details-row">
-            <span class="details-label">Date</span> : 16/03/2026
-        </div>
-        <div class="details-row">
-            <span class="details-label">Address</span> : Vill - Balikaria, PO - Gopal Bazar, P.S. - Nalbari, Dist. - Nalbari, PIN - 781353
-        </div>
+        <div class="footer-center">1</div>
+        <div class="footer-right">P.T.O.</div>
     </div>
+
+</div>
 
 </body>
 </html>
