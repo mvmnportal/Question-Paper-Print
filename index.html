@@ -1,288 +1,278 @@
 <!DOCTYPE html>
-<html lang="as">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>অসমীয়া ভাষা শিক্ষণ পদ্ধতি আৰু ব্যাকৰণ তত্ত্ব</title>
+    <title>AI Study Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #c0392b;
-            --accent-color: #2980b9;
-            --success-color: #27ae60;
-            --bg-color: #f9fbfd;
-            --text-color: #333;
-        }
-        
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            line-height: 1.6; 
-            color: var(--text-color); 
-            max-width: 900px; 
-            margin: 0 auto; 
-            padding: 20px; 
-            background-color: var(--bg-color); 
-        }
-        
-        .header-container {
-            text-align: center;
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        
-        h1 { 
-            color: var(--secondary-color); 
-            margin-bottom: 10px;
-        }
-        
-        h2 { 
-            color: var(--accent-color); 
-            background-color: #eaf2f8; 
-            padding: 12px; 
-            border-left: 5px solid var(--accent-color); 
-            margin-top: 40px; 
-            border-radius: 4px;
-        }
-        
-        h3 { 
-            color: #16a085; 
-            margin-top: 25px; 
-            border-bottom: 1px dashed #ccc;
-            padding-bottom: 5px;
-        }
-        
-        .subtitle { 
-            font-weight: bold; 
-            color: var(--primary-color); 
-            font-size: 1.2em; 
-        }
-        
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-top: 15px; 
-            background-color: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        th, td { 
-            padding: 12px; 
-            border: 1px solid #ddd; 
-            text-align: left; 
-        }
-        
-        th { 
-            background-color: var(--primary-color); 
-            color: white; 
-        }
-        
-        pre { 
-            background-color: #f4f6f7; 
-            padding: 15px; 
-            border: 1px dashed #bdc3c7; 
-            border-radius: 5px; 
-            font-size: 0.95em; 
-            overflow-x: auto; 
-            font-family: 'Courier New', Courier, monospace;
-        }
-        
-        .content-box {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-            border-left: 4px solid var(--accent-color);
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --user-msg-bg: #667eea;
+            --ai-msg-bg: #f8f9fa;
+            --text-dark: #2d3748;
+            --text-light: #ffffff;
+            --app-bg: #e2e8f0;
         }
 
-        .mcq-box { 
-            background-color: white; 
-            padding: 15px; 
-            border: 1px solid #e1e8ed; 
-            margin-bottom: 15px; 
-            border-radius: 6px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        
-        .answer { 
-            color: var(--success-color); 
-            font-weight: bold; 
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px dashed #eee;
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--app-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: var(--text-dark);
         }
-        
-        /* Print Button Styles */
-        .action-container {
+
+        #app-wrapper {
+            width: 100%;
+            max-width: 650px;
+            height: 85vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Colorful Header */
+        header {
+            background: var(--primary-gradient);
+            padding: 20px;
             text-align: center;
-            margin: 30px 0;
+            color: var(--text-light);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        header h1 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 5px;
         }
         
-        .print-btn { 
-            display: inline-block; 
-            padding: 15px 30px; 
-            background-color: var(--success-color); 
-            color: white; 
-            font-size: 1.2em; 
-            font-weight: bold; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            border: none; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+        header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Chat Area */
+        #chat-history {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: #ffffff;
+        }
+
+        .message {
+            padding: 12px 18px;
+            border-radius: 15px;
+            max-width: 80%;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            animation: fadeIn 0.3s ease-in-out;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-msg {
+            background-color: var(--user-msg-bg);
+            color: var(--text-light);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .ai-msg {
+            background-color: var(--ai-msg-bg);
+            color: var(--text-dark);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Input Area */
+        #input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #edf2f7;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
         
-        .print-btn:hover { 
-            background-color: #219a52; 
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        .instructions-text {
+            font-size: 0.8rem;
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        #user-input:focus {
+            border-color: #667eea;
+        }
+
+        #send-btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: inherit;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        #send-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        #send-btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
         }
         
-        /* Print Media Query */
-        @media print {
-            .action-container, .print-btn { display: none; }
-            body { background-color: white; padding: 0; max-width: 100%; }
-            .content-box, .mcq-box { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
-            h2 { page-break-after: avoid; }
-            table { break-inside: avoid; }
-        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a0aec0; }
     </style>
 </head>
 <body>
 
-    <div class="action-container">
-        <button class="print-btn" onclick="window.print()">🖨️ PDF হিচাপে সেভ কৰক বা প্ৰিণ্ট কৰক</button>
+<div id="app-wrapper">
+    <header>
+        <h1>✨ AI Study Assistant</h1>
+        <p>Your personal Socratic tutor</p>
+    </header>
+
+    <div id="chat-history">
+        <div class="message ai-msg">Hello! I am your AI tutor. I won't give you the direct answers, but I will help you figure them out. What are we learning today?</div>
     </div>
 
-    <div class="header-container">
-        <h1>📑 অসমীয়া ভাষা শিক্ষণ পদ্ধতি আৰু ব্যাকৰণ তত্ত্ব</h1>
-        <p class="subtitle">🎓 (D.El.Ed., TET, CTET আৰু শিক্ষক নিযুক্তি পৰীক্ষাৰ বাবে বিশেষ গাইড)</p>
+    <div id="input-container">
+        <span class="instructions-text">Instructions: Type your question or the topic you need help with below.</span>
+        <div class="input-row">
+            <input type="text" id="user-input" placeholder="Type here..." onkeypress="handleKeyPress(event)">
+            <button id="send-btn" onclick="sendMessage()">Send</button>
+        </div>
     </div>
+</div>
 
-    <h2>🟥 ১ম অধ্যায়: ভাষা শিক্ষণৰ সৰ্বমুঠ চাৰিটা কৌশল (LSRW)</h2>
-    <div class="content-box">
-        <p>মানুহৰ ভাষা শিকাৰ প্ৰক্ৰিয়াটো ঘাইকৈ চাৰিটা স্তম্ভৰ ওপৰত প্ৰতিষ্ঠিত। ইয়াক চমুকৈ <b>LSRW (Listening, Speaking, Reading, Writing)</b> ক্ৰম বুলি কোৱা হয়।</p>
+<script>
+    // 🔴 REPLACE THIS WITH YOUR *NEW* GOOGLE AI STUDIO API KEY
+    const API_KEY = 'YOUR_NEW_API_KEY_HERE'; 
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+    const systemInstruction = "You are a Socratic AI tutor for school students. Your goal is to help students find the answer themselves. Never provide the direct answer to a homework question. Instead, ask guiding questions, break down the concept, and encourage them to think critically.";
+
+    let chatContext = [];
+
+    async function sendMessage() {
+        const inputField = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const messageText = inputField.value.trim();
+
+        if (!messageText) return;
+
+        appendMessage(messageText, 'user-msg');
+        inputField.value = '';
+        inputField.disabled = true;
+        sendBtn.disabled = true;
+        sendBtn.innerText = '...';
+
+        chatContext.push({
+            role: "user",
+            parts: [{ text: messageText }]
+        });
+
+        const payload = {
+            system_instruction: { parts: { text: systemInstruction } },
+            contents: chatContext
+        };
+
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+
+            if (data.candidates && data.candidates.length > 0) {
+                const aiResponseText = data.candidates[0].content.parts[0].text;
+                appendMessage(aiResponseText, 'ai-msg');
+                chatContext.push({
+                    role: "model",
+                    parts: [{ text: aiResponseText }]
+                });
+            } else {
+                appendMessage("Sorry, I didn't understand that.", 'ai-msg');
+            }
+        } catch (error) {
+            console.error("Error calling API:", error);
+            appendMessage("Connection error. Please try again.", 'ai-msg');
+        } finally {
+            inputField.disabled = false;
+            sendBtn.disabled = false;
+            sendBtn.innerText = 'Send';
+            inputField.focus();
+        }
+    }
+
+    function appendMessage(text, className) {
+        const historyDiv = document.getElementById('chat-history');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${className}`;
         
-        <pre>
-                  ┌────────────────────────────────────────┐
-                  │        ভাষা শিক্ষণৰ মূল কৌশলসমূহ       │
-                  └───────────────────┬────────────────────┘
-                                      │
-             ┌────────────────────────┴────────────────────────┐
-             ▼                                                 ▼
-┌─────────────────────────┐                       ┌─────────────────────────┐
-│ গ্ৰহণাত্মক কৌশল (Receptive) │                       │ প্ৰকাশাত্মক কৌশল (Productive)│
-├─────────────────────────┤                       ├─────────────────────────┤
-│  ১. শ্ৰৱণ (Listening)   │                       │  ১. কথন (Speaking)     │
-│  ২. পঠন (Reading)       │                       │  ২. লিখন (Writing)      │
-└─────────────────────────┘                       └─────────────────────────┘
-        </pre>
+        const formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        messageDiv.innerHTML = formattedText;
+        
+        historyDiv.appendChild(messageDiv);
+        historyDiv.scrollTop = historyDiv.scrollHeight;
+    }
 
-        <h3>🔷 ১.১ গ্ৰহণাত্মক কৌশল (Receptive Skills)</h3>
-        <ul>
-            <li><b>সংজ্ঞা:</b> যি ক্ৰিয়া বা মাধ্যমৰ জৰিয়তে এজন ব্যক্তিয়ে সমাজ, পৰিৱেশ বা আন লোকৰ পৰা জ্ঞান, তথ্য আৰু ভাব নিজৰ মগজুলৈ গ্ৰহণ কৰে, তাক গ্ৰহণাত্মক কৌশল বোলে।</li>
-            <li><b>উপাদানসমূহ:</b> শ্ৰৱণ (Listening) আৰু পঠন (Reading)।</li>
-        </ul>
-
-        <h3>🔷 ১.২ প্ৰকাশাত্মক বা উৎপাদনাত্মক কৌশল (Productive / Expressive Skills)</h3>
-        <ul>
-            <li><b>সংজ্ঞা:</b> যেতিয়া এজন ব্যক্তিয়ে নিজৰ মনৰ চিন্তা, আৱেগ, ধাৰণা আৰু জ্ঞান আনৰ বুজিব পৰাকৈ প্ৰকাশ কৰে বা উৎপন্ন কৰে, তাক প্ৰকাশাত্মক কৌশল বোলে।</li>
-            <li><b>উপাদানসমূহ:</b> কথন (Speaking) আৰু লিখন (Writing)।</li>
-        </ul>
-    </div>
-
-    <h2>🟨 ২য় অধ্যায়: ভাষা শিক্ষণৰ উদ্দেশ্য আৰু নতুন শিক্ষানীতি (NEP 2020)</h2>
-    <div class="content-box">
-        <h3>🟢 ২.১ ভাষা শিক্ষাৰ মৌলিক উদ্দেশ্য</h3>
-        <p>ভাষা শিক্ষাৰ সৰ্বপ্ৰধান উদ্দেশ্য হৈছে— <b>কাৰ্যকৰীভাৱে মনৰ ভাৱ আদান-প্ৰদান (Effective Communication) কৰিব পৰা ক্ষমতা অৰ্জন কৰা।</b></p>
-
-        <h3>🟢 ২.২ ৰাষ্ট্ৰীয় শিক্ষানীতি (NEP 2020) ৰ নতুন শৈক্ষিক গাঁথনি</h3>
-        <p>বৰ্তমান সম্পূৰ্ণ আধুনিক আৰু বৈজ্ঞানিক <b>5+3+3+4</b> আৰ্হি প্ৰৱৰ্তন কৰা হৈছে।</p>
-        <table>
-            <tr>
-                <th>স্তৰ (Stage)</th>
-                <th>সময়সীমা</th>
-                <th>শ্ৰেণীসমূহ</th>
-            </tr>
-            <tr>
-                <td><b>১. ভেটিমূলক স্তৰ (Foundation)</b></td>
-                <td>৫ বছৰ</td>
-                <td>৩ বছৰ অংগনবাড়ী + ১ম আৰু ২য় শ্ৰেণী</td>
-            </tr>
-            <tr>
-                <td><b>২. প্ৰস্তুতিমূলক স্তৰ (Preparatory)</b></td>
-                <td>৩ বছৰ</td>
-                <td>৩য়, ৪ৰ্থ আৰু ৫মহ শ্ৰেণী</td>
-            </tr>
-            <tr>
-                <td><b>৩. মধ্যৱৰ্তী স্তৰ (Middle)</b></td>
-                <td>৩ বছৰ</td>
-                <td>৬ষ্ঠ, ৭ম আৰু ৮ম শ্ৰেণী</td>
-            </tr>
-            <tr>
-                <td><b>৪. মাধ্যমিক স্তৰ (Secondary)</b></td>
-                <td>৪ বছৰ</td>
-                <td>৯ম, ১০ম, ১১শ আৰু১২শ শ্ৰেণী</td>
-            </tr>
-        </table>
-    </div>
-
-    <h2>🟩 ৩য় অধ্যায়: ব্যাকৰণ শিক্ষণৰ পদ্ধতি (Methods of Teaching Grammar)</h2>
-    <div class="content-box">
-        <h3>🔺 ৩.১ আৰোহণ পদ্ধতি (Inductive Method)</h3>
-        <p><b>কাৰ্যপ্ৰণালী:</b> এই পদ্ধতিত শিক্ষকজনে প্ৰথমে ব’ৰ্ডত কেইটামান <b>বিশেষ উদাহৰণ</b> দিয়ে। তাৰ পিছত <b>সাধাৰণ নিয়মত বা সংজ্ঞাত</b> উপনীত হয়। ই প্ৰাথমিক স্তৰৰ বাবে উত্তম পদ্ধতি।</p>
-
-        <h3>🔺 ৩.২ অৱৰোহণ পদ্ধতি (Deductive Method)</h3>
-        <p><b>কাৰ্যপ্ৰণালী:</b> ইয়াত শিক্ষকজনে প্ৰথমে এটা <b>নিয়ম বা সংজ্ঞা</b> মুখস্থ কৰোৱায়। তাৰ পিছত তাক প্ৰমাণ কৰিবলৈ <b>উদাহৰণ</b> দাঙি ধৰে।</p>
-    </div>
-
-    <h2>🟦 ৪ৰ্থ অধ্যায়: অসমীয়া ব্যৱহাৰিক ব্যাকৰণ</h2>
-    <div class="content-box">
-        <h3>🔸 ৪.১ স্বৰসন্ধি</h3>
-        <ul>
-            <li><b>প্ৰত্যেক</b> = প্ৰতি + এক (ই-কাৰৰ পিছত আন স্বৰবৰ্ণ থাকিলে 'য-ফলা' হয়)</li>
-            <li><b>গায়ক</b> = গৈ + অক (ঐ-কাৰৰ পিছত আন স্বৰবৰ্ণ থাকিলে 'আয়' হয়)</li>
-        </ul>
-
-        <h3>🔸 ৪.২ কৃৎ প্ৰত্যয় আৰু তদ্ধিত প্ৰত্যয়</h3>
-        <ul>
-            <li><b>কৃৎ প্ৰত্যয়:</b> ধাতুৰ পিছত যোগ হয়। (উদাহৰণ: √খোজ + কাঢ় = খোজকাঢ়)</li>
-            <li><b>তদ্ধিত প্ৰত্যয়:</b> বিশেষ্য-বিশেষণৰ পিছত যোগ হয়। (উদাহৰণ: মাটি + য়া = মাটীয়া)</li>
-        </ul>
-    </div>
-
-    <h2>🔍 ৫মহ অধ্যায়: সাম্ভাব্য গুৰুত্বপূৰ্ণ প্ৰশ্নোত্তৰ (MCQ)</h2>
-    
-    <div class="mcq-box">
-        <p><b>প্ৰশ্ন ১: শিশু এটাই ভাষা আয়ত্ত কৰোঁতে তলৰ কোনটো ক্ৰম অনুসৰণ কৰে?</b></p>
-        <p>
-            (a) লিখন ➔ পঠন ➔ কথন ➔ শ্ৰৱণ<br>
-            (b) শ্ৰৱণ ➔ কথন ➔ পঠন ➔ লিখন<br>
-            (c) কথন ➔ শ্ৰৱণ ➔ লিখন ➔ পঠন
-        </p>
-        <p class="answer">✓ উত্তৰ: (b) শ্ৰৱণ ➔ কথন ➔ পঠন ➔ লিখন (LSRW)</p>
-    </div>
-
-    <div class="mcq-box">
-        <p><b>প্ৰশ্ন ২: 'চলন্ত' শব্দটোত থকা প্ৰত্যয়টো কি প্ৰত্যয়?</b></p>
-        <p>
-            (a) তদ্ধিত প্ৰত্যয়<br>
-            (b) কৃৎ প্ৰত্যয়<br>
-            (c) স্ত্ৰী প্ৰত্যয়
-        </p>
-        <p class="answer">✓ উত্তৰ: (b) কৃৎ প্ৰত্যয় (কাৰণ ই ধাতুৰ পিছত যোগ হৈছে)।</p>
-    </div>
-
-    <div class="mcq-box">
-        <p><b>প্ৰশ্ন ৩: NEP 2020 ৰ ৫ বছৰীয়া 'Foundation Stage' ত তলৰ কোনখন শ্ৰেণী অন্তৰ্ভুক্ত নহয়?</b></p>
-        <p>
-            (a) অংগনবাড়ী (৩ বছৰ)<br>
-            (b) প্ৰথম শ্ৰেণী<br>
-            (c) তৃতীয় শ্ৰেণী
-        </p>
-        <p class="answer">✓ উত্তৰ: (c) তৃতীয় শ্ৰেণী (কাৰণ ৩য় শ্ৰেণীটো Preparatory Stage ত পৰে)।</p>
-    </div>
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    }
+</script>
 
 </body>
 </html>
