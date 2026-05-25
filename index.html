@@ -1,259 +1,288 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="as">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GCE Exam Cover Page - Maharishi Vidya Mandir</title>
-    <!-- Tailwind CSS for Styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- QRCode.js for generating the QR code -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <title>অসমীয়া ভাষা শিক্ষণ পদ্ধতি আৰু ব্যাকৰণ তত্ত্ব</title>
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #e5e7eb;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-            margin: 0;
-            padding: 20px 0;
-            display: flex;
-            justify-content: center;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #c0392b;
+            --accent-color: #2980b9;
+            --success-color: #27ae60;
+            --bg-color: #f9fbfd;
+            --text-color: #333;
         }
         
-        .heading-font {
-            font-family: 'Merriweather', serif;
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            color: var(--text-color); 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background-color: var(--bg-color); 
         }
         
-        /* Strict A4 Page Setup */
-        .a4-container {
-            width: 210mm;
-            height: 297mm;
-            background-color: #ffffff;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            position: relative;
-            box-sizing: border-box;
-            padding: 12mm; /* Outer white margin */
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Decorative Formal Borders */
-        .border-outer {
-            border: 4px solid #1e3a8a; /* Deep Navy Blue */
-            height: 100%;
-            padding: 4px;
-            box-sizing: border-box;
+        .header-container {
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
         
-        .border-inner {
-            border: 1.5px solid #d97706; /* Formal Gold */
-            height: 100%;
+        h1 { 
+            color: var(--secondary-color); 
+            margin-bottom: 10px;
+        }
+        
+        h2 { 
+            color: var(--accent-color); 
+            background-color: #eaf2f8; 
+            padding: 12px; 
+            border-left: 5px solid var(--accent-color); 
+            margin-top: 40px; 
+            border-radius: 4px;
+        }
+        
+        h3 { 
+            color: #16a085; 
+            margin-top: 25px; 
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 5px;
+        }
+        
+        .subtitle { 
+            font-weight: bold; 
+            color: var(--primary-color); 
+            font-size: 1.2em; 
+        }
+        
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 15px; 
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        th, td { 
+            padding: 12px; 
+            border: 1px solid #ddd; 
+            text-align: left; 
+        }
+        
+        th { 
+            background-color: var(--primary-color); 
+            color: white; 
+        }
+        
+        pre { 
+            background-color: #f4f6f7; 
+            padding: 15px; 
+            border: 1px dashed #bdc3c7; 
+            border-radius: 5px; 
+            font-size: 0.95em; 
+            overflow-x: auto; 
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .content-box {
+            background: #fff;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), 
-                              radial-gradient(#cbd5e1 1px, transparent 1px);
-            background-size: 100% 100%, 15px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-color);
         }
 
-        /* Print Specific Rules */
-        @media print {
-            @page {
-                size: A4;
-                margin: 0;
-            }
-            body {
-                background-color: transparent;
-                padding: 0;
-            }
-            .a4-container {
-                box-shadow: none;
-                margin: 0;
-                width: 210mm;
-                height: 297mm;
-            }
-            .no-print {
-                display: none !important;
-            }
+        .mcq-box { 
+            background-color: white; 
+            padding: 15px; 
+            border: 1px solid #e1e8ed; 
+            margin-bottom: 15px; 
+            border-radius: 6px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
         
-        /* Fill-in blank lines */
-        .field-line {
-            border-bottom: 2px dotted #475569;
-            flex-grow: 1;
-            margin-left: 8px;
-            transform: translateY(-4px);
+        .answer { 
+            color: var(--success-color); 
+            font-weight: bold; 
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #eee;
+        }
+        
+        /* Print Button Styles */
+        .action-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .print-btn { 
+            display: inline-block; 
+            padding: 15px 30px; 
+            background-color: var(--success-color); 
+            color: white; 
+            font-size: 1.2em; 
+            font-weight: bold; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            border: none; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .print-btn:hover { 
+            background-color: #219a52; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* Print Media Query */
+        @media print {
+            .action-container, .print-btn { display: none; }
+            body { background-color: white; padding: 0; max-width: 100%; }
+            .content-box, .mcq-box { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+            h2 { page-break-after: avoid; }
+            table { break-inside: avoid; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Floating Print/Download Button -->
-    <div class="fixed top-5 right-5 no-print z-50">
-        <button onclick="window.print()" class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg flex items-center gap-2 transition duration-300 border-2 border-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-            </svg>
-            Save as PDF / Print
-        </button>
+    <div class="action-container">
+        <button class="print-btn" onclick="window.print()">🖨️ PDF হিচাপে সেভ কৰক বা প্ৰিণ্ট কৰক</button>
     </div>
 
-    <!-- A4 Document Container -->
-    <div class="a4-container">
-        <!-- Formal Borders -->
-        <div class="border-outer">
-            <div class="border-inner">
-                
-                <!-- 1. Header Section -->
-                <div class="text-center flex flex-col items-center mb-4">
-                    <!-- School Logo -->
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhshs7aiFTStV7saI4sVuNvWJe8gUk_pGpc8MhsxhlaMBwDDRTUoPe_BvZqtTtmU7n1VlebpLYhq7Xibzl-gdVniDk7AuktdD2Q7VebeAfhBSs6krjOYlCMkkY4LfONXaFwSXr85pXPTmaBl04Vf7fZa5pIwmrshj4TXuoeyUqlLujxo8Qt2VA5fXo6Yw/s224/61300.png" 
-                         alt="Maharishi Vidya Mandir Logo" 
-                         class="h-24 w-auto mb-2 object-contain"
-                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgZmlsbD0iI2QxZDVkYiIvPjwvc3ZnPg=='; this.onerror=null;">
-                    
-                    <!-- School Name -->
-                    <h1 class="heading-font text-3xl text-blue-900 font-black tracking-wide uppercase">
-                        Maharishi Vidya Mandir, Nalbari
-                    </h1>
-                </div>
-
-                <!-- 2. Exam Title Badge -->
-                <div class="flex justify-center mb-4 z-10">
-                    <div class="bg-blue-900 text-white py-2 px-8 rounded border-2 border-amber-500 shadow text-center">
-                        <h2 class="heading-font text-xl font-bold tracking-widest uppercase">
-                            Grammar Competitive Examination
-                        </h2>
-                    </div>
-                </div>
-
-                <!-- 3. Session & Level Info -->
-                <div class="flex justify-center gap-8 mb-6 text-sm font-bold z-10">
-                    <div class="bg-amber-100 text-amber-900 px-6 py-1.5 rounded-full border border-amber-300 uppercase tracking-widest">
-                        Session: 2026-2027
-                    </div>
-                    <div class="bg-amber-100 text-amber-900 px-6 py-1.5 rounded-full border border-amber-300 uppercase tracking-widest">
-                        Level 5: Classes IX & X
-                    </div>
-                </div>
-
-                <!-- 4. Registration Number Box -->
-                <div class="bg-white border-2 border-gray-300 rounded-lg p-4 mb-5 z-10 shadow-sm mx-8">
-                    <div class="text-center mb-2 text-gray-800 font-bold uppercase tracking-wider text-sm">
-                        Write Your 6-Digit Registration Number
-                    </div>
-                    <div class="flex justify-center gap-3">
-                        <!-- Standardized OMR style boxes -->
-                        <div class="w-10 h-12 border-2 border-blue-900 rounded bg-gray-50 flex items-center justify-center text-xl font-bold"></div>
-                        <div class="w-10 h-12 border-2 border-blue-900 rounded bg-gray-50 flex items-center justify-center text-xl font-bold"></div>
-                        <div class="w-10 h-12 border-2 border-blue-900 rounded bg-gray-50 flex items-center justify-center text-xl font-bold"></div>
-                        <div class="w-10 h-12 border-2 border-blue-900 rounded bg-gray-50 flex items-center justify-center text-xl font-bold"></div>
-                        <div class="w-10 h-12 border-2 border-blue-900 rounded bg-gray-50 flex items-center justify-center text-xl font-bold"></div>
-                        <div class="w-10 h-12 border-2 border-blue-900 rounded bg-gray-50 flex items-center justify-center text-xl font-bold"></div>
-                    </div>
-                </div>
-
-                <!-- 5. Student Details -->
-                <div class="z-10 mb-6 px-4">
-                    <div class="flex mb-4 items-end">
-                        <span class="font-bold text-gray-800 text-base">Student's Name:</span>
-                        <div class="field-line"></div>
-                    </div>
-                    <div class="flex mb-4 items-end">
-                        <span class="font-bold text-gray-800 text-base">Class:</span>
-                        <div class="field-line mr-6"></div>
-                        <span class="font-bold text-gray-800 text-base">Section:</span>
-                        <div class="field-line mr-6"></div>
-                        <span class="font-bold text-gray-800 text-base">Roll No:</span>
-                        <div class="field-line"></div>
-                    </div>
-                </div>
-
-                <!-- 6. Important Instructions -->
-                <div class="border border-blue-900 rounded overflow-hidden z-10 mb-4 bg-white mx-1">
-                    <div class="bg-blue-900 text-white text-center py-1.5 heading-font text-lg uppercase tracking-widest">
-                        Important Instructions
-                    </div>
-                    <div class="p-4 text-gray-800 bg-blue-50/20 text-sm">
-                        <ul class="space-y-2.5">
-                            <li class="flex items-start">
-                                <span class="text-blue-900 font-bold mr-2">1.</span>
-                                <p><strong>Read Carefully:</strong> Candidates must read the questions carefully before marking answers.</p>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-900 font-bold mr-2">2.</span>
-                                <p><strong>OMR Sheet:</strong> Use only the provided OMR sheet for marking your answers. Do not write anything on the question paper except your Registration Number and Academic Details.</p>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-900 font-bold mr-2">3.</span>
-                                <p><strong>No Negative Marking:</strong> There is NO NEGATIVE MARKING for incorrect answers. Attempt all questions.</p>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-900 font-bold mr-2">4.</span>
-                                <p><strong>Marking Method:</strong> Use a Blue ballpoint pen to darken the circles completely on the OMR sheet.</p>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-900 font-bold mr-2">5.</span>
-                                <p><strong>Time Duration:</strong> Total time for the examination is 90 minutes (11:30 am to 1:00 pm).</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- 7. Warning Footer Message -->
-                <div class="bg-red-50 border border-red-600 text-red-700 py-2.5 px-4 mb-4 z-10 rounded text-center mx-1">
-                    <p class="font-bold text-xs uppercase tracking-wide">
-                        ⚠️ Please Note: Answers marked on the question paper will NOT be evaluated. Use the OMR sheet provided separately.
-                    </p>
-                </div>
-
-                <!-- 8. Signatures & QR Code (Pushed to bottom) -->
-                <div class="mt-auto z-10 flex justify-between items-end px-6 pt-2">
-                    
-                    <!-- Invigilator Signature -->
-                    <div class="text-center w-40">
-                        <div class="border-t border-gray-800 mb-1.5"></div>
-                        <span class="font-bold text-gray-700 text-xs uppercase">Invigilator's Signature</span>
-                    </div>
-
-                    <!-- QR Code Box -->
-                    <div class="flex flex-col items-center transform translate-y-2">
-                        <div class="bg-white p-1.5 border border-gray-300 rounded shadow-sm">
-                            <!-- The QR Code will be injected here -->
-                            <div id="qrcode"></div>
-                        </div>
-                        <span class="text-[10px] text-gray-600 mt-1 font-bold uppercase tracking-wider">- Scan -</span>
-                    </div>
-
-                    <!-- Student Signature -->
-                    <div class="text-center w-40">
-                        <div class="border-t border-gray-800 mb-1.5"></div>
-                        <span class="font-bold text-gray-700 text-xs uppercase">Student's Signature</span>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
+    <div class="header-container">
+        <h1>📑 অসমীয়া ভাষা শিক্ষণ পদ্ধতি আৰু ব্যাকৰণ তত্ত্ব</h1>
+        <p class="subtitle">🎓 (D.El.Ed., TET, CTET আৰু শিক্ষক নিযুক্তি পৰীক্ষাৰ বাবে বিশেষ গাইড)</p>
     </div>
 
-    <!-- Script to Generate the QR Code -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Generate QR Code containing exactly: GCE/2627/L1
-            new QRCode(document.getElementById("qrcode"), {
-                text: "GCE/2627/L5",
-                width: 75, // Slightly smaller to ensure fit
-                height: 75,
-                colorDark : "#1e3a8a", // Navy blue
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            });
-        });
-    </script>
+    <h2>🟥 ১ম অধ্যায়: ভাষা শিক্ষণৰ সৰ্বমুঠ চাৰিটা কৌশল (LSRW)</h2>
+    <div class="content-box">
+        <p>মানুহৰ ভাষা শিকাৰ প্ৰক্ৰিয়াটো ঘাইকৈ চাৰিটা স্তম্ভৰ ওপৰত প্ৰতিষ্ঠিত। ইয়াক চমুকৈ <b>LSRW (Listening, Speaking, Reading, Writing)</b> ক্ৰম বুলি কোৱা হয়।</p>
+        
+        <pre>
+                  ┌────────────────────────────────────────┐
+                  │        ভাষা শিক্ষণৰ মূল কৌশলসমূহ       │
+                  └───────────────────┬────────────────────┘
+                                      │
+             ┌────────────────────────┴────────────────────────┐
+             ▼                                                 ▼
+┌─────────────────────────┐                       ┌─────────────────────────┐
+│ গ্ৰহণাত্মক কৌশল (Receptive) │                       │ প্ৰকাশাত্মক কৌশল (Productive)│
+├─────────────────────────┤                       ├─────────────────────────┤
+│  ১. শ্ৰৱণ (Listening)   │                       │  ১. কথন (Speaking)     │
+│  ২. পঠন (Reading)       │                       │  ২. লিখন (Writing)      │
+└─────────────────────────┘                       └─────────────────────────┘
+        </pre>
+
+        <h3>🔷 ১.১ গ্ৰহণাত্মক কৌশল (Receptive Skills)</h3>
+        <ul>
+            <li><b>সংজ্ঞা:</b> যি ক্ৰিয়া বা মাধ্যমৰ জৰিয়তে এজন ব্যক্তিয়ে সমাজ, পৰিৱেশ বা আন লোকৰ পৰা জ্ঞান, তথ্য আৰু ভাব নিজৰ মগজুলৈ গ্ৰহণ কৰে, তাক গ্ৰহণাত্মক কৌশল বোলে।</li>
+            <li><b>উপাদানসমূহ:</b> শ্ৰৱণ (Listening) আৰু পঠন (Reading)।</li>
+        </ul>
+
+        <h3>🔷 ১.২ প্ৰকাশাত্মক বা উৎপাদনাত্মক কৌশল (Productive / Expressive Skills)</h3>
+        <ul>
+            <li><b>সংজ্ঞা:</b> যেতিয়া এজন ব্যক্তিয়ে নিজৰ মনৰ চিন্তা, আৱেগ, ধাৰণা আৰু জ্ঞান আনৰ বুজিব পৰাকৈ প্ৰকাশ কৰে বা উৎপন্ন কৰে, তাক প্ৰকাশাত্মক কৌশল বোলে।</li>
+            <li><b>উপাদানসমূহ:</b> কথন (Speaking) আৰু লিখন (Writing)।</li>
+        </ul>
+    </div>
+
+    <h2>🟨 ২য় অধ্যায়: ভাষা শিক্ষণৰ উদ্দেশ্য আৰু নতুন শিক্ষানীতি (NEP 2020)</h2>
+    <div class="content-box">
+        <h3>🟢 ২.১ ভাষা শিক্ষাৰ মৌলিক উদ্দেশ্য</h3>
+        <p>ভাষা শিক্ষাৰ সৰ্বপ্ৰধান উদ্দেশ্য হৈছে— <b>কাৰ্যকৰীভাৱে মনৰ ভাৱ আদান-প্ৰদান (Effective Communication) কৰিব পৰা ক্ষমতা অৰ্জন কৰা।</b></p>
+
+        <h3>🟢 ২.২ ৰাষ্ট্ৰীয় শিক্ষানীতি (NEP 2020) ৰ নতুন শৈক্ষিক গাঁথনি</h3>
+        <p>বৰ্তমান সম্পূৰ্ণ আধুনিক আৰু বৈজ্ঞানিক <b>5+3+3+4</b> আৰ্হি প্ৰৱৰ্তন কৰা হৈছে।</p>
+        <table>
+            <tr>
+                <th>স্তৰ (Stage)</th>
+                <th>সময়সীমা</th>
+                <th>শ্ৰেণীসমূহ</th>
+            </tr>
+            <tr>
+                <td><b>১. ভেটিমূলক স্তৰ (Foundation)</b></td>
+                <td>৫ বছৰ</td>
+                <td>৩ বছৰ অংগনবাড়ী + ১ম আৰু ২য় শ্ৰেণী</td>
+            </tr>
+            <tr>
+                <td><b>২. প্ৰস্তুতিমূলক স্তৰ (Preparatory)</b></td>
+                <td>৩ বছৰ</td>
+                <td>৩য়, ৪ৰ্থ আৰু ৫মহ শ্ৰেণী</td>
+            </tr>
+            <tr>
+                <td><b>৩. মধ্যৱৰ্তী স্তৰ (Middle)</b></td>
+                <td>৩ বছৰ</td>
+                <td>৬ষ্ঠ, ৭ম আৰু ৮ম শ্ৰেণী</td>
+            </tr>
+            <tr>
+                <td><b>৪. মাধ্যমিক স্তৰ (Secondary)</b></td>
+                <td>৪ বছৰ</td>
+                <td>৯ম, ১০ম, ১১শ আৰু১২শ শ্ৰেণী</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>🟩 ৩য় অধ্যায়: ব্যাকৰণ শিক্ষণৰ পদ্ধতি (Methods of Teaching Grammar)</h2>
+    <div class="content-box">
+        <h3>🔺 ৩.১ আৰোহণ পদ্ধতি (Inductive Method)</h3>
+        <p><b>কাৰ্যপ্ৰণালী:</b> এই পদ্ধতিত শিক্ষকজনে প্ৰথমে ব’ৰ্ডত কেইটামান <b>বিশেষ উদাহৰণ</b> দিয়ে। তাৰ পিছত <b>সাধাৰণ নিয়মত বা সংজ্ঞাত</b> উপনীত হয়। ই প্ৰাথমিক স্তৰৰ বাবে উত্তম পদ্ধতি।</p>
+
+        <h3>🔺 ৩.২ অৱৰোহণ পদ্ধতি (Deductive Method)</h3>
+        <p><b>কাৰ্যপ্ৰণালী:</b> ইয়াত শিক্ষকজনে প্ৰথমে এটা <b>নিয়ম বা সংজ্ঞা</b> মুখস্থ কৰোৱায়। তাৰ পিছত তাক প্ৰমাণ কৰিবলৈ <b>উদাহৰণ</b> দাঙি ধৰে।</p>
+    </div>
+
+    <h2>🟦 ৪ৰ্থ অধ্যায়: অসমীয়া ব্যৱহাৰিক ব্যাকৰণ</h2>
+    <div class="content-box">
+        <h3>🔸 ৪.১ স্বৰসন্ধি</h3>
+        <ul>
+            <li><b>প্ৰত্যেক</b> = প্ৰতি + এক (ই-কাৰৰ পিছত আন স্বৰবৰ্ণ থাকিলে 'য-ফলা' হয়)</li>
+            <li><b>গায়ক</b> = গৈ + অক (ঐ-কাৰৰ পিছত আন স্বৰবৰ্ণ থাকিলে 'আয়' হয়)</li>
+        </ul>
+
+        <h3>🔸 ৪.২ কৃৎ প্ৰত্যয় আৰু তদ্ধিত প্ৰত্যয়</h3>
+        <ul>
+            <li><b>কৃৎ প্ৰত্যয়:</b> ধাতুৰ পিছত যোগ হয়। (উদাহৰণ: √খোজ + কাঢ় = খোজকাঢ়)</li>
+            <li><b>তদ্ধিত প্ৰত্যয়:</b> বিশেষ্য-বিশেষণৰ পিছত যোগ হয়। (উদাহৰণ: মাটি + য়া = মাটীয়া)</li>
+        </ul>
+    </div>
+
+    <h2>🔍 ৫মহ অধ্যায়: সাম্ভাব্য গুৰুত্বপূৰ্ণ প্ৰশ্নোত্তৰ (MCQ)</h2>
+    
+    <div class="mcq-box">
+        <p><b>প্ৰশ্ন ১: শিশু এটাই ভাষা আয়ত্ত কৰোঁতে তলৰ কোনটো ক্ৰম অনুসৰণ কৰে?</b></p>
+        <p>
+            (a) লিখন ➔ পঠন ➔ কথন ➔ শ্ৰৱণ<br>
+            (b) শ্ৰৱণ ➔ কথন ➔ পঠন ➔ লিখন<br>
+            (c) কথন ➔ শ্ৰৱণ ➔ লিখন ➔ পঠন
+        </p>
+        <p class="answer">✓ উত্তৰ: (b) শ্ৰৱণ ➔ কথন ➔ পঠন ➔ লিখন (LSRW)</p>
+    </div>
+
+    <div class="mcq-box">
+        <p><b>প্ৰশ্ন ২: 'চলন্ত' শব্দটোত থকা প্ৰত্যয়টো কি প্ৰত্যয়?</b></p>
+        <p>
+            (a) তদ্ধিত প্ৰত্যয়<br>
+            (b) কৃৎ প্ৰত্যয়<br>
+            (c) স্ত্ৰী প্ৰত্যয়
+        </p>
+        <p class="answer">✓ উত্তৰ: (b) কৃৎ প্ৰত্যয় (কাৰণ ই ধাতুৰ পিছত যোগ হৈছে)।</p>
+    </div>
+
+    <div class="mcq-box">
+        <p><b>প্ৰশ্ন ৩: NEP 2020 ৰ ৫ বছৰীয়া 'Foundation Stage' ত তলৰ কোনখন শ্ৰেণী অন্তৰ্ভুক্ত নহয়?</b></p>
+        <p>
+            (a) অংগনবাড়ী (৩ বছৰ)<br>
+            (b) প্ৰথম শ্ৰেণী<br>
+            (c) তৃতীয় শ্ৰেণী
+        </p>
+        <p class="answer">✓ উত্তৰ: (c) তৃতীয় শ্ৰেণী (কাৰণ ৩য় শ্ৰেণীটো Preparatory Stage ত পৰে)।</p>
+    </div>
+
 </body>
 </html>
