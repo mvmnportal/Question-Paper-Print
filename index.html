@@ -1,4 +1,4 @@
-<!-- Modern Live Chat AI Assistant Desk (Optimized for Google Sites) -->
+<!-- Modern Live Chat AI Assistant Desk (Optimized for Google Sites - Full Screen Responsive) -->
 <div id="section-ai">
     <!-- Chat Header -->
     <div class="chat-header">
@@ -22,6 +22,15 @@
         box-sizing: border-box;
     }
 
+    /* Reset body for true edge-to-edge full screen */
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden; /* Prevents double scrollbars */
+    }
+
     /* Self-contained variables for Google Sites */
     #section-ai {
         font-family: 'Poppins', sans-serif;
@@ -32,12 +41,10 @@
         display: flex;
         flex-direction: column;
         width: 100%;
-        height: 550px; /* Fixed height perfect for Google Sites */
+        height: 100vh; /* Fallback for older browsers */
+        height: 100dvh; /* Dynamic viewport height for modern mobile browsers */
         background: #ffffff;
-        border-radius: 16px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.12);
         overflow: hidden;
-        border: 1px solid #e5e7eb;
         margin: 0 auto;
     }
 
@@ -51,6 +58,7 @@
         gap: 15px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         z-index: 10;
+        flex-shrink: 0; /* Ensures header doesn't shrink on small screens */
     }
 
     .header-logo {
@@ -127,6 +135,14 @@
     .q-btn.menu-btn:hover { background: #4b5563; color: white; border-color: #4b5563; }
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    /* Extra responsiveness for very small mobile screens */
+    @media (max-width: 480px) {
+        .msg-bubble { max-width: 95%; font-size: 0.9rem; padding: 12px 15px; }
+        .chat-header { padding: 1rem; }
+        .header-text h2 { font-size: 1.1rem; }
+        #chat-history { padding: 1rem; }
+    }
 </style>
 
 <script>
