@@ -3,27 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- এই মেটা টেগটোৱে লোকেল ফাইলত ফটোবোৰ ব্লক হোৱাত বাধা দিব -->
     <meta name="referrer" content="no-referrer">
     <title>Question Paper - Class 2 Assamese</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <style>
-        /* A4 Print Setup and General Styling */
         @import url('https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap');
         
         body {
             font-family: 'Tiro Bangla', Arial, sans-serif;
             font-size: 16pt;
             color: #000;
-            background: #fff;
-            line-height: 1.6;
+            background: #f4f4f9;
             margin: 0;
-            padding: 0;
+            padding: 20px;
         }
 
-        .container {
+        /* Download Button Style */
+        .download-btn {
+            display: block;
+            width: 250px;
+            margin: 0 auto 20px auto;
+            padding: 12px 20px;
+            font-size: 16pt;
+            font-family: 'Tiro Bangla', Arial, sans-serif;
+            font-weight: bold;
+            color: #fff;
+            background-color: #d9381e;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+
+        .download-btn:hover {
+            background-color: #b82d16;
+        }
+
+        /* Paper Container */
+        .paper-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
         /* Header Styling */
@@ -34,16 +60,8 @@
             padding-bottom: 15px;
         }
 
-        .header h1 {
-            font-size: 24pt;
-            margin: 0 0 5px 0;
-        }
-
-        .header h2 {
-            font-size: 18pt;
-            margin: 0 0 15px 0;
-            font-weight: normal;
-        }
+        .header h1 { font-size: 24pt; margin: 0 0 5px 0; }
+        .header h2 { font-size: 18pt; margin: 0 0 15px 0; font-weight: normal; }
 
         .subject-class {
             text-align: center;
@@ -61,10 +79,10 @@
             margin-bottom: 10px;
         }
 
-        /* Question Blocks - Spacious */
+        /* Question Blocks */
         .q-block {
             margin-bottom: 45px; 
-            page-break-inside: avoid;
+            page-break-inside: avoid; /* পেজ কাটি যোৱা ৰোধ কৰিব */
         }
 
         .q-title {
@@ -72,10 +90,7 @@
             margin-bottom: 20px;
         }
 
-        .marks {
-            float: right;
-            font-weight: bold;
-        }
+        .marks { float: right; font-weight: bold; }
 
         /* Multiple Choice Options */
         .mcq-options {
@@ -86,12 +101,13 @@
             flex-wrap: wrap;
         }
 
-        /* Picture Questions - Vertical and Clean */
+        /* Picture Questions */
         .pic-question {
             display: flex;
             align-items: center;
             margin-bottom: 25px;
             margin-left: 20px;
+            page-break-inside: avoid;
         }
 
         .pic-img {
@@ -103,12 +119,9 @@
             margin-right: 25px;
         }
 
-        .pic-text {
-            font-size: 18pt;
-            font-weight: bold;
-        }
+        .pic-text { font-size: 18pt; font-weight: bold; }
 
-        /* Matching Questions - Big Gap */
+        /* Matching Questions */
         .match-wrap {
             display: flex;
             justify-content: space-between; 
@@ -126,7 +139,6 @@
             font-weight: bold;
         }
         
-        /* Trick to make matras exact same size without dots */
         .matra-col div {
             font-family: Arial, sans-serif;
             font-size: 28pt; 
@@ -137,17 +149,8 @@
         }
 
         /* Sub-questions */
-        .sub-q {
-            margin-bottom: 20px;
-            margin-left: 20px;
-        }
-
-        .poem {
-            margin-left: 50px;
-            font-size: 18pt;
-            line-height: 2;
-        }
-
+        .sub-q { margin-bottom: 20px; margin-left: 20px; }
+        .poem { margin-left: 50px; font-size: 18pt; line-height: 2; }
         .footer {
             text-align: center;
             font-weight: bold;
@@ -157,28 +160,21 @@
             padding-top: 15px;
         }
 
-        /* Print Specifics */
+        /* Print Media Query */
         @media print {
-            @page {
-                size: A4;
-                margin: 20mm;
-            }
-            body {
-                font-size: 16pt;
-                background: none;
-            }
-            .pic-img {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
+            body { background: none; padding: 0; }
+            .paper-container { box-shadow: none; padding: 0; max-width: 100%; }
+            .download-btn { display: none; } /* প্ৰিন্ট কৰোঁতে বুটামটো নাহে */
+            .pic-img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+<button class="download-btn" onclick="downloadPDF()">⬇ PDF ডাউনলোড কৰক</button>
+
+<div class="paper-container" id="paper-content">
     
-    <!-- Header Section -->
     <div class="header">
         <h1>জিত গাওঁ প্ৰাথমিক বিদ্যালয়</h1>
         <h2>প্ৰথম গঠনাত্মক মান নিৰূপণ</h2>
@@ -194,7 +190,6 @@
         </div>
     </div>
 
-    <!-- Question 1 -->
     <div class="q-block">
         <div class="q-title">১। তলৰ প্ৰশ্নসমূহৰ শুদ্ধ উত্তৰটো বিচাৰি লিখা। <span class="marks">১×৫=৫</span></div>
         
@@ -204,174 +199,3 @@
         </div>
         
         <div class="sub-q">খ) অসমীয়া ভাষাত মুঠ কিমানটা স্বৰবৰ্ণ আছে?</div>
-        <div class="mcq-options">
-            <span>অ) ১৩ টা</span> <span>আ) ১৫ টা</span> <span>ই) ৯ টা</span> <span>ঈ) ১১ টা</span>
-        </div>
-        
-        <div class="sub-q">গ) তলৰ কোনটো শব্দত 'ৰ' আখৰটো আছে?</div>
-        <div class="mcq-options">
-            <span>অ) আইতা</span> <span>আ) বজাৰ</span> <span>ই) শামুক</span> <span>ঈ) জিকা</span>
-        </div>
-
-        <div class="sub-q">ঘ) তলৰ শব্দবোৰৰ পৰা হ্ৰস্ব উ-কাৰ (<span style="font-family: Arial;">&nbsp;ু</span>) থকা শব্দটো বিচাৰি লিখা।</div>
-        <div class="mcq-options">
-            <span>অ) পূজা</span> <span>আ) বিলাহী</span> <span>ই) পৰুৱা</span> <span>ঈ) তৃণ</span>
-        </div>
-
-        <div class="sub-q">ঙ) 'ব' ৰ পিছৰ বৰ্ণটো কি?</div>
-        <div class="mcq-options">
-            <span>অ) ভ</span> <span>আ) ৰ</span> <span>ই) য</span> <span>ঈ) ম</span>
-        </div>
-    </div>
-
-    <!-- Question 2 -->
-    <div class="q-block">
-        <div class="q-title">২। ছবিৰ নাম সম্পূৰ্ণ কৰা। <span class="marks">১×৫=৫</span></div>
-        <div class="pic-question">
-            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg" alt="Tomato">
-            <span class="pic-text">ক) ..........লাহী</span>
-        </div>
-        <div class="pic-question">
-            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Table_grapes_on_white.jpg" alt="Grapes">
-            <span class="pic-text">খ) আ.........ৰ</span>
-        </div>
-        <div class="pic-question">
-            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Coconuts_-_single_and_cracked_open.jpg" alt="Coconut">
-            <span class="pic-text">গ) ........ৰিকল</span>
-        </div>
-        <div class="pic-question">
-            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg" alt="Apple">
-            <span class="pic-text">ঘ) ....... পেল</span>
-        </div>
-        <div class="pic-question">
-            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Peacock_Plumage.jpg" alt="Peacock">
-            <span class="pic-text">ঙ) ......য়ূৰ</span>
-        </div>
-    </div>
-
-    <!-- Question 3 -->
-    <div class="q-block">
-        <div class="q-title">৩। স্বৰবৰ্ণ আৰু স্বৰচিহ্নবোৰ আঁচ টানি মিলোৱা। <span class="marks">১×৫=৫</span></div>
-        <div class="match-wrap">
-            <div class="match-col">
-                <div>ঊ</div>
-                <div>ঐ</div>
-                <div>আ</div>
-                <div>ই</div>
-                <div>ও</div>
-            </div>
-            <div class="match-col matra-col">
-                <div>&nbsp;া</div>
-                <div>&nbsp;ো</div>
-                <div>&nbsp;ূ</div>
-                <div>&nbsp;ি</div>
-                <div>&nbsp;ৈ</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Question 4 -->
-    <div class="q-block">
-        <div class="q-title">৪। একে আখৰবোৰ আঁচ টানি মিলোৱা। <span class="marks">১×৫=৫</span></div>
-        <div class="match-wrap">
-            <div class="match-col">
-                <div>ক</div>
-                <div>ম</div>
-                <div>য</div>
-                <div>ৰ</div>
-                <div>চ</div>
-            </div>
-            <div class="match-col">
-                <div>ৰ</div>
-                <div>চ</div>
-                <div>য</div>
-                <div>ক</div>
-                <div>ম</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Question 5 -->
-    <div class="q-block">
-        <div class="q-title">৫। খেলিমেলিকৈ দিয়া আখৰবোৰ মিলাই শব্দ সাজি উলিওৱা। <span class="marks">১×৫=৫</span></div>
-        <div class="sub-q">লশিয়া -</div>
-        <div class="sub-q">কলুভা -</div>
-        <div class="sub-q">হংসি -</div>
-        <div class="sub-q">হুপ -</div>
-        <div class="sub-q">য়ালঘঁৰি -</div>
-    </div>
-
-    <!-- Question 6 -->
-    <div class="q-block">
-        <div class="q-title">৬। তলৰ আখৰবোৰ ই-কাৰ (<span style="font-family: Arial;">&nbsp;ি</span>) লগাই লিখা। <span class="marks">১×৫=৫</span></div>
-        <div class="sub-q">ব , ক , ৰ , হ , জ</div>
-    </div>
-
-    <!-- Question 7 -->
-    <div class="q-block">
-        <div class="q-title">৭। সঠিক আখৰটো বহুৱাই শব্দবোৰ সম্পূৰ্ণ কৰা। <span class="marks">১×৫=৫</span></div>
-        
-        <div class="pic-question">
-            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/4/43/Cute_dog.jpg" alt="Dog">
-            <span class="pic-text">ক) কুকু....... (ৰ / হ / ব)</span>
-        </div>
-        <div class="pic-question">
-            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Black_Peppercorns.jpg" alt="Black Pepper">
-            <span class="pic-text">খ) জালু..... (জ / ক / স)</span>
-        </div>
-        <div class="pic-question">
-            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Pink_Pearl_eraser.jpg" alt="Eraser">
-            <span class="pic-text">গ) ৰ..... ৰ (প / চ / ব)</span>
-        </div>
-        <div class="pic-question">
-            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Blue_sky_with_clouds.jpg" alt="Sky">
-            <span class="pic-text">ঘ) ..... কাশ (আ / হ / দ)</span>
-        </div>
-        <div class="pic-question">
-            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Old_woman_smiling_-_India.jpg" alt="Grandmother">
-            <span class="pic-text">ঙ) আ.... তা (ই / ভ / ন)</span>
-        </div>
-    </div>
-
-    <!-- Question 8 -->
-    <div class="q-block">
-        <div class="q-title">৮। খালী ঠাই পূৰণ কৰা। <span class="marks">১×৩=৩</span></div>
-        <div class="poem">
-            .............. পাখি মেলি<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;নাচে..........<br>
-            ................ কলিটিক <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;চায় ঘূৰি ঘূৰি।
-        </div>
-    </div>
-
-    <!-- Question 9 -->
-    <div class="q-block">
-        <div class="q-title">৯। এটা শব্দত উত্তৰ দিয়া। <span class="marks">১×৩=৩</span></div>
-        <div class="sub-q">ক) কোনে ৰিমঝিমক হাতত ধৰি আগুৱাই নিছিল?</div>
-        <div class="sub-q">খ) ৰাজীৱ আৰু কৰিমে কি আনিবলৈ পাহৰিছিল?</div>
-        <div class="sub-q">গ) মটৰগাড়ী চলাই কোন আহি আছিল?</div>
-    </div>
-
-    <!-- Question 10 -->
-    <div class="q-block">
-        <div class="q-title">১০। তিনিবিধ ফলৰ নাম লিখা। <span class="marks">১×৩=৩</span></div>
-    </div>
-
-    <!-- Question 11 -->
-    <div class="q-block">
-        <div class="q-title">১১। তিনিবিধ পাচলিৰ নাম লিখা। <span class="marks">১×৩=৩</span></div>
-    </div>
-
-    <!-- Question 12 -->
-    <div class="q-block">
-        <div class="q-title">১২। তিনিবিধ পিঠাৰ নাম লিখা। <span class="marks">১×৩=৩</span></div>
-    </div>
-
-    <div class="footer">
-        - সমাপ্ত -
-    </div>
-
-</div>
-
-</body>
-</html>
