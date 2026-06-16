@@ -1,336 +1,377 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="as">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MVM NALBARI AI Assistant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- এই মেটা টেগটোৱে লোকেল ফাইলত ফটোবোৰ ব্লক হোৱাত বাধা দিব -->
+    <meta name="referrer" content="no-referrer">
+    <title>Question Paper - Class 2 Assamese</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
-        /* Base Body Reset for Netlify Deployment */
+        /* A4 Print Setup and General Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap');
+        
         body {
+            font-family: 'Tiro Bangla', Arial, sans-serif;
+            font-size: 16pt;
+            color: #000;
+            background: #fff;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f8fafc;
-            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styling */
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            border-bottom: 3px double #000;
+            padding-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 24pt;
+            margin: 0 0 5px 0;
+        }
+
+        .header h2 {
+            font-size: 18pt;
+            margin: 0 0 15px 0;
+            font-weight: normal;
+        }
+
+        .subject-class {
+            text-align: center;
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .meta-info {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Question Blocks - Spacious */
+        .q-block {
+            margin-bottom: 45px; 
+            page-break-inside: avoid;
+        }
+
+        .q-title {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .marks {
+            float: right;
+            font-weight: bold;
+        }
+
+        /* Multiple Choice Options */
+        .mcq-options {
+            display: flex;
+            gap: 30px;
+            margin-left: 30px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        /* Picture Questions - Vertical and Clean */
+        .pic-question {
+            display: flex;
             align-items: center;
-            min-height: 100vh;
+            margin-bottom: 25px;
+            margin-left: 20px;
         }
 
-        * {
-            box-sizing: border-box;
+        .pic-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border: 2px solid #000;
+            border-radius: 5px;
+            margin-right: 25px;
         }
 
-        /* Desktop Card Mode (Default) */
-        #section-ai {
-            --primary-color: #1e3a8a;
-            --secondary-color: #3b82f6;
-            --text-main: #1f2937;
-            
-            width: 100%;
-            max-width: 800px; /* Keeps it as a neat card on desktop */
-            height: 650px;    /* Fixed height for desktop card */
-            margin: 2rem auto;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            overflow: hidden;
-            border: 1px solid #e5e7eb;
+        .pic-text {
+            font-size: 18pt;
+            font-weight: bold;
+        }
+
+        /* Matching Questions - Big Gap */
+        .match-wrap {
+            display: flex;
+            justify-content: space-between; 
+            width: 75%; 
+            margin: 20px auto;
+            font-size: 20pt;
+            padding: 0 30px;
+        }
+
+        .match-col {
             display: flex;
             flex-direction: column;
+            gap: 35px; 
+            text-align: center;
+            font-weight: bold;
         }
-
-        /* Enhanced Attractive Header */
-        .chat-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1.2rem 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            z-index: 10;
-            flex-shrink: 0;
-        }
-
-        .header-logo {
-            width: 48px;
-            height: 48px;
-            background: white;
-            border-radius: 50%;
-            padding: 4px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            object-fit: contain;
-        }
-
-        .header-text h2 {
-            margin: 0;
-            font-size: 1.25rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .header-text span {
-            font-size: 0.85rem;
-            font-weight: 400;
-            opacity: 0.95;
-            display: flex;
-            align-items: center;
-            margin-top: 2px;
-        }
-
-        /* Pulsing Online Dot */
-        .status-dot {
+        
+        /* Trick to make matras exact same size without dots */
+        .matra-col div {
+            font-family: Arial, sans-serif;
+            font-size: 28pt; 
             display: inline-block;
-            width: 10px;
-            height: 10px;
-            background-color: #10b981;
-            border-radius: 50%;
-            margin-right: 6px;
-            animation: pulse 1.5s infinite;
+            width: 40px; 
+            text-align: center;
+            line-height: 1;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        /* Sub-questions */
+        .sub-q {
+            margin-bottom: 20px;
+            margin-left: 20px;
         }
 
-        /* Chat History Area */
-        #chat-history {
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
-            background: #f4f7f6;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            scroll-behavior: smooth;
+        .poem {
+            margin-left: 50px;
+            font-size: 18pt;
+            line-height: 2;
         }
 
-        /* Live Chat Graphic Styles */
-        .msg-row { display: flex; width: 100%; margin-bottom: 5px; animation: fadeIn 0.3s ease-in; }
-        .msg-row.bot { justify-content: flex-start; }
-        .msg-row.user { justify-content: flex-end; }
-        
-        .msg-bubble { max-width: 85%; padding: 14px 18px; font-size: 0.95rem; line-height: 1.6; box-shadow: 0 3px 8px rgba(0,0,0,0.05); position: relative; word-wrap: break-word; }
-        .bot .msg-bubble { background: #ffffff; color: var(--text-main); border-radius: 18px 18px 18px 4px; border-left: 4px solid var(--secondary-color); }
-        .user .msg-bubble { background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); color: white; border-radius: 18px 18px 4px 18px; }
-        
-        .quick-replies { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-        .q-btn { background: #e0e7ff; color: var(--primary-color); border: 1px solid #bfdbfe; padding: 10px 16px; border-radius: 50px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: left; }
-        .q-btn:hover { background: var(--secondary-color); color: white; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); border-color: var(--secondary-color); }
-        
-        .q-btn.back-btn { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
-        .q-btn.back-btn:hover { background: #ef4444; color: white; border-color: #ef4444; }
-        .q-btn.menu-btn { background: #f3f4f6; color: #374151; border-color: #d1d5db; }
-        .q-btn.menu-btn:hover { background: #4b5563; color: white; border-color: #4b5563; }
+        .footer {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18pt;
+            margin-top: 60px;
+            border-top: 1px solid #000;
+            padding-top: 15px;
+        }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* STRICT MOBILE RESPONSIVENESS */
-        @media (max-width: 768px) {
+        /* Print Specifics */
+        @media print {
+            @page {
+                size: A4;
+                margin: 20mm;
+            }
             body {
-                align-items: flex-start; /* Aligns to top on mobile */
+                font-size: 16pt;
+                background: none;
             }
-            #section-ai {
-                max-width: 100%;
-                margin: 0;
-                border-radius: 0;
-                height: 100vh;
-                height: 100dvh; /* Dynamic viewport for modern mobile browsers */
-                border: none;
-            }
-            .chat-header {
-                padding: 1rem;
-                gap: 12px;
-            }
-            .header-logo {
-                width: 42px;
-                height: 42px;
-            }
-            .header-text h2 {
-                font-size: 1.15rem;
-            }
-            #chat-history {
-                padding: 1rem;
-                gap: 12px;
-            }
-            .msg-bubble {
-                max-width: 95%; /* Expands bubble to fit mobile screens perfectly */
-                padding: 12px 15px;
-                font-size: 0.9rem;
-            }
-            .quick-replies {
-                flex-direction: column; /* Stacks buttons vertically on phones */
-                gap: 8px;
-            }
-            .q-btn {
-                width: 100%; /* Makes buttons easy to tap on mobile */
-                text-align: center;
-                border-radius: 12px; /* Square-rounded for stacked mobile layout */
+            .pic-img {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Modern Live Chat AI Assistant Desk -->
-    <div id="section-ai">
-        <!-- Chat Header -->
-        <div class="chat-header">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXpYeuf6hD01Ma9osE62vGUlDMaqwuFp92mFgZLci_-TmoJDwRBE-xlmLo6bUnFMLgo01gQ1mRffvjVv3RLbH36tsNvGURIb8Mx4zOK_Qx2udXKEgK3K_GEKqhe5RlCi0kZIydiBsmwyJV44-m66eCTNXb2NTpzjIctzFymBg-BgSEAhmqATIGrxPXRQ/s224/logo.png" alt="School Logo" class="header-logo">
-            <div class="header-text">
-                <h2>Smart AI Assistant</h2>
-                <span><span class="status-dot"></span> Online | MVM Nalbari Help Desk</span>
-            </div>
+<div class="container">
+    
+    <!-- Header Section -->
+    <div class="header">
+        <h1>জিত গাওঁ প্ৰাথমিক বিদ্যালয়</h1>
+        <h2>প্ৰথম গঠনাত্মক মান নিৰূপণ</h2>
+        
+        <div class="subject-class">
+            <div>বিষয়: অসমীয়া</div>
+            <div>শ্ৰেণী: দ্বিতীয়</div>
         </div>
 
-        <!-- Chat Body -->
-        <div id="chat-history">
-            <!-- Chat messages will be injected here automatically -->
+        <div class="meta-info">
+            <span>সময়: ২ ঘণ্টা</span>
+            <span>মুঠ নম্বৰ: ৫০</span>
         </div>
     </div>
 
-    <script>
-        // Knowledge Base - Exact Data Preserved Strictly
-        const chatData = {
-            "AppProcess": {
-                "title": "The Application Process",
-                "items": {
-                    "How do I begin my application?": "<b>Q: How do I begin my application?</b><br>A: Navigate to the official school website and click on the STUDENT EXAMINATION PORTAL button located in the top menu bar. From there, select the 'LIVE' button corresponding to your specific class category to open the form.",
-                    "Are there specific formatting rules for the online form?": "<b>Q: Are there specific formatting rules for the online form?</b><br>A: Yes. All information must be entered in CAPITAL LETTERS. Providing an accurate mobile number and email address is critical, as these are the primary channels for your application status updates and credentials.",
-                    "Can I edit my form after I submit it?": "<b>Q: Can I edit my form after I submit it?</b><br>A: No. Once you click 'Confirm & Submit,' no further changes or edits can be made. You must use the 'Review Your Details' screen to verify all information for accuracy before the final submission.",
-                    "How do I know my application was successfully submitted?": "<b>Q: How do I know my application was successfully submitted?</b><br>A: Once submitted, the system will generate a unique Application ID (e.g., APP-8ABDE63F). You will also receive an official notification confirming that the verification process has begun. Do not submit the form a second time once you receive this confirmation."
-                }
-            },
-            "PostApp": {
-                "title": "Post-Submission & Credentials",
-                "items": {
-                    "What happens if my application is rejected?": "<b>Q: What happens if my application is rejected?</b><br>A: If your application is rejected during the administrative review, you must contact the school office directly to resolve the issue or clarify the reason for rejection.",
-                    "How do I receive my Student ID and login credentials?": "<b>Q: How do I receive my Student ID and login credentials?</b><br>A: Once the administration approves your application, you will receive an official notification via email containing your Student ID and confirmed Date of Birth. These are required to log in and download your Admit Card.",
-                    "What if I lose my Student ID?": "<b>Q: What if I lose my Student ID?</b><br>A: Visit the help desk section of the portal and click the 'Get Student ID' button. You will be asked to enter your Application ID to retrieve your credentials.",
-                    "Where can I get help if I am stuck?": "<b>Q: Where can I get help if I am stuck?</b><br>A: The help desk section on the portal provides a step-by-step Help Manual and an Online Application Process (Video) tutorial to guide you through each step."
-                }
-            },
-            "Guidelines": {
-                "title": "Examination Day Guidelines",
-                "items": {
-                    "What must I bring to the examination hall?": "<b>Q: What must I bring to the examination hall?</b><br>A: You must carry your printed Admit Card. Entry will be denied without it. Ensure the card clearly displays all student details, the barcode, and the principal's signature.",
-                    "What are the consequences of arriving late?": "<b>Q: What are the consequences of arriving late?</b><br>A: You must arrive at least 15 minutes before the scheduled reporting time. Late entry after the designated seating time is strictly prohibited.",
-                    "What items are forbidden in the examination hall?": "<b>Q: What items are forbidden in the examination hall?</b><br>A: Electronic devices—including mobile phones, smartwatches, and calculators—are strictly prohibited. Carrying these items into the hall is a violation of exam policy.",
-                    "What is the policy on academic integrity?": "<b>Q: What is the policy on academic integrity?</b><br>A: Engaging in any form of malpractice or unfair means will result in immediate cancellation of your candidature and potential legal action. Furthermore, you must maintain silence and discipline; any misconduct will lead to immediate disqualification.",
-                    "Can I write on my Admit Card or question paper?": "<b>Q: Can I write on my Admit Card or question paper?</b><br>A: No. You are prohibited from writing anything on the question paper or the admit card, except for mandatory signature fields."
-                }
-            }
-        };
+    <!-- Question 1 -->
+    <div class="q-block">
+        <div class="q-title">১। তলৰ প্ৰশ্নসমূহৰ শুদ্ধ উত্তৰটো বিচাৰি লিখা। <span class="marks">১×৫=৫</span></div>
+        
+        <div class="sub-q">ক) মানুহবোৰে কাক আগুৰি ধৰি আছিল?</div>
+        <div class="mcq-options">
+            <span>অ) দৰাক</span> <span>আ) ৰিমঝিমক</span> <span>ই) খুৰাক</span> <span>ঈ) পেহীক</span>
+        </div>
+        
+        <div class="sub-q">খ) অসমীয়া ভাষাত মুঠ কিমানটা স্বৰবৰ্ণ আছে?</div>
+        <div class="mcq-options">
+            <span>অ) ১৩ টা</span> <span>আ) ১৫ টা</span> <span>ই) ৯ টা</span> <span>ঈ) ১১ টা</span>
+        </div>
+        
+        <div class="sub-q">গ) তলৰ কোনটো শব্দত 'ৰ' আখৰটো আছে?</div>
+        <div class="mcq-options">
+            <span>অ) আইতা</span> <span>আ) বজাৰ</span> <span>ই) শামুক</span> <span>ঈ) জিকা</span>
+        </div>
 
-        const chatHistory = document.getElementById('chat-history');
+        <div class="sub-q">ঘ) তলৰ শব্দবোৰৰ পৰা হ্ৰস্ব উ-কাৰ (<span style="font-family: Arial;">&nbsp;ু</span>) থকা শব্দটো বিচাৰি লিখা।</div>
+        <div class="mcq-options">
+            <span>অ) পূজা</span> <span>আ) বিলাহী</span> <span>ই) পৰুৱা</span> <span>ঈ) তৃণ</span>
+        </div>
 
-        // Core Chat Functions
-        function scrollToBottom() {
-            setTimeout(() => { chatHistory.scrollTop = chatHistory.scrollHeight; }, 50);
-        }
+        <div class="sub-q">ঙ) 'ব' ৰ পিছৰ বৰ্ণটো কি?</div>
+        <div class="mcq-options">
+            <span>অ) ভ</span> <span>আ) ৰ</span> <span>ই) য</span> <span>ঈ) ম</span>
+        </div>
+    </div>
 
-        function removePreviousReplies() {
-            const activeReplies = document.querySelectorAll('.quick-replies');
-            activeReplies.forEach(reply => reply.style.display = 'none');
-        }
+    <!-- Question 2 -->
+    <div class="q-block">
+        <div class="q-title">২। ছবিৰ নাম সম্পূৰ্ণ কৰা। <span class="marks">১×৫=৫</span></div>
+        <div class="pic-question">
+            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg" alt="Tomato">
+            <span class="pic-text">ক) ..........লাহী</span>
+        </div>
+        <div class="pic-question">
+            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Table_grapes_on_white.jpg" alt="Grapes">
+            <span class="pic-text">খ) আ.........ৰ</span>
+        </div>
+        <div class="pic-question">
+            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Coconuts_-_single_and_cracked_open.jpg" alt="Coconut">
+            <span class="pic-text">গ) ........ৰিকল</span>
+        </div>
+        <div class="pic-question">
+            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg" alt="Apple">
+            <span class="pic-text">ঘ) ....... পেল</span>
+        </div>
+        <div class="pic-question">
+            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Peacock_Plumage.jpg" alt="Peacock">
+            <span class="pic-text">ঙ) ......য়ূৰ</span>
+        </div>
+    </div>
 
-        function addUserMsg(text) {
-            removePreviousReplies();
-            chatHistory.innerHTML += `
-                <div class="msg-row user">
-                    <div class="msg-bubble">${text}</div>
-                </div>`;
-            scrollToBottom();
-        }
+    <!-- Question 3 -->
+    <div class="q-block">
+        <div class="q-title">৩। স্বৰবৰ্ণ আৰু স্বৰচিহ্নবোৰ আঁচ টানি মিলোৱা। <span class="marks">১×৫=৫</span></div>
+        <div class="match-wrap">
+            <div class="match-col">
+                <div>ঊ</div>
+                <div>ঐ</div>
+                <div>আ</div>
+                <div>ই</div>
+                <div>ও</div>
+            </div>
+            <div class="match-col matra-col">
+                <div>&nbsp;া</div>
+                <div>&nbsp;ো</div>
+                <div>&nbsp;ূ</div>
+                <div>&nbsp;ি</div>
+                <div>&nbsp;ৈ</div>
+            </div>
+        </div>
+    </div>
 
-        function addBotMsg(text, buttonsHtml = '') {
-            chatHistory.innerHTML += `
-                <div class="msg-row bot">
-                    <div class="msg-bubble">
-                        ${text}
-                        ${buttonsHtml ? `<div class="quick-replies">${buttonsHtml}</div>` : ''}
-                    </div>
-                </div>`;
-            scrollToBottom();
-        }
+    <!-- Question 4 -->
+    <div class="q-block">
+        <div class="q-title">৪। একে আখৰবোৰ আঁচ টানি মিলোৱা। <span class="marks">১×৫=৫</span></div>
+        <div class="match-wrap">
+            <div class="match-col">
+                <div>ক</div>
+                <div>ম</div>
+                <div>য</div>
+                <div>ৰ</div>
+                <div>চ</div>
+            </div>
+            <div class="match-col">
+                <div>ৰ</div>
+                <div>চ</div>
+                <div>য</div>
+                <div>ক</div>
+                <div>ম</div>
+            </div>
+        </div>
+    </div>
 
-        // Chat Logic Flows
-        function initChat() {
-            const hour = new Date().getHours();
-            let greeting = "";
-            
-            // Accurate Time Logic
-            if (hour >= 4 && hour < 12) {
-                greeting = "Morning";
-            } else if (hour >= 12 && hour < 17) {
-                greeting = "Afternoon";
-            } else if (hour >= 17 && hour < 21) {
-                greeting = "Evening";
-            } else {
-                greeting = "Night";
-            }
-            
-            let btns = `
-                <button class="q-btn" onclick="handleStart('Yes')">Yes</button>
-                <button class="q-btn back-btn" onclick="handleStart('No')">No</button>
-            `;
-            addBotMsg(`Hello! Good ${greeting}. I am your MVM Nalbari Smart Assistant.<br><br>Do you want help from me?`, btns);
-        }
+    <!-- Question 5 -->
+    <div class="q-block">
+        <div class="q-title">৫। খেলিমেলিকৈ দিয়া আখৰবোৰ মিলাই শব্দ সাজি উলিওৱা। <span class="marks">১×৫=৫</span></div>
+        <div class="sub-q">লশিয়া -</div>
+        <div class="sub-q">কলুভা -</div>
+        <div class="sub-q">হংসি -</div>
+        <div class="sub-q">হুপ -</div>
+        <div class="sub-q">য়ালঘঁৰি -</div>
+    </div>
 
-        function handleStart(choice) {
-            addUserMsg(choice);
-            if(choice === 'Yes') {
-                setTimeout(() => showMainMenu(), 400);
-            } else {
-                setTimeout(() => addBotMsg("Understood. If you need help later, just click below.", `<button class="q-btn menu-btn" onclick="initChat()">Restart Chat</button>`), 400);
-            }
-        }
+    <!-- Question 6 -->
+    <div class="q-block">
+        <div class="q-title">৬। তলৰ আখৰবোৰ ই-কাৰ (<span style="font-family: Arial;">&nbsp;ি</span>) লগাই লিখা। <span class="marks">১×৫=৫</span></div>
+        <div class="sub-q">ব , ক , ৰ , হ , জ</div>
+    </div>
 
-        function showMainMenu(fromUser = false) {
-            if(fromUser) addUserMsg("Main Menu");
-            let btns = `
-                <button class="q-btn" onclick="showTopic('AppProcess')">The Application Process</button>
-                <button class="q-btn" onclick="showTopic('PostApp')">Post-Submission & Credentials</button>
-                <button class="q-btn" onclick="showTopic('Guidelines')">Examination Day Guidelines</button>
-            `;
-            setTimeout(() => addBotMsg("Please select a topic you need help with:", btns), fromUser ? 400 : 0);
-        }
+    <!-- Question 7 -->
+    <div class="q-block">
+        <div class="q-title">৭। সঠিক আখৰটো বহুৱাই শব্দবোৰ সম্পূৰ্ণ কৰা। <span class="marks">১×৫=৫</span></div>
+        
+        <div class="pic-question">
+            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/4/43/Cute_dog.jpg" alt="Dog">
+            <span class="pic-text">ক) কুকু....... (ৰ / হ / ব)</span>
+        </div>
+        <div class="pic-question">
+            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Black_Peppercorns.jpg" alt="Black Pepper">
+            <span class="pic-text">খ) জালু..... (জ / ক / স)</span>
+        </div>
+        <div class="pic-question">
+            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Pink_Pearl_eraser.jpg" alt="Eraser">
+            <span class="pic-text">গ) ৰ..... ৰ (প / চ / ব)</span>
+        </div>
+        <div class="pic-question">
+            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Blue_sky_with_clouds.jpg" alt="Sky">
+            <span class="pic-text">ঘ) ..... কাশ (আ / হ / দ)</span>
+        </div>
+        <div class="pic-question">
+            <img class="pic-img" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Old_woman_smiling_-_India.jpg" alt="Grandmother">
+            <span class="pic-text">ঙ) আ.... তা (ই / ভ / ন)</span>
+        </div>
+    </div>
 
-        function showTopic(catKey) {
-            const cat = chatData[catKey];
-            addUserMsg(cat.title);
-            
-            let btns = '';
-            for(let q in cat.items) {
-                btns += `<button class="q-btn" onclick="showAnswer('${catKey}', '${q.replace(/'/g, "\\'")}')">${q}</button>`;
-            }
-            btns += `
-                <button class="q-btn back-btn" onclick="showMainMenu(true)">Go Back (Main Menu)</button>
-            `;
-            
-            setTimeout(() => addBotMsg(`Here are the questions for <b>${cat.title}</b>. Please select one:`, btns), 400);
-        }
+    <!-- Question 8 -->
+    <div class="q-block">
+        <div class="q-title">৮। খালী ঠাই পূৰণ কৰা। <span class="marks">১×৩=৩</span></div>
+        <div class="poem">
+            .............. পাখি মেলি<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;নাচে..........<br>
+            ................ কলিটিক <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;চায় ঘূৰি ঘূৰি।
+        </div>
+    </div>
 
-        function showAnswer(catKey, qKey) {
-            addUserMsg(qKey);
-            const answerText = chatData[catKey].items[qKey];
-            
-            let btns = `
-                <button class="q-btn" onclick="showTopic('${catKey}')">Go Back to ${chatData[catKey].title}</button>
-                <button class="q-btn menu-btn" onclick="showMainMenu(true)">Main Menu</button>
-            `;
-            
-            setTimeout(() => addBotMsg(answerText, btns), 500);
-        }
+    <!-- Question 9 -->
+    <div class="q-block">
+        <div class="q-title">৯। এটা শব্দত উত্তৰ দিয়া। <span class="marks">১×৩=৩</span></div>
+        <div class="sub-q">ক) কোনে ৰিমঝিমক হাতত ধৰি আগুৱাই নিছিল?</div>
+        <div class="sub-q">খ) ৰাজীৱ আৰু কৰিমে কি আনিবলৈ পাহৰিছিল?</div>
+        <div class="sub-q">গ) মটৰগাড়ী চলাই কোন আহি আছিল?</div>
+    </div>
 
-        // Start Chat automatically on load
-        window.onload = initChat;
-    </script>
+    <!-- Question 10 -->
+    <div class="q-block">
+        <div class="q-title">১০। তিনিবিধ ফলৰ নাম লিখা। <span class="marks">১×৩=৩</span></div>
+    </div>
+
+    <!-- Question 11 -->
+    <div class="q-block">
+        <div class="q-title">১১। তিনিবিধ পাচলিৰ নাম লিখা। <span class="marks">১×৩=৩</span></div>
+    </div>
+
+    <!-- Question 12 -->
+    <div class="q-block">
+        <div class="q-title">১২। তিনিবিধ পিঠাৰ নাম লিখা। <span class="marks">১×৩=৩</span></div>
+    </div>
+
+    <div class="footer">
+        - সমাপ্ত -
+    </div>
+
+</div>
+
 </body>
 </html>
